@@ -33,8 +33,8 @@ const CurrentMission = (): JSX.Element => {
       <h2>작심 그룹 리스트</h2>
       <MissonTab missionTab={missionTab} isActive={isActive} />
       <CurrentMissionListS>
-        {groupList.map((groupInfo) => {
-          return <CurrentMissionItem groupInfo={groupInfo} />;
+        {groupList.map((groupInfo,idx) => {
+          return <CurrentMissionItem groupInfo={groupInfo} key={idx}/>;
         })}
       </CurrentMissionListS>
     </article>

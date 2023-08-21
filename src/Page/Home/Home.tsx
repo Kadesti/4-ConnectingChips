@@ -1,14 +1,34 @@
 import { styled } from "styled-components";
 import MyMisson from "./MyMisson";
 import CurrentMission from "./CurrentMission";
+import Logo_001 from "../../image/Logo_001.png";
+import { MissionType } from "../../Type/MissionType";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
   const nickNmae = "김형욱";
+  const missionList: MissionType[] = [
+    {
+      id: 0,
+      tag: "헬스",
+      title: "헬스 모여라!",
+      day: 1,
+      count: 3,
+    },
+    {
+      id: 1,
+      tag: "걷기",
+      title: "걷기는 재밌단말이지비",
+      day: 2,
+      count: 1,
+    },
+  ];
+  // const missionList = false
+
   return (
     <HomeS>
       <LogoContainerS>
-        <h1>Logo</h1>
+        <img src={Logo_001} alt="logo" width="250rem" height="auto" />
       </LogoContainerS>
       <WelcomeTextS>
         반가워요 {nickNmae} 칩스!
@@ -17,7 +37,8 @@ const Home = (): JSX.Element => {
         <br />
         작심을 골라볼까요?
       </WelcomeTextS>
-      <MyMisson />
+      {missionList && <MyMisson missionList={missionList} />}
+
       <CurrentMission />
     </HomeS>
   );

@@ -26,8 +26,9 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  p{
-    margin: 0
+  h2, p, li{
+    margin: 0;
+    cursor: default;
   }
 
   button {
