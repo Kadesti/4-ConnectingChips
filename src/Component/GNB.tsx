@@ -1,12 +1,35 @@
 import { styled } from "styled-components";
+import { FeedIcon, HomeIcon, MyPageIcon } from "./GNBIcon";
 
+/** 2023-08-1 GNB img 속성 */
+type GNBType = {
+  url: string;
+  alt: string;
+};
 /** 2023-08-20 Global Navigator Bar */
 const GNB = () => {
-  const gnbIcon: string[] = ["홈", "피", "마"];
+  const gnbIcon: GNBType[] = [
+    {
+      url: HomeIcon,
+      alt: "HomeIcon",
+    },
+    {
+      url: FeedIcon,
+      alt: "FeedIcon",
+    },
+    {
+      url: MyPageIcon,
+      alt: "MyPageIcon",
+    },
+  ];
   return (
     <GNBS>
       {gnbIcon.map((icon, idx) => {
-        return <li key={idx}>{icon}</li>;
+        return (
+          <li key={idx}>
+            <img src={icon.url} alt={icon.url} />
+          </li>
+        );
       })}
     </GNBS>
   );
@@ -20,7 +43,7 @@ const GNBS = styled.ul`
   position: sticky;
   bottom: 0;
   width: 100%;
-  height: 4rem;
+  height: 3.25rem;
 
   display: flex;
   justify-content: space-around;

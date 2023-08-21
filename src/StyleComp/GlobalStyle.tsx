@@ -1,32 +1,50 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-  /* body {
-    font-family: "Helvetica", "Arial", sans-serif;
-    line-height: 1.5;
-  } */
-  * {
-    /* color: white; */
-    list-style: none;
+  body {
+    color: #111;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    line-height: normal;    
   }
-
   ul {
     margin: 0;
     padding: 0;
   }
 
-  li.button{
-    &:hover{
-        cursor: pointer;
-        opacity: 40%;
-    }
-    &.active{
-      background: #000;
-      color: white;
+  li{
+    list-style: none;
+
+    &.button{
+      &:hover{
+          cursor: pointer;
+          opacity: 60%;
+      }
+      &.active{
+        background: #000;
+        color: white;
+      }
     }
   }
 
-  h2, p, li{
+  
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 400;
+  }
+
+  h2{
+    font-size: 1.125rem;
+    font-weight: 500;
+
+  }
+
+  p{
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+  
+  h1, h2, p, li{
     margin: 0;
     cursor: default;
   }
@@ -37,7 +55,6 @@ const GlobalStyle = createGlobalStyle`
 
     &:hover {
         cursor: pointer;
-        opacity: 40%;
     }
   }
 `;

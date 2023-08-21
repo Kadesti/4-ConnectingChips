@@ -1,16 +1,17 @@
 import { styled } from "styled-components";
 import { MissionSingleWide } from "../../Component/MissionTab";
-import { MissionType } from "../../Type/MissionType";
+import { MyMissionType } from "../../Type/MissionType";
 
 /** 2023-08-20 Home.tsx - 작심 중인 리스트 */
-const MyMisson = ({ missionList }: { missionList: MissionType[] }): JSX.Element => {
+const MyMisson = ({ missionList }: { missionList: MyMissionType[] }): JSX.Element => {
   return (
     <MyMissonS>
+      <h2>나의 작심 현황(1/3)</h2>
       <MyMissionULS>
         {missionList.map((el) => {
           return (
             <li key={el.id}>
-              <MyMissionInfoS>
+              <MyMissionInfoS img={el.image}>
                 <div>
                   <MissionSingleWide text={el.tag} />
                   <h2>{el.title}</h2>
@@ -56,31 +57,36 @@ const MyMissonS = styled.article`
 const MyMissionULS = styled.ul`
   display: flex;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 
-  li {
-    &:not(:first-child) {
-      margin-left: 1rem;
-    }
+  li:not(:first-child) {
+    margin-left: 1rem;
   }
 `;
 
 /** 2023-08-21 MyMisson.tsx - 나의 작심 현황 항목 정보 */
-const MyMissionInfoS = styled.div`
+const MyMissionInfoS = styled.div<{ img: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  width: 10rem;
+  width: 11.3125rem;
   aspect-ratio: 1/1;
 
   border: 0.1px solid;
-  border-radius: 1rem;
+  border-radius: 0.625rem;
   margin-bottom: 1rem;
   padding: 1rem;
+
+  background-image: url(${(props) => props.img});
+  background-size: 20rem;
+
+  color: white;
 
   h2 {
     font-size: 1.3rem;
     margin-top: 0.2rem;
+    height: 4rem;
   }
 `;
 /** 2023-08-21 MyMisson.tsx - 시식 칩 리스트*/
@@ -113,5 +119,6 @@ const ClearBtnS = styled.button`
   padding: 1rem;
   width: 100%;
   border-radius: 2rem;
-  background-color: yellow;
+  background-color: black;
+  color: yellow;
 `;
