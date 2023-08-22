@@ -1,25 +1,32 @@
 import { styled } from "styled-components";
 import { MissionSingleWide } from "../../Component/Mission/MissionTab";
-import { MyMissionType } from "../../Type/MissionType";
+import { GroupInfoType } from "../../Type/MissionType";
 
 /** 2023-08-20 Home.tsx - 작심 중인 리스트 */
-const MyMisson = ({ missionList }: { missionList: MyMissionType[] }): JSX.Element => {
+const MyMisson = ({ myMissions, myID }: { myMissions: GroupInfoType[]; myID: number }): JSX.Element => {
   return (
     <MyMissonS>
-      <h2>나의 작심 현황({missionList.length}/3)</h2>
+      <h2>나의 작심 현황({myMissions.length}/3)</h2>
       <MyMissionULS>
-        {missionList.map((el) => {
+        {myMissions.map((mission) => {
+          const missionInfo = mission.memberList.find((member) => member.memberid === myID);
+          if (missionInfo === undefined) return "";
+
+          const myDate = missionInfo.day;
+          const myCount = missionInfo.count;
+          
+
           return (
-            <li key={el.id}>
-              <MyMissionInfoS img={el.image}>
+            <li key={mission.groupID}>
+              <MyMissionInfoS img={mission.image}>
                 <div>
-                  <MissionSingleWide text={el.tag} />
-                  <h2>{el.title}</h2>
-                  <p>🔥 {el.day}일자 맛보기 중</p>
+                  <MissionSingleWide text={mission.tag} />
+                  <h2>{mission.title}</h2>
+                  <p>🔥 {myDate}일자 맛보기 중</p>
                 </div>
-                <ChipList count={el.count} />
+                <ChipList count={myCount} />
               </MyMissionInfoS>
-              {el.count !== 3 ? <NoneClearBtnS>작심 인증하기</NoneClearBtnS> : <ClearBtnS>재작심하기</ClearBtnS>}
+              {myCount !== 3 ? <NoneClearBtnS>작심 인증하기</NoneClearBtnS> : <ClearBtnS>재작심하기</ClearBtnS>}
             </li>
           );
         })}

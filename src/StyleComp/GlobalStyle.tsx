@@ -1,8 +1,21 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --color-main: #FFBB00;
+    --color-bg: #F7F7FB;
+    --color-line: #F0F0F6;
+    --font-color1: #111111;
+    --font-color2: #505050;
+    --font-color3: #767676;
+    --system-red: #DC0000;
+    --color-disabled1: #999999;
+    --color-disabled2: #E5E5EC;
+    --system-green: #04B014;
+
+  }
   body {
-    color: #111;
+    color: var(--font-color1);
     font-family: Noto Sans KR;
     font-style: normal;
     line-height: normal;    

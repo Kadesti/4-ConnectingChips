@@ -1,17 +1,28 @@
 import { styled } from "styled-components";
-import 달리기 from "../../image/예시사진모음/달리기.jpg";
-import GroupArticle from "../../Component/Mission/GroupArticle";
+import GroupArticle from "../Component/Mission/GroupArticle";
+import { useParams } from "react-router-dom";
+import missionList from "../data/groupList";
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {
-  const groupText = "미션 소개글을 여기에다가 써주세요!\n어떤 목적으로 하는 미션인지를 적어주면 됩니다~\n00칼로리 소모하려면 몇 분 운동해야 하는지 적기!";
-  const groupRule = "첫째, 칼로리 소모 00칼로리 해야 합니다\n둘째, 소모한 칼로리를 사진 혹은 글로 인증하면 끝!";
+  const { groupID } = useParams();
+
+  if (groupID === undefined) {
+    return <>잘못오셨습니다</>;
+  }
+
+  const groupMission = missionList.find((item) => String(item.groupID) === groupID);
+  if (groupMission === undefined) {
+    return <>잘못된 id입니다</>;
+  }
+  const {intro, rule} = groupMission
+
   return (
-    <GroupIntroS img={달리기}>
+    <GroupIntroS img={groupMission.image}>
       <BGDarkS>
         <GroupContainerS>
           <div>뒤로가기</div>
-          <GroupArticle groupText={groupText} groupRule={groupRule} />
+          <GroupArticle groupText={intro} groupRule={rule} selected={[0, 1, 2, 3]} state="join"/>
         </GroupContainerS>
       </BGDarkS>
     </GroupIntroS>

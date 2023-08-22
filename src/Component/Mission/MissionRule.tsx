@@ -17,7 +17,7 @@ const MissionRuleS = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   color: black;
   padding: 1rem;
-  margin: 1.25rem 0;
+  margin-top: 1.25rem;
   border-radius: 1rem;
 
   p {

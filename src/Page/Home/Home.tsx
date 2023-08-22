@@ -2,31 +2,14 @@ import { styled } from "styled-components";
 import MyMisson from "./MyMisson";
 import CurrentMission from "./CurrentMission";
 import Logo_001 from "../../image/Logo_001.png";
-import { MyMissionType } from "../../Type/MissionType";
-import { 역도 } from "./SampleImage";
+import groupList from "../../data/groupList";
+import { GroupInfoType } from "../../Type/MissionType";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
-  const nickNmae = "김형욱";
-  const missionList: MyMissionType[] = [
-    {
-      id: 0,
-      tag: "헬스",
-      title: "헬스 모여라!",
-      image: 역도,
-      day: 1,
-      count: 3,
-    },
-    {
-      id: 1,
-      tag: "걷기",
-      title: "걷기는 재밌단말이지비",
-      image: 역도,
-      day: 2,
-      count: 1,
-    },
-  ];
-  // const missionList = false
+  const nickNmae: string = "김형욱";
+  const myID: number = 42186;
+  const myMissions: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.memberid === myID));
 
   return (
     <HomeS>
@@ -42,7 +25,7 @@ const Home = (): JSX.Element => {
           작심을 골라볼까요?
         </h1>
       </WelcomeTextS>
-      {missionList && <MyMisson missionList={missionList} />}
+      {myMissions && <MyMisson myMissions={myMissions} myID={myID}  />}
       <CurrentMission />
     </HomeS>
   );
@@ -54,7 +37,6 @@ export default Home;
 const HomeS = styled.section`
   padding: 1rem;
   height: 100%;
-  /* border: 1px solid blue; */
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -72,8 +54,6 @@ const LogoContainerS = styled.div`
 /** 2023-08-20 Home.tsx - 오늘도 득근한 하루 되세요 */
 const WelcomeTextS = styled.div`
   width: 70%;
-  /* height: 7.8125rem; */
-  /* font-size: 1.5rem; */
   padding: 2rem 0;
 
   h1 {
