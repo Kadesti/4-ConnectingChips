@@ -40,9 +40,6 @@ export default GNB;
 /** 2023-08-20 Global Navigator Bar Style*/
 const GNBS = styled.ul`
   display: flex;
-  position: sticky;
-  bottom: 0;
-  width: 100%;
   height: 3.25rem;
 
   display: flex;

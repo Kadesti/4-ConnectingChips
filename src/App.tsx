@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GNB, Home, GroupIntro, Feed, MyPage, GroupPage } from "./AppBarral";
+import { Home, GroupIntro, Feed, MyPage, GroupPage } from "./AppBarral";
 
 function App() {
   return (

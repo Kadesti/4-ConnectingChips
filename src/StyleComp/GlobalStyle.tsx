@@ -14,6 +14,11 @@ const GlobalStyle = createGlobalStyle`
     --system-green: #04B014;
 
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
   body {
     color: var(--font-color1);
     font-family: Noto Sans KR;
@@ -57,9 +62,10 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
   
-  h1, h2, p, li{
+  h1, h2, p, li, div{
     margin: 0;
     cursor: default;
+    white-space: pre-line;
   }
 
   button {

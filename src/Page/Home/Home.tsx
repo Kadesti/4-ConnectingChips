@@ -4,6 +4,7 @@ import CurrentMission from "./CurrentMission";
 import Logo_001 from "../../image/Logo_001.png";
 import groupList from "../../data/groupList";
 import { GroupInfoType } from "../../Type/MissionType";
+import { GNB } from "../../AppBarral";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
@@ -16,17 +17,23 @@ const Home = (): JSX.Element => {
       <LogoContainerS>
         <img src={Logo_001} alt="logo" width="250rem" height="auto" />
       </LogoContainerS>
-      <WelcomeTextS>
-        <h1>
-          반가워요 {nickNmae} 칩스!
-          <br />
-          아래 리스트 중에서
-          <br />
-          작심을 골라볼까요?
-        </h1>
-      </WelcomeTextS>
-      {myMissions && <MyMisson myMissions={myMissions} myID={myID}  />}
-      <CurrentMission />
+      <HomeContentS>
+        <WelcomeTextS>
+          <h1>
+            반가워요 {nickNmae} 칩스!
+            <br />
+            아래 리스트 중에서
+            <br />
+            작심을 골라볼까요?
+          </h1>
+        </WelcomeTextS>
+        {myMissions && <MyMisson myMissions={myMissions} myID={myID} />}
+        <CurrentMission />
+      </HomeContentS>
+
+      <div className="CTA">
+        <GNB />
+      </div>
     </HomeS>
   );
 };
@@ -35,12 +42,13 @@ export default Home;
 
 /** 2023-08-20 Home.tsx - 메인 컴프 스타일 */
 const HomeS = styled.section`
-  padding: 1rem;
+  /* padding: 1rem; */
   height: 100%;
   overflow-y: scroll;
 
-  &::-webkit-scrollbar {
-    display: none;
+  .CTA {
+    position: sticky;
+    bottom: 0;
   }
 `;
 
@@ -50,6 +58,10 @@ const LogoContainerS = styled.div`
   height: 3.5rem;
   justify-content: center;
 `;
+
+const HomeContentS = styled.div`
+  margin: 0 1rem;
+`
 
 /** 2023-08-20 Home.tsx - 오늘도 득근한 하루 되세요 */
 const WelcomeTextS = styled.div`
