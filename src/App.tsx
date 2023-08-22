@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GNB, Home, GroupIntro, Feed, MyPage } from "./AppBarral";
+import { GNB, Home, GroupIntro, Feed, MyPage, GroupPage } from "./AppBarral";
 
 function App() {
   return (
@@ -8,7 +8,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/groupIntro" element={<GroupIntro />} />
+          <Route path="/groupIntro/:groupID" element={<GroupIntro />} />
+          <Route path="/groupPage/:groupID" element={<GroupPage />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/mypage" element={<MyPage />} />
         </Routes>

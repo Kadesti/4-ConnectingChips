@@ -1,16 +1,9 @@
 import { styled } from "styled-components";
 import { MissonTab } from "../../Component/Mission/MissionTab";
 import { CurrentMissionTab } from "../../Type/MissionType";
-import { 삼대운동, 빨간벽 } from "./SampleImage";
-
-/** 2023-08-20 CurrentMission.tsx - 작심그룹 항목 타입 */
-type groupInfo = {
-  id: number;
-  title: string;
-  memberNum: number;
-  url: string;
-  image: string;
-};
+// import { 삼대운동, 빨간벽 } from "./SampleImage";
+import { GroupInfoType } from "../../Type/MissionType";
+import groupList from "../../data/groupList";
 
 /** 23-08-20 CurrentMission.tsx - 메인 컴프 */
 const CurrentMission = (): JSX.Element => {
@@ -32,30 +25,14 @@ const CurrentMission = (): JSX.Element => {
       title: "자전거",
     },
   ];
-  const groupList: groupInfo[] = [
-    {
-      id: 0,
-      title: "첫번째 그룹",
-      memberNum: 10,
-      url: "/어디로든 문",
-      image: 삼대운동,
-    },
-    {
-      id: 1,
-      title: "두번째 그룹",
-      memberNum: 20,
-      url: "/어디로든 문2",
-      image: 빨간벽,
-    },
-  ];
 
   return (
     <article>
       <h2>작심 그룹 리스트</h2>
       <MissonTab missionTab={missionTab} />
       <CurrentMissionListS>
-        {groupList.map((groupInfo, idx) => {
-          return <CurrentMissionItem groupInfo={groupInfo} key={idx} />;
+        {groupList.map(groupInfo => {
+          return <CurrentMissionItem groupInfo={groupInfo} key={groupInfo.groupID} />;
         })}
       </CurrentMissionListS>
     </article>
@@ -65,12 +42,12 @@ const CurrentMission = (): JSX.Element => {
 export default CurrentMission;
 
 /** 2023-08-20 CurrentMission.tsx - 작심 그룹 항목 */
-const CurrentMissionItem = ({ groupInfo }: { groupInfo: groupInfo }): JSX.Element => {
+const CurrentMissionItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element => {
   return (
-    <CurrentMissionItemS key={groupInfo.id} img={groupInfo.image}>
+    <CurrentMissionItemS key={groupInfo.groupID} img={groupInfo.image}>
       <div>
         <h2>{groupInfo.title}</h2>
-        <p>{groupInfo.memberNum}명 참여중</p>
+        <p>{groupInfo.memberAmount}명 참여중</p>
       </div>
       <button>참여하기</button>
     </CurrentMissionItemS>
