@@ -1,4 +1,4 @@
-import GNB from "./Component/GNB";
+import GNB from "./Component/GNB/GNB";
 import Home from "./Page/Home/Home";
 import GroupIntro from "./Page/GroupIntro/GroupIntro";
 import Feed from "./Page/Feed/Feed";

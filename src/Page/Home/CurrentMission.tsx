@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { MissonTab } from "../../Component/MissionTab";
+import { MissonTab } from "../../Component/Mission/MissionTab";
 import { CurrentMissionTab } from "../../Type/MissionType";
 import { 삼대운동, 빨간벽 } from "./SampleImage";
 

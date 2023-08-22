@@ -1,12 +1,12 @@
 import { styled } from "styled-components";
-import { MissionSingleWide } from "../../Component/MissionTab";
+import { MissionSingleWide } from "../../Component/Mission/MissionTab";
 import { MyMissionType } from "../../Type/MissionType";
 
 /** 2023-08-20 Home.tsx - 작심 중인 리스트 */
 const MyMisson = ({ missionList }: { missionList: MyMissionType[] }): JSX.Element => {
   return (
     <MyMissonS>
-      <h2>나의 작심 현황(1/3)</h2>
+      <h2>나의 작심 현황({missionList.length}/3)</h2>
       <MyMissionULS>
         {missionList.map((el) => {
           return (

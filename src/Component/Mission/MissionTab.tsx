@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { CurrentMissionTab } from "../Type/MissionType";
+import { CurrentMissionTab } from "../../Type/MissionType";
 import { useState } from "react";
 
 /** 2023-08-21 MyMisson.tsx - 작심 중인 리스트 Props */
@@ -63,7 +63,7 @@ export { MissonTab, MissionSingle, MissionSingleWide };
 /** 2023-08-20 MyMisson.tsx - 작심 중인 리스트 탭 */
 const MyMissonTabS = styled.ul`
   display: flex;
-  margin-top: 1rem;  
+  margin-top: 1rem;
 `;
 
 /** 2023-08-21 MyMisson.tsx - 작심 중인 리스트 항목 */
@@ -73,8 +73,6 @@ const MissionSingleS = styled.li`
   align-items: center;
 
   border: 1px solid;
-  /* padding: 10px; */
-
   border-radius: 1.5rem;
 
   font-size: 0.8125rem;

@@ -3,7 +3,7 @@ import MyMisson from "./MyMisson";
 import CurrentMission from "./CurrentMission";
 import Logo_001 from "../../image/Logo_001.png";
 import { MyMissionType } from "../../Type/MissionType";
-import {역도, 삼대운동, 빨간벽} from './SampleImage'
+import { 역도 } from "./SampleImage";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
@@ -76,7 +76,7 @@ const WelcomeTextS = styled.div`
   /* font-size: 1.5rem; */
   padding: 2rem 0;
 
-  h1{
-    display: block
+  h1 {
+    display: block;
   }
 `;
