@@ -4,5 +4,7 @@ import GroupIntro from "./Page/GroupIntro/GroupIntro";
 import Feed from "./Page/Feed/Feed";
 import MyPage from "./Page/MyPage/MyPage";
 import GroupPage from "./Page/GroupPage/GroupPage";
+import SignUp from "./Page/SignUp/SignUp";
+import CreatePost from "./Page/CreatePost/CreatePost";
 
-export { GNB, Home, GroupIntro, Feed, MyPage, GroupPage };
+export { GNB, Home, GroupIntro, Feed, MyPage, GroupPage, SignUp, CreatePost };
