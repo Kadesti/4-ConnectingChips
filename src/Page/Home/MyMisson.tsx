@@ -1,31 +1,30 @@
 import { styled } from "styled-components";
 import { MissionSingleWide } from "../../Component/Mission/MissionTab";
 import { GroupInfoType } from "../../Type/MissionType";
+import { findUrl } from "../../Hooks/useFindGroup";
 
-/** 2023-08-20 Home.tsx - 작심 중인 리스트 */
-const MyMisson = ({ myMissions, myID }: { myMissions: GroupInfoType[]; myID: number }): JSX.Element => {
+/** 2023-08-20 MyMission.tsx - 작심 중인 리스트 */
+const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: number }): JSX.Element => {
   return (
     <MyMissonS>
-      <h2>나의 작심 현황({myMissions.length}/3)</h2>
+      <h2>나의 작심 현황({myGroupList.length}/3)</h2>
       <MyMissionULS>
-        {myMissions.map((mission) => {
-          const missionInfo = mission.memberList.find((member) => member.id === myID);
+        {myGroupList.map((myGroup) => {
+          const missionInfo = myGroup.memberList.find((member) => member.id === myID);
           if (missionInfo === undefined) return "";
 
           const myDate = missionInfo.day;
           const myCount = missionInfo.count;
-          const posts = mission.posts.filter((post) => post.images.find((image) => image.url)).find((post) => post.images);
-          if (posts === undefined) return <></>;
-          const post = posts.images.find((image) => image.url);
-          if (post === undefined) return <></>;
-          const image = post.url;
+
+          const imageUrl = findUrl(myGroup);
+          const { id, tag, title } = myGroup;
 
           return (
-            <li key={mission.id}>
-              <MyMissionInfoS img={image}>
+            <li key={id}>
+              <MyMissionInfoS img={imageUrl}>
                 <div>
-                  <MissionSingleWide text={mission.tag} />
-                  <h2>{mission.title}</h2>
+                  <MissionSingleWide text={tag} />
+                  <h2>{title}</h2>
                   <p>
                     🔥 <span className="date">{myDate}</span>일자 맛보기 중
                   </p>
@@ -42,6 +41,7 @@ const MyMisson = ({ myMissions, myID }: { myMissions: GroupInfoType[]; myID: num
 };
 
 export default MyMisson;
+
 
 const ChipList = ({ count }: { count: number }): JSX.Element => {
   const isChecked: string[] = ["", "", ""];

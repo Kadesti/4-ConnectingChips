@@ -10,7 +10,7 @@ import { GNB } from "../../AppBarral";
 const Home = (): JSX.Element => {
   const nickNmae: string = "김형욱";
   const myID: number = 42186;
-  const myMissions: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.id === myID));
+  const myGroupList: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.id === myID));
 
   return (
     <HomeS>
@@ -27,7 +27,7 @@ const Home = (): JSX.Element => {
             작심을 골라볼까요?
           </h1>
         </WelcomeTextS>
-        {myMissions && <MyMisson myMissions={myMissions} myID={myID} />}
+        {myGroupList && <MyMisson myGroupList={myGroupList} myID={myID} />}
         <CurrentMission />
       </HomeContentS>
 
@@ -60,6 +60,7 @@ const LogoContainerS = styled.div`
   justify-content: center;
 `;
 
+/** 2023-08-20 Home.tsx - WelcomeTextS, MyMisson, CurrentMission 컨테이너 */
 const HomeContentS = styled.div`
   margin: 0 1rem;
   margin-bottom: 5rem;

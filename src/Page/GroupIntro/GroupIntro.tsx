@@ -5,7 +5,7 @@ import GroupArticle from "../../Component/Mission/GroupArticle";
 import ActiveExample from "./ActiveExample";
 import { JoinButtonCTA } from "../../Component/Mission/GroupButton";
 import { GroupIntroHeader } from "../../Component/Mission/GroupHeader";
-import useFindGroup from "../../Hooks/useFindGroup";
+import { useFindGroup } from "../../Hooks/useFindGroup";
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {

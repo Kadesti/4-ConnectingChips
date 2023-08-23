@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import GroupActive from "./GroupActive";
 import GroupArticle from "../../Component/Mission/GroupArticle";
 import { GroupHeader } from "../../Component/Mission/GroupHeader";
-import useFindGroup from "../../Hooks/useFindGroup";
+import { useFindGroup } from "../../Hooks/useFindGroup";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
