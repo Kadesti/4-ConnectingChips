@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   :root {
+    /* 색상코드 */
     --color-main: #FFBB00;
     --color-bg: #F7F7FB;
     --color-line: #F0F0F6;
@@ -13,17 +14,20 @@ const GlobalStyle = createGlobalStyle`
     --color-disabled2: #E5E5EC;
     --system-green: #04B014;
 
+    /* 가로 폭 */
+    --width-mobile: 375px;
   }
 
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     display: none;
-  }
+  } */
   
   body {
     color: var(--font-color1);
     font-family: Noto Sans KR;
     font-style: normal;
     line-height: normal;    
+    margin:0;
   }
   ul {
     margin: 0;
