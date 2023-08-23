@@ -39,7 +39,6 @@ export default GNB;
 
 /** 2023-08-20 Global Navigator Bar Style*/
 const GNBS = styled.ul`
-  display: flex;
   height: 3.25rem;
 
   display: flex;

@@ -5,6 +5,7 @@ import missionList from "../../data/groupList";
 import ActiveExample from "./ActiveExample";
 import { JoinButtonCTA } from "../../Component/Mission/GroupButton";
 import { GNB } from "../../AppBarral";
+import { GroupIntroHeader } from "../../Component/Mission/GroupHeader";
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {
@@ -38,10 +39,6 @@ const GroupIntro = (): JSX.Element => {
 
 export default GroupIntro;
 
-/** 2023-08-22 GroupIntro.tsx - 그룹 인트로 뒤로가기 */
-const GroupIntroHeader = (): JSX.Element => {
-  return <GroupIntroHeaderS>뒤로가기</GroupIntroHeaderS>;
-};
 
 /** 2023-08-22 GroupIntro.tsx - CTA 참여하기 + GNB */
 const CTAContainer = (): JSX.Element => {
@@ -85,16 +82,7 @@ const GroupContainerS = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  position: relative;
   overflow-y: scroll;
-`;
-
-/** 2023-08-22 GroupIntro.tsx - 그룹 인트로 뒤로가기 */
-const GroupIntroHeaderS = styled.div`
-  margin: 1rem;
-  position: sticky;
-  top: 0;
 `;
 
 /** 2023-08-22 GroupIntro.tsx - 그룹 인트로 헤드라인 + 예시 */

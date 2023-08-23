@@ -11,12 +11,13 @@ export interface GroupInfoType {
   tag: string;
   title: string;
   intro: string;
-  rule: string
+  rule: string;
+
   image: string;
-  url: "/어디로든 문",
-  memberAmount: number,
+  url: "/어디로든 문";
+  memberAmount: number;
   memberList: MemberInfo[];
-};
+}
 
 /** 2023-08-21 MissionType.tsx - 작심그룹 리스트 탭 */
 export type CurrentMissionTab = {

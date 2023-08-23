@@ -11,13 +11,13 @@ const groupList: GroupInfoType[] = [
     title: "헬스 모여라!",
     intro: "미션 소개글을 여기에다가 써주세요!\n어떤 목적으로 하는 미션인지를 적어주면 됩니다~\n00칼로리 소모하려면 몇 분 운동해야 하는지 적기!",
     rule: "첫째, 칼로리 소모 00칼로리 해야 합니다\n둘째, 소모한 칼로리를 사진 혹은 글로 인증하면 끝!",
-    image: 달리기,
+    image: 역도,
     url: "/어디로든 문",
     memberAmount: 10,
     memberList: [
       {
         memberid: 42186,
-        day: 1,
+        day: 6,
         count: 3,
       },
       {
@@ -33,13 +33,13 @@ const groupList: GroupInfoType[] = [
     title: "걷기는 재밌단말이지비",
     intro: "미션 소개글을 여기에다가 써주세요!\n어떤 목적으로 하는 미션인지를 적어주면 됩니다~\n00칼로리 소모하려면 몇 분 운동해야 하는지 적기!",
     rule: "첫째, 칼로리 소모 00칼로리 해야 합니다\n둘째, 소모한 칼로리를 사진 혹은 글로 인증하면 끝!",
-    image: 역도,
+    image: 달리기,
     url: "/어디로든 문",
     memberAmount: 20,
     memberList: [
       {
         memberid: 42186,
-        day: 1,
+        day: 2,
         count: 2,
       },
       {

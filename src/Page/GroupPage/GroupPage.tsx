@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import missionList from "../../data/groupList";
 import { styled } from "styled-components";
 import GroupActive from "./GroupActive";
-import { PostButton } from "../../Component/Mission/GroupButton";
+import { GroupHeader } from "../../Component/Mission/GroupHeader";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
@@ -34,39 +34,11 @@ const GroupPage = (): JSX.Element => {
 
 export default GroupPage;
 
-const GroupHeader = (): JSX.Element => {
-  return (
-    <GroupHeaderS>
-      <div>뒤로가기</div>
-      <div>글작성</div>
-    </GroupHeaderS>
-  );
-};
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPageS = styled.div`
   overflow-y: scroll;
   position: relative;
   /* backdrop-filter: blur(10px); */
-`;
-
-/** 2023-08-22 GroupPage.tsx - 그룹페이지 상단 고정 */
-const GroupHeaderS = styled.header`
-  position: sticky;
-  top: 0;
-
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  padding: 1rem 1.2rem;
-
-  // 자연스럽게 붙이기
-  /* padding-top: 3rem;
-  top: -2rem; */
-
-  // 아래 비치게 하기
-  opacity: 0.7;
-  backdrop-filter: blur(10px);
-  /* -webkit-backdrop-filter: blur(10px); */
 `;
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 대표 이미지 */

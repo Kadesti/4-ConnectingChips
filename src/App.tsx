@@ -13,7 +13,6 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/mypage" element={<MyPage />} />
         </Routes>
-        {/* <GNB /> */}
       </BrowserRouter>
     </MobileS>
   );
