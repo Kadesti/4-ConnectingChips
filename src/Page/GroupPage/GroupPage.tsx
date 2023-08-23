@@ -1,45 +1,27 @@
-import GroupArticle from "../../Component/Mission/GroupArticle";
-import { useParams } from "react-router-dom";
-import missionList from "../../data/groupList";
 import { styled } from "styled-components";
+
 import GroupActive from "./GroupActive";
+import GroupArticle from "../../Component/Mission/GroupArticle";
 import { GroupHeader } from "../../Component/Mission/GroupHeader";
+import useFindGroup from "../../Hooks/useFindGroup";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
-  const { groupID } = useParams();
-  if (groupID === undefined) {
-    return <>잘못오셨습니다</>;
-  }
-
-  const groupMission = missionList.find((mission) => String(mission.groupID) === groupID);
-  if (groupMission === undefined) {
-    return <>잘못된 id입니다</>;
-  }
-
-  const { intro, rule } = groupMission;
+  const { intro, rule, url } = useFindGroup();
 
   return (
-    <GroupPageS>
+    <div>
       <GroupHeader />
-      <GroupImageS url={groupMission.image} />
+      <GroupImageS url={url} />
       <GroupContentS>
-        {/* <GroupArticle groupText={intro} groupRule={rule} selected={[0, 1, 3]} state="post" /> */}
         <GroupArticle groupText={intro} groupRule={rule} selected={[0, 1, 3]} />
         <GroupActive />
       </GroupContentS>
-    </GroupPageS>
+    </div>
   );
 };
 
 export default GroupPage;
-
-/** 2023-08-22 GroupPage.tsx - 메인 컴프 */
-const GroupPageS = styled.div`
-  overflow-y: scroll;
-  position: relative;
-  /* backdrop-filter: blur(10px); */
-`;
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 대표 이미지 */
 const GroupImageS = styled.div<{ url: string }>`

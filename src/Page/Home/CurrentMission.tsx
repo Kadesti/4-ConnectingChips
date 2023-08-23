@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 import { MissonTab } from "../../Component/Mission/MissionTab";
 import { CurrentMissionTab } from "../../Type/MissionType";
-// import { 삼대운동, 빨간벽 } from "./SampleImage";
 import { GroupInfoType } from "../../Type/MissionType";
 import groupList from "../../data/groupList";
 
@@ -31,8 +30,8 @@ const CurrentMission = (): JSX.Element => {
       <h2>작심 그룹 리스트</h2>
       <MissonTab missionTab={missionTab} />
       <CurrentMissionListS>
-        {groupList.map(groupInfo => {
-          return <CurrentMissionItem groupInfo={groupInfo} key={groupInfo.groupID} />;
+        {groupList.map((groupInfo) => {
+          return <CurrentMissionItem groupInfo={groupInfo} key={groupInfo.id} />;
         })}
       </CurrentMissionListS>
     </article>
@@ -43,11 +42,17 @@ export default CurrentMission;
 
 /** 2023-08-20 CurrentMission.tsx - 작심 그룹 항목 */
 const CurrentMissionItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element => {
+  const post = groupInfo.posts.find((group) => group.id === groupInfo.defaultImageid);
+  if (post === undefined) return <></>;
+
+  const image = post.images.find(image => image.url)
+  if(image === undefined) return <></>
+
   return (
-    <CurrentMissionItemS key={groupInfo.groupID} img={groupInfo.image}>
+    <CurrentMissionItemS key={groupInfo.id} img={image.url}>
       <div>
         <h2>{groupInfo.title}</h2>
-        <p>{groupInfo.memberAmount}명 참여중</p>
+        <p>{groupInfo.memberList.length}명 참여중</p>
       </div>
       <button>참여하기</button>
     </CurrentMissionItemS>

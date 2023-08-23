@@ -10,7 +10,7 @@ import { GNB } from "../../AppBarral";
 const Home = (): JSX.Element => {
   const nickNmae: string = "김형욱";
   const myID: number = 42186;
-  const myMissions: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.memberid === myID));
+  const myMissions: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.id === myID));
 
   return (
     <HomeS>
@@ -43,10 +43,12 @@ export default Home;
 /** 2023-08-20 Home.tsx - 메인 컴프 스타일 */
 const HomeS = styled.section`
   height: 100%;
-  overflow-y: scroll;
 
   .CTA {
     position: sticky;
+    /* position: fixed; */
+    max-width: var(--width-mobile);
+    width: var(--width-mobile);
     bottom: 0;
   }
 `;
@@ -60,7 +62,8 @@ const LogoContainerS = styled.div`
 
 const HomeContentS = styled.div`
   margin: 0 1rem;
-`
+  margin-bottom: 5rem;
+`;
 
 /** 2023-08-20 Home.tsx - 오늘도 득근한 하루 되세요 */
 const WelcomeTextS = styled.div`

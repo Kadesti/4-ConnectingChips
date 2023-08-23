@@ -9,20 +9,26 @@ const MyMisson = ({ myMissions, myID }: { myMissions: GroupInfoType[]; myID: num
       <h2>나의 작심 현황({myMissions.length}/3)</h2>
       <MyMissionULS>
         {myMissions.map((mission) => {
-          const missionInfo = mission.memberList.find((member) => member.memberid === myID);
+          const missionInfo = mission.memberList.find((member) => member.id === myID);
           if (missionInfo === undefined) return "";
 
           const myDate = missionInfo.day;
           const myCount = missionInfo.count;
-          
+          const posts = mission.posts.filter((post) => post.images.find((image) => image.url)).find((post) => post.images);
+          if (posts === undefined) return <></>;
+          const post = posts.images.find((image) => image.url);
+          if (post === undefined) return <></>;
+          const image = post.url;
 
           return (
-            <li key={mission.groupID}>
-              <MyMissionInfoS img={mission.image}>
+            <li key={mission.id}>
+              <MyMissionInfoS img={image}>
                 <div>
                   <MissionSingleWide text={mission.tag} />
                   <h2>{mission.title}</h2>
-                  <p>🔥 {myDate}일자 맛보기 중</p>
+                  <p>
+                    🔥 <span className="date">{myDate}</span>일자 맛보기 중
+                  </p>
                 </div>
                 <ChipList count={myCount} />
               </MyMissionInfoS>
@@ -58,6 +64,8 @@ const MyMissonS = styled.article`
   justify-content: space-between;
 
   margin-bottom: 2rem;
+
+  overflow-x: scroll;
 `;
 
 /** 2023-08-20 MyMisson.tsx - 나의 작심 현황 리스트 */
@@ -94,6 +102,10 @@ const MyMissionInfoS = styled.div<{ img: string }>`
     font-size: 1.3rem;
     margin-top: 0.2rem;
     height: 4rem;
+  }
+
+  span.date {
+    /* color: */
   }
 `;
 /** 2023-08-21 MyMisson.tsx - 시식 칩 리스트*/
