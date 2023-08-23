@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import MyMisson from "./MyMisson";
 import CurrentMission from "./CurrentMission";
-import Logo_001 from "../../image/Logo_001.png";
+import { Banner as BannerImage, Logo_002 } from "./HomeImageBarrel";
 import groupList from "../../data/groupList";
 import { GroupInfoType } from "../../Type/MissionType";
 import { GNB } from "../../AppBarral";
@@ -15,19 +15,19 @@ const Home = (): JSX.Element => {
   return (
     <HomeS>
       <LogoContainerS>
-        <img src={Logo_001} alt="logo" width="250rem" height="auto" />
+        <img src={Logo_002} alt="logo" />
+        <button>로그인</button>
       </LogoContainerS>
       <HomeContentS>
         <WelcomeTextS>
           <h1>
-            반가워요 {nickNmae} 칩스!
+            {nickNmae} 님,
             <br />
-            아래 리스트 중에서
-            <br />
-            작심을 골라볼까요?
+            오늘도 득근한 하루되세요!
           </h1>
         </WelcomeTextS>
         {myGroupList && <MyMisson myGroupList={myGroupList} myID={myID} />}
+        <Banner />
         <CurrentMission />
       </HomeContentS>
 
@@ -39,6 +39,40 @@ const Home = (): JSX.Element => {
 };
 
 export default Home;
+
+const Banner = (): JSX.Element => {
+  return (
+    <BannerS>
+      <div className="bannerText">
+        <h2>칩스님의 의견을 들려주세요</h2>
+        <p>작심삼칩을 부탁해</p>
+      </div>
+      <img src={BannerImage} alt="bannerImage" />
+    </BannerS>
+  );
+};
+
+const BannerS = styled.div`
+  height: 5.5rem;
+  background-color: var(--color-line);
+
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+
+  .bannerText {
+    width: 7.9375rem;
+
+    p {
+      font-size: 0.8125rem;
+      margin-top: 0.25rem;
+    }
+  }
+  img {
+    width: 10.5625rem;
+    position: absolute;
+    transform: translateX(9.5rem) translateY(-5.7rem);
+  }
+`;
 
 /** 2023-08-20 Home.tsx - 메인 컴프 스타일 */
 const HomeS = styled.section`
@@ -56,8 +90,27 @@ const HomeS = styled.section`
 /** 2023-08-20 Home.tsx - 로고 위치 잡는 div */
 const LogoContainerS = styled.div`
   display: flex;
-  height: 3.5rem;
-  justify-content: center;
+  height: 2.7rem;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--font-color1);
+  padding: 1rem;
+
+  position: sticky;
+  top: 0;
+
+  img {
+    height: 1.8rem;
+  }
+
+  button {
+    color: var(--color-bg);
+    width: 5.125rem;
+    height: 2rem;
+    border: 0.1rem solid var(--color-bg);
+    border-radius: 2rem;
+  }
 `;
 
 /** 2023-08-20 Home.tsx - WelcomeTextS, MyMisson, CurrentMission 컨테이너 */

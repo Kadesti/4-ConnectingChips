@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { MissionSingleWide } from "../../Component/Mission/MissionTab";
 import { GroupInfoType } from "../../Type/MissionType";
 import { findUrl } from "../../Hooks/useFindGroup";
+import { chip_Active, chip_NoneActive } from "./HomeImageBarrel";
 
 /** 2023-08-20 MyMission.tsx - 작심 중인 리스트 */
 const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: number }): JSX.Element => {
@@ -42,16 +43,22 @@ const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: n
 
 export default MyMisson;
 
-
+/** 2023-08-20 MyMisson.tsx - 현재 카운트 (칩스) */
 const ChipList = ({ count }: { count: number }): JSX.Element => {
   const isChecked: string[] = ["", "", ""];
   for (let idx = 0; idx < count; idx++) {
     isChecked[idx] = "checked";
   }
+
   return (
     <ChipListS>
       {isChecked.map((className, idx) => {
-        return <li className={className} key={idx} />;
+        const chipState = className === "checked" ? chip_Active : chip_NoneActive;
+        return (
+          <ChipCicleS state={className}>
+            <img src={chipState} alt="chip State" key={idx} />
+          </ChipCicleS>
+        );
       })}
     </ChipListS>
   );
@@ -105,23 +112,27 @@ const MyMissionInfoS = styled.div<{ img: string }>`
   }
 
   span.date {
-    /* color: */
+    color: var(--color-main);
   }
 `;
 /** 2023-08-21 MyMisson.tsx - 시식 칩 리스트*/
 const ChipListS = styled.ul`
   display: flex;
+`;
 
-  li {
+/** 2023-08-23 MyMisson.tsx - 시식 칩 항목*/
+const ChipCicleS = styled.li<{ state: string }>`
+  width: 2.52456rem;
+  aspect-ratio: 1/1;
+  background-color: ${(props) => (props.state === "checked" ? "#FFD32C" : "#D9D9D9")};
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
     width: 2rem;
-    aspect-ratio: 1/1;
-    border: 1px solid;
-    border-radius: 100%;
-
-    &.checked {
-      /* border: none; */
-      background-color: yellow;
-    }
   }
 `;
 
