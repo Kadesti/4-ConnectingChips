@@ -6,6 +6,7 @@ import ActiveExample from "./ActiveExample";
 import { JoinButtonCTA } from "../../Component/Mission/GroupButton";
 import { GroupIntroHeader } from "../../Component/Mission/GroupHeader";
 import { useFindGroup } from "../../Hooks/useFindGroup";
+import GroupContent from "../../Component/Mission/GroupContent";
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {
@@ -16,10 +17,13 @@ const GroupIntro = (): JSX.Element => {
       <BGDarkS>
         <GroupContainerS>
           <GroupIntroHeader />
-          <GroupIntroContentS>
+          <div></div>
+          <GroupContent intro={intro} rule={rule} selected={[0, 1, 2]} sort="Example" />
+
+          {/* <GroupIntroContentS>
             <GroupArticle groupText={intro} groupRule={rule} selected={[0, 1, 2, 3]} />
             <ActiveExample />
-          </GroupIntroContentS>
+          </GroupIntroContentS> */}
           <CTAContainer />
         </GroupContainerS>
       </BGDarkS>
@@ -49,7 +53,8 @@ const GroupIntroS = styled.div<{ img: string }>`
   justify-content: space-between;
 
   border: 1px solid;
-  height: 53rem;
+  /* height: 53rem; */
+  height: 100vh;
 
   background-image: url(${(props) => props.img});
   background-size: 70rem;
@@ -76,11 +81,6 @@ const GroupContainerS = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-/** 2023-08-22 GroupIntro.tsx - 그룹 인트로 헤드라인 + 예시 */
-const GroupIntroContentS = styled.div`
-  margin: 22em 1rem 1rem 1rem;
 `;
 
 /** 2023-08-22 GroupIntro.tsx - CTA 참여하기 + GNB */

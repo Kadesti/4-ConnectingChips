@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
-
-import GroupActive from "./GroupActive";
-import GroupArticle from "../../Component/Mission/GroupArticle";
-import { GroupHeader } from "../../Component/Mission/GroupHeader";
 import { useFindGroup } from "../../Hooks/useFindGroup";
+import { GroupHeader } from "../../Component/Mission/GroupHeader";
+import GroupContent from "../../Component/Mission/GroupContent";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
@@ -13,15 +11,14 @@ const GroupPage = (): JSX.Element => {
     <div>
       <GroupHeader />
       <GroupImageS url={url} />
-      <GroupContentS>
-        <GroupArticle groupText={intro} groupRule={rule} selected={[0, 1, 3]} />
-        <GroupActive />
-      </GroupContentS>
+      <GroupContent intro={intro} rule={rule} selected={[0, 1]} sort="Active"/>
     </div>
   );
 };
 
 export default GroupPage;
+
+
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 대표 이미지 */
 const GroupImageS = styled.div<{ url: string }>`
@@ -31,7 +28,3 @@ const GroupImageS = styled.div<{ url: string }>`
   height: 10rem;
 `;
 
-/** 2023-08-22 GroupPage.tsx - 그룹페이지 아티클 + 인증 글 */
-const GroupContentS = styled.div`
-  margin: 0 1rem;
-`;

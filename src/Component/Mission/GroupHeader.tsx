@@ -40,7 +40,4 @@ const GroupBGHeaderS = styled(GroupHeaderS)`
   // 자연스럽게 붙이기
   /* padding-top: 3rem;
 top: -2rem; */
-
-  // 아래 비치게 하기
-  backdrop-filter: blur(10px);
 `;

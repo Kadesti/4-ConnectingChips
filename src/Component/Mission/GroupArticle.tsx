@@ -8,12 +8,13 @@ interface GroupArticleProps {
   groupText: string;
   groupRule: string;
   selected: number[];
+  sort?: "Create";
 }
 
 /** 2023-08-22 GroupArticle.tsx - 그룹 아티클 - 0 : 헤드라인 1 : 소개 2 : 규칙 3 : 버튼 */
-const GroupArticle = ({ groupText, groupRule, selected }: GroupArticleProps): JSX.Element => {
+const GroupArticle = ({ groupText, groupRule, selected, sort }: GroupArticleProps): JSX.Element => {
   // const compArr = [<HeadLine />, <MissionIntro groupText={groupText} />, <MissionRule groupRule={groupRule} />, <MissionButtonS state={state}>{state === "join" ? "참여하기" : "작심 인증하기"}</MissionButtonS>];
-  const compArr = [<HeadLine />, <MissionIntro groupText={groupText} />, <MissionRule groupRule={groupRule} />];
+  const compArr = [<HeadLine />, <MissionIntro groupText={groupText} />, <MissionRule groupRule={groupRule} sort={sort} />];
   return (
     <GroupArticleS>
       {selected.map((el) => (
@@ -25,7 +26,6 @@ const GroupArticle = ({ groupText, groupRule, selected }: GroupArticleProps): JS
 
 export default GroupArticle;
 
-
 /** 2023-08-22 GroupArticle.tsx - 그룹 인트로 아티클 */
 const GroupArticleS = styled.article`
   margin-top: 1rem;
@@ -35,5 +35,3 @@ const GroupArticleS = styled.article`
     font-size: 0.875rem;
   }
 `;
-
-
