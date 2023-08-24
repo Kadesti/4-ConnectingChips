@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Banner from "../../Component/SignUp/Banner";
 import { LogInS, LoginInputS } from "../../StyleComp/LoginInputS";
 import { SignClearBtnS, SignNotClearBtnS } from "../../StyleComp/SignBtnS";
+import { type handlerBind, useSignup } from'../../Hooks/useSignup'
 
 enum Error {
   ID = "ID",
@@ -15,13 +16,7 @@ const SignUp = (): JSX.Element => {
   const [isValid, setIsValid] = useState(false);
   const [inputState, setInputState] = useState("default");
   const isDefault = inputState === "default";
-
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [passConfirm, setPassConfirm] = useState("");
-  const idBind = { value: id, setValue: setId };
-  const passBind = { value: password, setValue: setPassword };
-  const confirmBind = { value: passConfirm, setValue: setPassConfirm };
+  const { idBind, passBind, confirmBind } = useSignup();
 
   axios.defaults.baseURL = "http://52.78.19.133/";
 
@@ -75,12 +70,10 @@ const SignUp = (): JSX.Element => {
 
 export default SignUp;
 
+/** 2023-08-24 SignUp.tsx - 입력창 props */
 interface SignUpInputProps {
   sort: "ID" | "PW";
-  handlerBind: {
-    value: string;
-    setValue: any;
-  };
+  handlerBind: handlerBind;
 }
 
 /**
@@ -90,9 +83,13 @@ interface SignUpInputProps {
  */
 const SignUpInput = ({ sort, handlerBind }: SignUpInputProps): JSX.Element => {
   const { value, setValue } = handlerBind;
-  if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" value={value} onChange={setValue} />;
+  const handlerOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
-  return <LoginInputS placeholder="비밀번호를 입력해 주세요" type="password" value={value} onChange={setValue} />;
+  if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" value={value} onChange={handlerOnChange} />;
+
+  return <LoginInputS placeholder="비밀번호를 입력해 주세요" type="password" value={value} onChange={handlerOnChange} />;
 };
 
 /** 2023-08-24 LogIn.tsx - 로그인 입력폼 */
