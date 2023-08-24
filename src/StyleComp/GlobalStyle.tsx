@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
 
     /* 가로 폭 */
     --width-mobile: 375px;
+
+    /* 세로 폭 */
+    --height-banner: 3.5rem;
   }
 
   /* ::-webkit-scrollbar {
@@ -70,6 +73,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     cursor: default;
     white-space: pre-line;
+  }
+
+  a{
+    text-decoration: none;
+    color: var(--font-color1)
   }
 
   button {

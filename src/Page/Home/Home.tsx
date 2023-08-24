@@ -14,10 +14,10 @@ const Home = (): JSX.Element => {
 
   return (
     <HomeS>
-      <LogoContainerS>
+      <HomeHeaderS>
         <img src={Logo_002} alt="logo" />
         <button>로그인</button>
-      </LogoContainerS>
+      </HomeHeaderS>
       <HomeContentS>
         <WelcomeTextS>
           <h1>
@@ -40,9 +40,10 @@ const Home = (): JSX.Element => {
 
 export default Home;
 
+/** 2023-08-22 Home.tsx - 설문조사 배너 */
 const Banner = (): JSX.Element => {
   return (
-    <BannerS>
+    <BannerS href={"http://52.78.19.133/"} target="_blank">
       <div className="bannerText">
         <h2>칩스님의 의견을 들려주세요</h2>
         <p>작심삼칩을 부탁해</p>
@@ -52,7 +53,9 @@ const Banner = (): JSX.Element => {
   );
 };
 
-const BannerS = styled.div`
+/** 2023-08-22 Home.tsx - 설문조사 배너 */
+const BannerS = styled.a`
+  display: block;
   height: 5.5rem;
   background-color: var(--color-line);
 
@@ -87,8 +90,8 @@ const HomeS = styled.section`
   }
 `;
 
-/** 2023-08-20 Home.tsx - 로고 위치 잡는 div */
-const LogoContainerS = styled.div`
+/** 2023-08-20 Home.tsx - 홈화면 헤더 */
+const HomeHeaderS = styled.header`
   display: flex;
   height: 2.7rem;
   justify-content: space-between;

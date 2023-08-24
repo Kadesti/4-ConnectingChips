@@ -55,7 +55,7 @@ const ChipList = ({ count }: { count: number }): JSX.Element => {
       {isChecked.map((className, idx) => {
         const chipState = className === "checked" ? chip_Active : chip_NoneActive;
         return (
-          <ChipCicleS state={className}>
+          <ChipCicleS state={className} key={idx}>
             <img src={chipState} alt="chip State" key={idx} />
           </ChipCicleS>
         );
