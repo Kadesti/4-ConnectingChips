@@ -1,14 +1,17 @@
-import GroupArticle from "../../Component/Mission/GroupArticle";
+import { useState } from "react";
+import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 import { GroupHeader } from "../../Component/Mission/GroupHeader";
 import groupList from "../../data/groupList";
-import { useParams } from "react-router-dom";
-import 자전거운동 from "../../image/예시사진모음/자전거운동.jpg";
-import { styled } from "styled-components";
 import GroupContent from "../../Component/Mission/GroupContent";
+import { SubmitButtonCTA } from "../../Component/Mission/GroupButton";
 
 /** 2023-08-24 CreatePost.tsx - 인증글쓰기 페이지 */
 const CreatePost = () => {
   const { postID } = useParams();
+
+  const [imageUrl,setImageUrl] = useState('');
+  const [text,setText] = useState('');
 
   // if (postID === undefined) {
   //   return <>잘못오셨습니다</>;
@@ -25,52 +28,58 @@ const CreatePost = () => {
   return (
     <CreatePostS>
       <GroupHeader />
-      <GroupContent intro={intro} rule={rule} selected={[0, 2]} sort="Create"/>
-      <div>
-        <div>인증샷 올리기</div>
-        <div>오늘의 작심은 어땠나요?</div>
-        <button>인증하기</button>
-      </div>
+      <GroupContent intro={intro} rule={rule} selected={[0, 2]} PageSort="Create" />
+      <CreateFormS>
+        <CreateFormUploadS>
+          <h2>인증샷 올리기</h2>
+          <SampleImageS />
+        </CreateFormUploadS>
+        <CreateFormUploadS>
+          <h2>오늘의 작심은 어땠나요?</h2>
+          <textarea placeholder="오늘 작심 성공!" />
+        </CreateFormUploadS>
+        <SubmitButtonCTA />
+      </CreateFormS>
     </CreatePostS>
   );
 };
 
 export default CreatePost;
 
-/** 2023-08-22 GroupActive.tsx - 작심 인증 글 */
-const GroupActive = (): JSX.Element => {
-  return (
-    <PostS>
-      <h2>인증 사진 예시</h2>
-      <PostImageS>
-        <img src={자전거운동} alt="업로드 사진" />
-      </PostImageS>
-    </PostS>
-  );
-};
-
 /** 2023-08-24 CreatePost.tsx - 인증글쓰기 페이지 */
 const CreatePostS = styled.div`
+  width: var(--width-mobile);
   border: 1px solid;
+  height: 100vh;
 `;
 
-const PostContainerS = styled.div``;
-
-/** 2023-08-22 GroupActive.tsx - 그룹페이지 아티클 */
-const PostS = styled.article`
-  background-color: var(--color-bg);
-`;
-
-/** 2023-08-22 GroupActive.tsx - 그룹페이지 아티클 인증 이미지(임시) */
-const PostImageS = styled.div`
-  width: 100%;
-  overflow: hidden;
-
+/** 2023-08-25 CreatePost.tsx - 인증글쓰기 폼 */
+const CreateFormS = styled.form`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  /* height: 100%; */
+`;
 
-  img {
-    width: 100%;
+/** 2023-08-25 CreatePost.tsx - 인증글쓰기 이미지/채팅 컨테이너 */
+const CreateFormUploadS = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0 1rem;
+
+  textarea {
+    height: 16.3125rem;
+    border: 1px solid #e3e3e3;
+    border-radius: 1rem;
   }
+`;
+
+/** 2023-08-25 CreatePost.tsx - 임시 확보한 이미지 공간 */
+const SampleImageS = styled.div`
+  height: 5.70525rem;
+  width: 5.70525rem;
+
+  border-radius: 1rem;
+  background-color: var(--color-main);
 `;
