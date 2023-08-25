@@ -19,7 +19,6 @@ export { JoinButtonCTA, PostButton, SubmitButtonCTA };
 
 /** 2023-08-22 GroupButton.tsx - 버튼 공통 스타일 */
 const Button = styled.button`
-  /* width: 100%; */
   height: 3.5rem;
 
   font-size: 1rem;
@@ -31,13 +30,15 @@ const Button = styled.button`
 /** 2023-08-22 GroupArticle.tsx - CTA 버튼(참여하기, 인증하기) */
 const CTAButtonS = styled(Button)`
   background-color: var(--color-main);
-
   margin: 0 1rem;
+  position: sticky;
+  bottom: 0;
 `;
 
 /** 2023-08-22 GroupArticle.tsx - 작심 인증하기 버튼 */
 const MissionButtonS = styled(Button)`
-  background-color: "transparent";
-  border: 0.2rem solid;
+  border: 0.1rem solid;
   border-color: var(--color-main);
+
+  width: 100%;
 `;

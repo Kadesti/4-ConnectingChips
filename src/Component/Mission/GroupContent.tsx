@@ -1,34 +1,33 @@
 import { styled } from "styled-components";
 import GroupArticle from "./GroupArticle";
 import GroupActive from "../../Page/GroupPage/GroupActive";
-import ActiveExample from "../../Page/GroupIntro/ActiveExample";
+import { IntroExample, CreateExample } from "../../Page/GroupIntro/ActiveExample";
+import { PageSort } from "../../Type/MissionType";
+import DivideBaS from "./DivideBa";
 
-type Sort = "Active" | "Example" | "Create";
 type GroupContentProps = {
   intro: string;
   rule: string;
   selected: number[];
-  sort: Sort;
+  PageSort: PageSort;
 };
 
 /** 2023-08-22 GroupContent.tsx - 아티클 + 내용 [ 0 : 헤드라인 1 : 소개 2 : 규칙 3 : 버튼 ] */
-const GroupContent = ({ intro, rule, selected, sort }: GroupContentProps) => {
+const GroupContent = ({ intro, rule, selected, PageSort }: GroupContentProps) => {
   return (
-    <GroupContentS sort={sort}>
-      {sort === "Active" ? (
+    <GroupContentS PageSort={PageSort}>
+      <GroupArticle groupText={intro} groupRule={rule} selected={selected} PageSort={PageSort} />
+      {PageSort === "Intro" ? (
+        <IntroExample PageSort={PageSort} />
+      ) : PageSort === "Page" ? (
         <>
-          <GroupArticle groupText={intro} groupRule={rule} selected={selected} />
-          <GroupActive />
+          <DivideBaS />
+          <GroupActive PageSort={PageSort} />
         </>
-      ) : sort === "Example" ? (
+      ) : PageSort === "Create" ? (
         <>
-          <GroupArticle groupText={intro} groupRule={rule} selected={selected} />
-          <ActiveExample />
-        </>
-      ) : sort === "Create" ? (
-        <>
-          <GroupArticle groupText={intro} groupRule={rule} selected={selected} sort={sort}/>
-          <GroupActive />
+          <DivideBaS />
+          <CreateExample PageSort={PageSort} />
         </>
       ) : (
         <></>
@@ -40,12 +39,17 @@ const GroupContent = ({ intro, rule, selected, sort }: GroupContentProps) => {
 export default GroupContent;
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 아티클 + 인증 글 */
-const GroupContentS = styled.div<{ sort: Sort }>`
-  /* margin: 0 1rem; */
-  margin: ${(props) => (props.sort === "Example" ? "0 1rem 1rem 1rem" : "0 1rem")};
+const GroupContentS = styled.div<{ PageSort: PageSort }>`
+  margin-bottom: 1rem;
 
   &::before {
-    height: ${(props) => (props.sort === "Example" ? "18rem" : "0")};
+    height: ${(props) => (props.PageSort === "Intro" ? "30rem" : "0")};
+    content: "";
+    display: block;
+  }
+
+  &::after {
+    height: ${(props) => (props.PageSort === "Page" ? "1.25rem" : "0")};
     content: "";
     display: block;
   }

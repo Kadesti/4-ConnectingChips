@@ -31,9 +31,9 @@ const Home = (): JSX.Element => {
         <CurrentMission />
       </HomeContentS>
 
-      <div className="CTA">
+      {/* <div className="CTA">
         <GNB />
-      </div>
+      </div> */}
     </HomeS>
   );
 };

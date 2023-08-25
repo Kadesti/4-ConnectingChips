@@ -19,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
 
     /* 세로 폭 */
     --height-banner: 3.5rem;
+
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   /* ::-webkit-scrollbar {
@@ -81,12 +86,19 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    background-color: rgba(0,0,0,0);
+    background-color: transparent;
     border: 0;
+    font-family: Noto Sans KR;
 
     &:hover {
         cursor: pointer;
     }
+  }
+
+  textarea{
+    padding: 1rem;
+    font-family: Noto Sans KR;
+    font-size: 1rem;
   }
 `;
 

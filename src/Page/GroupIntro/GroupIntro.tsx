@@ -1,8 +1,6 @@
 import { styled } from "styled-components";
 
 import { GNB } from "../../AppBarral";
-import GroupArticle from "../../Component/Mission/GroupArticle";
-import ActiveExample from "./ActiveExample";
 import { JoinButtonCTA } from "../../Component/Mission/GroupButton";
 import { GroupIntroHeader } from "../../Component/Mission/GroupHeader";
 import { useFindGroup } from "../../Hooks/useFindGroup";
@@ -17,13 +15,7 @@ const GroupIntro = (): JSX.Element => {
       <BGDarkS>
         <GroupContainerS>
           <GroupIntroHeader />
-          <div></div>
-          <GroupContent intro={intro} rule={rule} selected={[0, 1, 2]} sort="Example" />
-
-          {/* <GroupIntroContentS>
-            <GroupArticle groupText={intro} groupRule={rule} selected={[0, 1, 2, 3]} />
-            <ActiveExample />
-          </GroupIntroContentS> */}
+          <GroupContent intro={intro} rule={rule} selected={[0, 1, 2]} PageSort="Intro" />
           <CTAContainer />
         </GroupContainerS>
       </BGDarkS>
@@ -37,7 +29,7 @@ export default GroupIntro;
 const CTAContainer = (): JSX.Element => {
   return (
     <CTAContainerS>
-      <GNB />
+      {/* <GNB /> */}
       <JoinButtonCTA />
     </CTAContainerS>
   );
@@ -53,7 +45,6 @@ const GroupIntroS = styled.div<{ img: string }>`
   justify-content: space-between;
 
   border: 1px solid;
-  /* height: 53rem; */
   height: 100vh;
 
   background-image: url(${(props) => props.img});

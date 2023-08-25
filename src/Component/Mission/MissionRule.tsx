@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
+import { PageSort } from "../../Type/MissionType";
 
 /** 2023-08-22 MissionRule.tsx - 미션 규칙 */
-const MissionRule = ({ groupRule, sort }: { groupRule: string, sort?: 'Create' }): JSX.Element => {
+const MissionRule = ({ groupRule, PageSort }: { groupRule: string; PageSort: PageSort }): JSX.Element => {
   return (
-    <MissionRuleS sort={sort}>
+    <MissionRuleS PageSort={PageSort}>
       <div>인증 글쓰기 규칙</div>
       <p className={"rule"}>{groupRule}</p>
     </MissionRuleS>
@@ -13,12 +14,12 @@ const MissionRule = ({ groupRule, sort }: { groupRule: string, sort?: 'Create' }
 export default MissionRule;
 
 /** 2023-08-22 MissionRule.tsx - 그룹 아티클 규칙 */
-const MissionRuleS = styled.div<{sort?: 'Create'}>`
-  background-color: ${props=>props.sort === 'Create' ? 'var(--color-bg)' :'rgba(255, 255, 255, 0.7)'};
+const MissionRuleS = styled.div<{ PageSort: PageSort }>`
+  background-color: ${(props) => (props.PageSort === "Create" ? "var(--color-bg)" : "rgba(255, 255, 255, 0.7)")};
   color: black;
   padding: 1rem;
   margin-top: 1.25rem;
-  border-radius: 1rem;
+  border-radius: ${(props) => (props.PageSort === "Create" ? "0" : "1rem")};
 
   p {
     white-space: pre-line;

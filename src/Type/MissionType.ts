@@ -34,3 +34,5 @@ export type CurrentMissionTab = {
   id: number;
   title: string;
 };
+
+export type PageSort = "Page" | "Intro" | "Create";

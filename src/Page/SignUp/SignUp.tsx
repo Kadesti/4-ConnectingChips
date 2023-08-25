@@ -13,9 +13,9 @@ enum Error {
 
 /** 2023-08-24 SignUp - 회원가입 페이지 */
 const SignUp = (): JSX.Element => {
-  const [isValid, setIsValid] = useState(false);
-  const [inputState, setInputState] = useState("default");
-  const isDefault = inputState === "default";
+  const [isValid, setIsValid] = useState(true);
+  const [inputState, setInputState] = useState("failed");
+  const isFailed = inputState === "failed";
   const { id, idBind, password, passBind, passConfirm, confirmBind } = useSignup();
 
   axios.defaults.baseURL = "http://52.78.19.133/";
@@ -67,20 +67,21 @@ const SignUp = (): JSX.Element => {
       <LoginFormS onSubmit={SignupSubmit}>
         <LoginInputContainerS>
           <h2>아이디</h2>
-          <SignUpInput sort="ID" handlerBind={idBind} isDefault={isDefault} />
-          {isDefault && <p>영문, 영문+숫자 중 1가지 2~10자 조합, 공백 불가</p>}
-          {/* <p>이미 존재하는 아이디입니다</p> */}
+          <SignUpInput sort="ID" handlerBind={idBind} isFailed={isFailed} />
+          {!isFailed && <p>영문, 영문+숫자 중 1가지 2~10자 조합, 공백 불가</p>}
+          {isFailed && <p className="error">이미 존재하는 아이디입니다</p>}
         </LoginInputContainerS>
         <LoginInputContainerS>
           <h2>비밀번호</h2>
-          <SignUpInput sort="PW" handlerBind={passBind} isDefault={isDefault} />
-          {isDefault && <p>영문+숫자 10~20자 조합, 공백 불가</p>}
-          {/* <p>영문+숫자 10~20자 조합, 공백 불가</p> */}
+          <SignUpInput sort="PW" handlerBind={passBind} />
+          <p>영문+숫자 10~20자 조합, 공백 불가</p>
+          {/* {isDefault && <p>영문+숫자 10~20자 조합, 공백 불가</p>} */}
+          {/* {!isDefault && <p className="error">영문+숫자 10~20자 조합, 공백 불가</p>} */}
         </LoginInputContainerS>
         <LoginInputContainerS>
           <h2>비밀번호 확인</h2>
-          <SignUpInput sort="PW" handlerBind={confirmBind} isDefault={isDefault} />
-          {/* <p>비밀번호가 일치하지 않습니다</p> */}
+          <SignUpInput sort="PW" handlerBind={confirmBind} />
+          {/* {!isDefault && <p className="error">비밀번호가 일치하지 않습니다</p>} */}
         </LoginInputContainerS>
 
         {isValid ? (
@@ -103,7 +104,7 @@ export default SignUp;
 interface SignUpInputProps {
   sort: "ID" | "PW";
   handlerBind: handlerBind;
-  isDefault: boolean;
+  isFailed?: boolean;
 }
 
 /**
@@ -111,13 +112,13 @@ interface SignUpInputProps {
  * @param sort id인지 password인지 식별
  * @returns id입력창 또는 pw입력창
  */
-const SignUpInput = ({ sort, handlerBind, isDefault }: SignUpInputProps): JSX.Element => {
+const SignUpInput = ({ sort, handlerBind, isFailed }: SignUpInputProps): JSX.Element => {
   const { value, setValue } = handlerBind;
   const handlerOnChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
-  if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" className={isDefault ? "" : "failed"} value={value} onChange={handlerOnChange} />;
+  if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" className={isFailed ? "failed" : ""} value={value} onChange={handlerOnChange} />;
 
-  return <LoginInputS placeholder="비밀번호를 입력해 주세요" type="password" className={isDefault ? "" : "failed"} value={value} onChange={handlerOnChange} />;
+  return <LoginInputS placeholder="비밀번호를 입력해 주세요" type="password" className={isFailed ? "failed" : ""} value={value} onChange={handlerOnChange} />;
 };
 
 /** 2023-08-24 LogIn.tsx - 로그인 입력폼 */

@@ -2,13 +2,14 @@ import { styled } from "styled-components";
 import postInfo from "../../data/postInfo";
 import 프로필사진 from "../../image/예시사진모음/프로필사진.jpg";
 import 자전거운동 from "../../image/예시사진모음/자전거운동.jpg";
+import { PageSort } from "../../Type/MissionType";
 
 /** 2023-08-22 GroupActive.tsx - 작심 인증 글 */
-const GroupActive = (): JSX.Element => {
+const GroupActive = ({ PageSort }: { PageSort: PageSort }): JSX.Element => {
   const nowTime: string = new Date().toLocaleString();
 
   return (
-    <section>
+    <GroupActiveS PageSort={PageSort}>
       <h2>작심 인증 글</h2>
       <PostS>
         <PostHeader nowTime={nowTime} />
@@ -17,7 +18,7 @@ const GroupActive = (): JSX.Element => {
         </PostImageS>
         <PostContent />
       </PostS>
-    </section>
+    </GroupActiveS>
   );
 };
 
@@ -61,6 +62,14 @@ const PostContent = (): JSX.Element => {
     </PostContents>
   );
 };
+
+const GroupActiveS = styled.div<{ PageSort: PageSort }>`
+  margin: ${(props) => (props.PageSort === "Intro" ? "0 1rem 1rem 1rem" : "0 1rem")};
+  margin-top: 1.25rem;
+  h2 {
+    margin-bottom: 0.5rem;
+  }
+`;
 
 /** 2023-08-22 GroupActive.tsx - 그룹페이지 아티클 */
 const PostS = styled.article`

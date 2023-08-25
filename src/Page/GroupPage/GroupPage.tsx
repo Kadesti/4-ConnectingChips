@@ -8,17 +8,20 @@ const GroupPage = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
 
   return (
-    <div>
+    <GroupPageS>
       <GroupHeader />
       <GroupImageS url={url} />
-      <GroupContent intro={intro} rule={rule} selected={[0, 1]} sort="Active"/>
-    </div>
+      <GroupContent intro={intro} rule={rule} selected={[0, 1, 3]} PageSort="Page" />
+    </GroupPageS>
   );
 };
 
 export default GroupPage;
 
-
+const GroupPageS = styled.div`
+  width: var(--width-mobile);
+  position: relative;
+`;
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 대표 이미지 */
 const GroupImageS = styled.div<{ url: string }>`
@@ -27,4 +30,3 @@ const GroupImageS = styled.div<{ url: string }>`
   background-position: 0 -1rem;
   height: 10rem;
 `;
-
