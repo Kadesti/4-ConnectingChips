@@ -10,14 +10,14 @@ interface GroupArticleProps {
   groupText: string;
   groupRule: string;
   selected: number[];
-  PageSort: PageSort;
+  passsort: PageSort;
 }
 
 /** 2023-08-22 GroupArticle.tsx - 그룹 아티클 - 0 : 헤드라인 1 : 소개 2 : 규칙 3 : 버튼 */
-const GroupArticle = ({ groupText, groupRule, selected, PageSort }: GroupArticleProps): JSX.Element => {
-  const compArr = [<HeadLine />, <MissionIntro groupText={groupText} />, <MissionRule groupRule={groupRule} PageSort={PageSort} />, <PostButton />];
+const GroupArticle = ({ groupText, groupRule, selected, passsort }: GroupArticleProps): JSX.Element => {
+  const compArr = [<HeadLine />, <MissionIntro groupText={groupText} />, <MissionRule groupRule={groupRule} passsort={passsort} />, <PostButton />];
   return (
-    <GroupArticleS PageSort={PageSort}>
+    <GroupArticleS passsort={passsort}>
       {selected.map((el) => (
         <div key={el}>{compArr[el]}</div>
       ))}
@@ -28,8 +28,8 @@ const GroupArticle = ({ groupText, groupRule, selected, PageSort }: GroupArticle
 export default GroupArticle;
 
 /** 2023-08-22 GroupArticle.tsx - 그룹 인트로 아티클 */
-const GroupArticleS = styled.article<{ PageSort: PageSort }>`
-  margin: ${(props) => (props.PageSort === "Intro" ? "0 1rem 1rem 1rem" : "0 1rem")};
+const GroupArticleS = styled.article<{ passsort: PageSort }>`
+  margin: ${(props) => (props.passsort === "Intro" ? "0 1rem 1rem 1rem" : "0 1rem")};
   margin-top: 1rem;
   margin-bottom: 1.25rem;
 

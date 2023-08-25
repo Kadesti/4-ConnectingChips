@@ -1,17 +1,23 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { useFindGroup } from "../../Hooks/useFindGroup";
 import { GroupHeader } from "../../Component/Mission/GroupHeader";
 import GroupContent from "../../Component/Mission/GroupContent";
+import scrollTop from "../../Hooks/scrollTop";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
 
+  useEffect(() => {
+    scrollTop();
+  }, []);
+
   return (
     <GroupPageS>
       <GroupHeader />
       <GroupImageS url={url} />
-      <GroupContent intro={intro} rule={rule} selected={[0, 1, 3]} PageSort="Page" />
+      <GroupContent intro={intro} rule={rule} selected={[0, 1, 3]} passsort="Page" />
     </GroupPageS>
   );
 };

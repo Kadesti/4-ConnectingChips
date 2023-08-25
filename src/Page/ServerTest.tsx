@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { styled } from "styled-components";
 
-function ServerTest() {
+const ServerTest = (): JSX.Element => {
   const [text, setTest] = useState("");
 
-//   useEffect(() => {
-//     getServer();
-//   }, []);
+  //   useEffect(() => {
+  //     getServer();
+  //   }, []);
 
-  const getServer = () => {
+  const getServer = (): void => {
     // axios.get("http://52.78.19.133/");
     axios.get("http://52.78.19.133/").then((res) => setTest(res.data));
   };
@@ -20,7 +20,7 @@ function ServerTest() {
       <h2>{text}</h2>
     </div>
   );
-}
+};
 
 export default ServerTest;
 

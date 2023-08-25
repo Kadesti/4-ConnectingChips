@@ -1,15 +1,17 @@
 import { styled } from "styled-components";
 import postInfo from "../../data/postInfo";
-import 프로필사진 from "../../image/예시사진모음/프로필사진.jpg";
+import 기본프로필 from '../../image/예시사진모음/default_profile.svg'
 import 자전거운동 from "../../image/예시사진모음/자전거운동.jpg";
 import { PageSort } from "../../Type/MissionType";
+import point3 from "../../image/Icon/3point_icon.svg";
+import { likeIcon, commentIcon } from '../../Component/Like_CommentBarrel'
 
 /** 2023-08-22 GroupActive.tsx - 작심 인증 글 */
-const GroupActive = ({ PageSort }: { PageSort: PageSort }): JSX.Element => {
+const GroupActive = ({ passsort }: { passsort: PageSort }): JSX.Element => {
   const nowTime: string = new Date().toLocaleString();
 
   return (
-    <GroupActiveS PageSort={PageSort}>
+    <GroupActiveS passsort={passsort}>
       <h2>작심 인증 글</h2>
       <PostS>
         <PostHeader nowTime={nowTime} />
@@ -32,14 +34,14 @@ const PostHeader = ({ nowTime }: { nowTime: string }): JSX.Element => {
     <PostHeaderS>
       <PostHeaderProfileS>
         <PostProfileImageS>
-          <img src={프로필사진} alt="프로필 사진" />
+          <img src={기본프로필} alt="프로필 사진" />
         </PostProfileImageS>
         <div>
           <h2>{postInfo.nickName}</h2>
-          <p>{`${year}년 ${month}월 ${day}일 ${time}`}</p>
+          <p>{`${year}년 ${month}월 ${day}일 `}</p>
         </div>
       </PostHeaderProfileS>
-      <div>더보기</div>
+      <img src={point3} alt="point3_icon" />
     </PostHeaderS>
   );
 };
@@ -47,7 +49,7 @@ const PostHeader = ({ nowTime }: { nowTime: string }): JSX.Element => {
 /** 2023-08-22 GroupActive.tsx - 작심 인증 글 내용 */
 const PostContent = (): JSX.Element => {
   return (
-    <PostContents>
+    <PostContentS>
       <p className="post">{postInfo.postText}</p>
       <PostLikeS>
         <PostLikeCountS>
@@ -55,16 +57,16 @@ const PostContent = (): JSX.Element => {
           <p className="like"> 댓글{postInfo.commentList.length}</p>
         </PostLikeCountS>
         <PostLikesViewS>
-          <div>icon1</div>
-          <div>icon2</div>
+          <img src={likeIcon} alt="like"/>
+          <img src={commentIcon} alt="comment"/>
         </PostLikesViewS>
       </PostLikeS>
-    </PostContents>
+    </PostContentS>
   );
 };
 
-const GroupActiveS = styled.div<{ PageSort: PageSort }>`
-  margin: ${(props) => (props.PageSort === "Intro" ? "0 1rem 1rem 1rem" : "0 1rem")};
+const GroupActiveS = styled.div<{ passsort: PageSort }>`
+  margin: ${(props) => (props.passsort === "Intro" ? "0 1rem 1rem 1rem" : "0 1rem")};
   margin-top: 1.25rem;
   h2 {
     margin-bottom: 0.5rem;
@@ -107,6 +109,7 @@ const PostProfileImageS = styled.div`
   aspect-ratio: 1/1;
   border-radius: 10rem;
   overflow: hidden;
+  margin-right: 0.5rem;
 
   img {
     width: 3.5rem;
@@ -128,13 +131,15 @@ const PostImageS = styled.div`
   }
 `;
 /** 2023-08-22 GroupActive.tsx - 그룹페이지 아티클 내용 */
-const PostContents = styled.div`
+const PostContentS = styled.div`
   margin: 1rem;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5rem;
+
+  /* height: 8rem; */
 
   p {
     &.like {
@@ -149,7 +154,11 @@ const PostContents = styled.div`
 /** 2023-08-22 GroupActive.tsx - 그룹페이지 좋아요 */
 const PostLikeS = styled.div`
   width: 10.625rem;
-  height: 3.3125rem;
+  margin-bottom: 1.13rem;
+
+  display: flex;
+  flex-direction: column;
+  gap:0.5rem
 `;
 
 /** 2023-08-22 GroupActive.tsx - 그룹페이지 좋아요 / 댓글 수 */
@@ -161,4 +170,5 @@ const PostLikeCountS = styled.div`
 /** 2023-08-22 GroupActive.tsx - 그룹페이지 좋아요 / 댓글 보기 */
 const PostLikesViewS = styled.div`
   display: flex;
+  gap: 0.7rem;
 `;

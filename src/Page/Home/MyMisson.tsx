@@ -3,7 +3,9 @@ import { MissionSingleWide } from "../../Component/Mission/MissionTab";
 import { GroupInfoType } from "../../Type/MissionType";
 import { findUrl } from "../../Hooks/useFindGroup";
 import { chip_Active, chip_NoneActive } from "./HomeImageBarrel";
+import { Link } from "react-router-dom";
 
+const baseURL = process.env.REACT_APP_BASE_URL;
 /** 2023-08-20 MyMission.tsx - 작심 중인 리스트 */
 const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: number }): JSX.Element => {
   return (
@@ -32,7 +34,16 @@ const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: n
                 </div>
                 <ChipList count={myCount} />
               </MyMissionInfoS>
-              {myCount !== 3 ? <NoneClearBtnS>작심 인증하기</NoneClearBtnS> : <ClearBtnS>재작심하기</ClearBtnS>}
+              {myCount !== 3 ? (
+                // <Link to={`${baseURL}/uploadPost/1`}>
+                <Link to="/uploadPost/1">
+                  <NoneClearBtnS>작심 인증하기</NoneClearBtnS>
+                </Link>
+              ) : (
+                <Link to="/groupPage/44123">
+                  <ClearBtnS>재작심하기</ClearBtnS>
+                </Link>
+              )}
             </li>
           );
         })}

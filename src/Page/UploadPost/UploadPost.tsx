@@ -1,37 +1,28 @@
-import { useState } from "react";
 import { styled } from "styled-components";
-import { useParams } from "react-router-dom";
 import { GroupHeader } from "../../Component/Mission/GroupHeader";
 import groupList from "../../data/groupList";
 import GroupContent from "../../Component/Mission/GroupContent";
 import { SubmitButtonCTA } from "../../Component/Mission/GroupButton";
+import { useEffect } from "react";
+import scrollTop from "../../Hooks/scrollTop";
 
 /** 2023-08-24 CreatePost.tsx - 인증글쓰기 페이지 */
-const CreatePost = () => {
-  const { postID } = useParams();
-
-  const [imageUrl,setImageUrl] = useState('');
-  const [text,setText] = useState('');
-
-  // if (postID === undefined) {
-  //   return <>잘못오셨습니다</>;
-  // }
-
-  // const groupMission = groupList.find((item) => String(item) === postID);
-  // if (groupMission === undefined) {
-  //   return <>잘못된 id입니다</>;
-  // }
-  // const { intro, rule } = groupMission;
-
+const UploadPost = () => {
   const { intro, rule } = groupList[0];
+
+  useEffect(() => {
+    scrollTop();
+  }, []);
 
   return (
     <CreatePostS>
       <GroupHeader />
-      <GroupContent intro={intro} rule={rule} selected={[0, 2]} PageSort="Create" />
+      <GroupContent intro={intro} rule={rule} selected={[0, 2]} passsort="Create" />
       <CreateFormS>
+        {/* enctype="multipart/form-data" */}
         <CreateFormUploadS>
           <h2>인증샷 올리기</h2>
+          {/* <SettingUserThumbnail /> */}
           <SampleImageS />
         </CreateFormUploadS>
         <CreateFormUploadS>
@@ -44,12 +35,12 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default UploadPost;
 
 /** 2023-08-24 CreatePost.tsx - 인증글쓰기 페이지 */
 const CreatePostS = styled.div`
   width: var(--width-mobile);
-  border: 1px solid;
+  /* border: 1px solid; */
   height: 100vh;
 `;
 
@@ -72,6 +63,19 @@ const CreateFormUploadS = styled.div`
     height: 16.3125rem;
     border: 1px solid #e3e3e3;
     border-radius: 1rem;
+  }
+
+  label {
+    display: inline-block;
+    height: 5.70525rem;
+    width: 5.70525rem;
+
+    border-radius: 1rem;
+    background-color: var(--color-main);
+    cursor: pointer;
+  }
+  input[type="file"] {
+    display: none;
   }
 `;
 

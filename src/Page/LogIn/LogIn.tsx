@@ -1,13 +1,20 @@
 import { styled } from "styled-components";
-import { useState } from "react";
-import arrow from "../../image/Icon/Arrow_icon.svg";
+import { useEffect, useState } from "react";
 import Banner from "../../Component/SignUp/Banner";
 import { LogInS, LoginInputS } from "../../StyleComp/LoginInputS";
 import { SignClearBtnS } from "../../StyleComp/SignBtnS";
+import { Link } from "react-router-dom";
+import { Arrow_Left_W } from "../../Component/ArrowBarrel";
+import scrollTop from "../../Hooks/scrollTop";
 
 /** 2023-08-24 LogIn.tsx - 로그인 페이지 */
 const LogIn = (): JSX.Element => {
   const [inputState, setInputState] = useState("default");
+
+  useEffect(() => {
+    scrollTop();
+  }, []);
+
   // const [password, setPassword] = useState("");
   // const [showPassword, setShowPassword] = useState(false);
 
@@ -52,8 +59,9 @@ const LogIn = (): JSX.Element => {
         </LoginFormS>
         <NudgeSignS>
           <p className="hoxy">회원이 아니신가요?</p>
-          <p>회원가입</p>
-          <img src={arrow} alt="arrowIcon" />
+          <Link to="/signUp">회원가입</Link>
+          {/* <p>회원가입</p> */}
+          <img src={Arrow_Left_W} alt="arrowIcon" />
         </NudgeSignS>
       </LoginContainerS>
     </LogInS>

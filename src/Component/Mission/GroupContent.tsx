@@ -9,25 +9,25 @@ type GroupContentProps = {
   intro: string;
   rule: string;
   selected: number[];
-  PageSort: PageSort;
+  passsort: PageSort;
 };
 
 /** 2023-08-22 GroupContent.tsx - 아티클 + 내용 [ 0 : 헤드라인 1 : 소개 2 : 규칙 3 : 버튼 ] */
-const GroupContent = ({ intro, rule, selected, PageSort }: GroupContentProps) => {
+const GroupContent = ({ intro, rule, selected, passsort }: GroupContentProps) => {
   return (
-    <GroupContentS PageSort={PageSort}>
-      <GroupArticle groupText={intro} groupRule={rule} selected={selected} PageSort={PageSort} />
-      {PageSort === "Intro" ? (
-        <IntroExample PageSort={PageSort} />
-      ) : PageSort === "Page" ? (
+    <GroupContentS passsort={passsort}>
+      <GroupArticle groupText={intro} groupRule={rule} selected={selected} passsort={passsort} />
+      {passsort === "Intro" ? (
+        <IntroExample passsort={passsort} />
+      ) : passsort === "Page" ? (
         <>
           <DivideBaS />
-          <GroupActive PageSort={PageSort} />
+          <GroupActive passsort={passsort} />
         </>
-      ) : PageSort === "Create" ? (
+      ) : passsort === "Create" ? (
         <>
           <DivideBaS />
-          <CreateExample PageSort={PageSort} />
+          <CreateExample passsort={passsort} />
         </>
       ) : (
         <></>
@@ -39,17 +39,17 @@ const GroupContent = ({ intro, rule, selected, PageSort }: GroupContentProps) =>
 export default GroupContent;
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 아티클 + 인증 글 */
-const GroupContentS = styled.div<{ PageSort: PageSort }>`
+const GroupContentS = styled.div<{ passsort: PageSort }>`
   margin-bottom: 1rem;
 
   &::before {
-    height: ${(props) => (props.PageSort === "Intro" ? "30rem" : "0")};
+    height: ${(props) => (props.passsort === "Intro" ? "30rem" : "0")};
     content: "";
     display: block;
   }
 
   &::after {
-    height: ${(props) => (props.PageSort === "Page" ? "1.25rem" : "0")};
+    height: ${(props) => (props.passsort === "Page" ? "1.25rem" : "0")};
     content: "";
     display: block;
   }

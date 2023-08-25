@@ -1,21 +1,26 @@
 import { styled } from "styled-components";
-
 import { GNB } from "../../AppBarral";
 import { JoinButtonCTA } from "../../Component/Mission/GroupButton";
 import { GroupIntroHeader } from "../../Component/Mission/GroupHeader";
 import { useFindGroup } from "../../Hooks/useFindGroup";
 import GroupContent from "../../Component/Mission/GroupContent";
+import { useEffect } from "react";
+import scrollTop from "../../Hooks/scrollTop";
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
+
+  useEffect(() => {
+    scrollTop();
+  }, []);
 
   return (
     <GroupIntroS img={url}>
       <BGDarkS>
         <GroupContainerS>
           <GroupIntroHeader />
-          <GroupContent intro={intro} rule={rule} selected={[0, 1, 2]} PageSort="Intro" />
+          <GroupContent intro={intro} rule={rule} selected={[0, 1, 2]} passsort="Intro" />
           <CTAContainer />
         </GroupContainerS>
       </BGDarkS>

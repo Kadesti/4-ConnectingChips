@@ -5,6 +5,7 @@ import Banner from "../../Component/SignUp/Banner";
 import { LogInS, LoginInputS } from "../../StyleComp/LoginInputS";
 import { SignClearBtnS, SignNotClearBtnS } from "../../StyleComp/SignBtnS";
 import { type handlerBind, useSignup } from "../../Hooks/useSignup";
+import scrollTop from "../../Hooks/scrollTop";
 
 enum Error {
   ID = "ID",
@@ -14,12 +15,14 @@ enum Error {
 /** 2023-08-24 SignUp - 회원가입 페이지 */
 const SignUp = (): JSX.Element => {
   const [isValid, setIsValid] = useState(true);
-  const [inputState, setInputState] = useState("failed");
+  const [inputState, setInputState] = useState("default");
   const isFailed = inputState === "failed";
   const { id, idBind, password, passBind, passConfirm, confirmBind } = useSignup();
 
-  axios.defaults.baseURL = "http://52.78.19.133/";
-
+  useEffect(() => {
+    scrollTop();
+  }, []);
+  
   useEffect(() => {
     const isValidArr = [false, false, false];
 
@@ -75,13 +78,10 @@ const SignUp = (): JSX.Element => {
           <h2>비밀번호</h2>
           <SignUpInput sort="PW" handlerBind={passBind} />
           <p>영문+숫자 10~20자 조합, 공백 불가</p>
-          {/* {isDefault && <p>영문+숫자 10~20자 조합, 공백 불가</p>} */}
-          {/* {!isDefault && <p className="error">영문+숫자 10~20자 조합, 공백 불가</p>} */}
         </LoginInputContainerS>
         <LoginInputContainerS>
           <h2>비밀번호 확인</h2>
           <SignUpInput sort="PW" handlerBind={confirmBind} />
-          {/* {!isDefault && <p className="error">비밀번호가 일치하지 않습니다</p>} */}
         </LoginInputContainerS>
 
         {isValid ? (

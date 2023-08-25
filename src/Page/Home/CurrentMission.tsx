@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 import { MissonTab } from "../../Component/Mission/MissionTab";
 import { CurrentMissionTab } from "../../Type/MissionType";
 import { GroupInfoType } from "../../Type/MissionType";
@@ -42,11 +43,12 @@ export default CurrentMission;
 
 /** 2023-08-20 CurrentMission.tsx - 작심 그룹 항목 */
 const CurrentMissionItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element => {
+  const groupID = groupInfo.id;
   const post = groupInfo.posts.find((group) => group.id === groupInfo.defaultImageid);
   if (post === undefined) return <></>;
 
-  const image = post.images.find(image => image.url)
-  if(image === undefined) return <></>
+  const image = post.images.find((image) => image.url);
+  if (image === undefined) return <></>;
 
   return (
     <CurrentMissionItemS key={groupInfo.id} img={image.url}>
@@ -54,7 +56,9 @@ const CurrentMissionItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.El
         <h2>{groupInfo.title}</h2>
         <p>{groupInfo.memberList.length}명 참여중</p>
       </div>
-      <button>참여하기</button>
+      <Link to={`/groupPage/${groupID}`}>
+        <button>참여하기</button>
+      </Link>
     </CurrentMissionItemS>
   );
 };

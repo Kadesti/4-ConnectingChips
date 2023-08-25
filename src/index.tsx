@@ -1,9 +1,11 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import MobileBGS from "./StyleComp/MobileBGS";
 import App from "./App";
 import GlobalStyle from "./StyleComp/GlobalStyle";
 import reportWebVitals from "./reportWebVitals";
+import axios from "axios";
+
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(

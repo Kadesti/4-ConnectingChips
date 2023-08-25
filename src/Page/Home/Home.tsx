@@ -5,6 +5,9 @@ import { Banner as BannerImage, Logo_002 } from "./HomeImageBarrel";
 import groupList from "../../data/groupList";
 import { GroupInfoType } from "../../Type/MissionType";
 import { GNB } from "../../AppBarral";
+import { Link } from "react-router-dom";
+import scrollTop from "../../Hooks/scrollTop";
+import { useEffect } from "react";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
@@ -12,11 +15,17 @@ const Home = (): JSX.Element => {
   const myID: number = 42186;
   const myGroupList: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.id === myID));
 
+  useEffect(() => {
+    scrollTop();
+  }, []);
+
   return (
     <HomeS>
       <HomeHeaderS>
         <img src={Logo_002} alt="logo" />
-        <button>로그인</button>
+        <Link to="/login">
+          <button>로그인</button>
+        </Link>
       </HomeHeaderS>
       <HomeContentS>
         <WelcomeTextS>
@@ -40,10 +49,13 @@ const Home = (): JSX.Element => {
 
 export default Home;
 
+// const baseurl = process.env.REACT_APP_BASE_URL;
+
 /** 2023-08-22 Home.tsx - 설문조사 배너 */
 const Banner = (): JSX.Element => {
   return (
     <BannerS href={"http://52.78.19.133/"} target="_blank">
+      {/* <BannerS href={baseurl} target="_blank"> */}
       <div className="bannerText">
         <h2>칩스님의 의견을 들려주세요</h2>
         <p>작심삼칩을 부탁해</p>

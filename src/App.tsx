@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, GroupIntro, Feed, GroupPage, LogIn, CreatePost, ServerTest, SignUp } from "./AppBarral";
+import { Home, GroupIntro, Feed, GroupPage, LogIn, UploadPost, ServerTest, SignUp } from "./AppBarral";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/groupIntro/:uuid" element={<GroupIntro />} />
           <Route path="/groupPage/:uuid" element={<GroupPage />} />
-          <Route path="/createPost/:postID" element={<CreatePost />} />
+          <Route path="/uploadPost/:postID" element={<UploadPost />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/LogIn" element={<LogIn />} />
           <Route path="/signUp" element={<SignUp />} />
