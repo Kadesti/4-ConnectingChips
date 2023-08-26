@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { Arrow_Left_B, Arrow_Left_W } from "../ArrowBarrel";
 import post_Icon from "../../image/Icon/post_Icon.svg";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 /** 2023-08-25 GroupHeader.tsx - 뒤로가기 핸들러 */
 const goBack = (): void => {

@@ -56,7 +56,7 @@ const CurrentMissionItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.El
         <h2>{groupInfo.title}</h2>
         <p>{groupInfo.memberList.length}명 참여중</p>
       </div>
-      <Link to={`/groupPage/${groupID}`}>
+      <Link to={`/groupIntro/${groupID}`}>
         <button>참여하기</button>
       </Link>
     </CurrentMissionItemS>

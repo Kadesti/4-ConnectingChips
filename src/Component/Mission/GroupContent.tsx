@@ -26,8 +26,8 @@ const GroupContent = ({ intro, rule, selected, passsort }: GroupContentProps) =>
         </>
       ) : passsort === "Create" ? (
         <>
-          <DivideBaS />
           <CreateExample passsort={passsort} />
+          <DivideBaS />
         </>
       ) : (
         <></>
