@@ -1,16 +1,17 @@
 import { styled } from "styled-components";
-import MyMisson from "./MyMisson";
-import CurrentMission from "./CurrentMission";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Banner as BannerImage, Logo_002 } from "./HomeImageBarrel";
 import groupList from "../../data/groupList";
+import { MyMisson, CurrentMission } from "./HomeBarrel";
 import { GroupInfoType } from "../../Type/MissionType";
 import { GNB } from "../../AppBarral";
-import { Link } from "react-router-dom";
 import scrollTop from "../../Hooks/scrollTop";
-import { useEffect } from "react";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
+  const [isLogin, setIsLogin] = useState(false);
+
   const nickNmae: string = "김형욱";
   const myID: number = 42186;
   const myGroupList: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.id === myID));
@@ -23,9 +24,13 @@ const Home = (): JSX.Element => {
     <HomeS>
       <HomeHeaderS>
         <img src={Logo_002} alt="logo" />
-        <Link to="/login">
-          <button>로그인</button>
-        </Link>
+        {isLogin ? (
+          <button>로그아웃</button>
+        ) : (
+          <Link to="/login">
+            <button>로그인</button>
+          </Link>
+        )}
       </HomeHeaderS>
       <HomeContentS>
         <WelcomeTextS>
