@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { GroupHeader } from "../../Component/Mission/GroupHeader";
-import groupList from "../../data/groupList";
+import groupList from "../../data/groupListData";
 import GroupContent from "../../Component/Mission/GroupContent";
 import { SubmitButtonCTA } from "../../Component/Mission/GroupButton";
 import { useEffect } from "react";

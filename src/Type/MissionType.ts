@@ -1,6 +1,6 @@
 /** 2023-08-22 MissionType.tsx - 미션 그룹 멤버 정보 */
 export interface MemberInfo {
-  id: number;
+  id: string;
   day: number;
   count: number;
 }
@@ -30,7 +30,7 @@ export interface GroupInfoType {
 }
 
 /** 2023-08-21 MissionType.tsx - 작심그룹 리스트 탭 */
-export type CurrentMissionTab = {
+export type GroupListTab = {
   id: number;
   title: string;
 };

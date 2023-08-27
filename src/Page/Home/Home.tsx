@@ -2,19 +2,37 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Banner as BannerImage, Logo_002 } from "./HomeImageBarrel";
-import groupList from "../../data/groupList";
-import { MyMisson, CurrentMission } from "./HomeBarrel";
+import groupListData from "../../data/groupListData";
+import { MyMisson, GroupList } from "./HomeBarrel";
 import { GroupInfoType } from "../../Type/MissionType";
 import { GNB } from "../../AppBarral";
 import scrollTop from "../../Hooks/scrollTop";
+import { group } from "console";
+import testData from "../../data/testData";
+
+type MyInfoType = {
+  id: string;
+  password: string;
+  profileimg: string;
+};
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
   const [isLogin, setIsLogin] = useState(false);
 
-  const nickNmae: string = "김형욱";
-  const myID: number = 42186;
-  const myGroupList: GroupInfoType[] = groupList.filter((group) => group.memberList.find((member) => member.id === myID));
+  const myInfo: MyInfoType = {
+    id: "aadd1234",
+    password: "abcd1234ef56",
+    profileimg: "",
+  };
+
+  console.log("groupListData: ", groupListData);
+  const myGroupList: GroupInfoType[] = groupListData.filter((group) => group.memberList.filter((member) => member.id === myInfo.id));
+  // const myGroupList = groupListData.map((group) => group.memberList.filter((member) => console.log(member.id === myInfo.id)));
+  console.log("myGroupList: ", myGroupList);
+
+  // const testResult = testData.flatMap((item) => item.memberList.filter((member) => member.id === myInfo.id));
+  // console.log("testResult: ", testResult);
 
   useEffect(() => {
     scrollTop();
@@ -34,15 +52,18 @@ const Home = (): JSX.Element => {
       </HomeHeaderS>
       <HomeContentS>
         <WelcomeTextS>
-          <h1>
-            {nickNmae} 님,
-            <br />
-            오늘도 득근한 하루되세요!
-          </h1>
+          {isLogin ? (
+            <h1>반가워요 {myInfo.id} 님! 오늘도 함께 작심을 성공해볼까요?</h1>
+          ) : (
+            <h1>
+              반가워요 칩스!
+              <br /> 아래 리스트에서 작심을 시작해볼까요?
+            </h1>
+          )}
         </WelcomeTextS>
-        {myGroupList && <MyMisson myGroupList={myGroupList} myID={myID} />}
+        {/* {myGroupList && <MyMisson myGroupList={myGroupList} myID={myInfo.id} />} */}
         <Banner />
-        <CurrentMission />
+        <GroupList />
       </HomeContentS>
 
       {/* <div className="CTA">
@@ -59,7 +80,7 @@ export default Home;
 /** 2023-08-22 Home.tsx - 설문조사 배너 */
 const Banner = (): JSX.Element => {
   return (
-    <BannerS href={"http://52.78.19.133/"} target="_blank">
+    <BannerS href={"https://docs.google.com/forms/d/e/1FAIpQLSfUEWLC19oM9kPgzitmki705aZxY8Wn5jkH1YtkMObi-1FHIg/viewform"} target="_blank">
       {/* <BannerS href={baseurl} target="_blank"> */}
       <div className="bannerText">
         <h2>칩스님의 의견을 들려주세요</h2>
@@ -150,5 +171,6 @@ const WelcomeTextS = styled.div`
 
   h1 {
     display: block;
+    word-break: keep-all;
   }
 `;

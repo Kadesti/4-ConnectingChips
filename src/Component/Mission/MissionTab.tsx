@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
-import { CurrentMissionTab } from "../../Type/MissionType";
+import { GroupListTab } from "../../Type/MissionType";
 import { useState } from "react";
 
 /** 2023-08-21 MyMisson.tsx - 작심 중인 리스트 Props */
 type MissonTabProps = {
-  missionTab: CurrentMissionTab[];
+  missionTab: GroupListTab[];
 };
 
 /** 2023-08-21 MyMisson.tsx - 작심 중인 리스트 항목 타입 */

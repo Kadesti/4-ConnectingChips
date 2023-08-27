@@ -1,4 +1,4 @@
 import MyMisson from "./MyMisson";
-import CurrentMission from "./CurrentMission";
+import GroupList from "./GroupList";
 
-export { MyMisson, CurrentMission };
+export { MyMisson, GroupList };

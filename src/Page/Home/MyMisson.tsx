@@ -7,24 +7,27 @@ import { Link } from "react-router-dom";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 /** 2023-08-20 MyMission.tsx - 작심 중인 리스트 */
-const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: number }): JSX.Element => {
+const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: string }): JSX.Element => {  
+  if (myGroupList.length === 0) return <></>;
+
   return (
     <MyMissonS>
       <h2>나의 작심 현황({myGroupList.length}/3)</h2>
       <MyMissionULS>
-        {myGroupList.map((myGroup) => {
+        {myGroupList.map((myGroup) => {          
           const missionInfo = myGroup.memberList.find((member) => member.id === myID);
           if (missionInfo === undefined) return "";
 
           const myDate = missionInfo.day;
           const myCount = missionInfo.count;
+          const completedToday = false;
 
           const imageUrl = findUrl(myGroup);
           const { id, tag, title } = myGroup;
 
           return (
             <li key={id}>
-              <MyMissionInfoS img={imageUrl}>
+              <MyMissionInfoS img={imageUrl} href={`/groupPage/${id}`}>
                 <div>
                   <MissionSingleWide text={tag} />
                   <h2>{title}</h2>
@@ -35,12 +38,15 @@ const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: n
                 <ChipList count={myCount} />
               </MyMissionInfoS>
               {myCount !== 3 ? (
-                // <Link to={`${baseURL}/uploadPost/1`}>
-                <Link to="/uploadPost/1">
-                  <NoneClearBtnS>작심 인증하기</NoneClearBtnS>
-                </Link>
+                completedToday ? (
+                  <TodayClearBtnS>오늘 작심 성공!</TodayClearBtnS>
+                ) : (
+                  <Link to="/uploadPost/1">
+                    <NoneClearBtnS>작심 인증하기</NoneClearBtnS>
+                  </Link>
+                )
               ) : (
-                <Link to="/groupPage/44123">
+                <Link to={`/groupPage/${id}`}>
                   <ClearBtnS>재작심하기</ClearBtnS>
                 </Link>
               )}
@@ -98,7 +104,7 @@ const MyMissionULS = styled.ul`
 `;
 
 /** 2023-08-21 MyMisson.tsx - 나의 작심 현황 항목 정보 */
-const MyMissionInfoS = styled.div<{ img: string }>`
+const MyMissionInfoS = styled.a<{ img: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -116,10 +122,19 @@ const MyMissionInfoS = styled.div<{ img: string }>`
 
   color: white;
 
+  cursor: pointer;
+
   h2 {
     font-size: 1.3rem;
     margin-top: 0.2rem;
     height: 4rem;
+  }
+
+  div,
+  p,
+  li,
+  h2 {
+    cursor: pointer;
   }
 
   span.date {
@@ -161,5 +176,14 @@ const ClearBtnS = styled.button`
   width: 100%;
   border-radius: 2rem;
   background-color: black;
-  color: yellow;
+  color: var(--color-main);
+`;
+
+/** 2023-08-27 MyMisson.tsx - 오늘 작심 성공! 버튼 */
+const TodayClearBtnS = styled.button`
+  padding: 1rem;
+  width: 100%;
+  border-radius: 2rem;
+  background-color: var(--color-main);
+  color: black;
 `;

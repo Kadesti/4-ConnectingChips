@@ -36,7 +36,7 @@ const HeadLine = (): JSX.Element => {
     <HeadLineS>
       <MissionSingleWide text={groupInfo.tab} />
       <h1>{groupInfo.title}</h1>
-      <p className={urlPath === "groupIntro" ? "" : "subTitle"}>{groupInfo.member}명과 함께 맛보기 중</p>
+      <p className={urlPath === "groupIntro" ? "" : "subTitle"}>{groupInfo.member - 1}명과 함께 맛보기 중</p>
     </HeadLineS>
   );
 };

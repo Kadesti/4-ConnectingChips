@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { initGroup } from "../data/initialData";
 import { GroupInfoType } from "../Type/MissionType";
-import groupList from "../data/groupList";
+import groupListData from "../data/groupListData";
 
 interface FindGroupHook {
   intro: string;
@@ -40,7 +40,7 @@ const FindGroup = (uuid: string | undefined, initGroup: GroupInfoType): { group:
   const initValue = { group: initGroup, imageUrl: "" };
   if (uuid === undefined) return initValue;
 
-  const group = groupList.find((group) => group.id === Number(uuid));
+  const group = groupListData.find((group) => group.id === Number(uuid));
   if (group === undefined) return initValue;
 
   const imageUrl = findUrl(group);

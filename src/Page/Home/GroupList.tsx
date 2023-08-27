@@ -1,13 +1,13 @@
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { MissonTab } from "../../Component/Mission/MissionTab";
-import { CurrentMissionTab } from "../../Type/MissionType";
+import { GroupListTab } from "../../Type/MissionType";
 import { GroupInfoType } from "../../Type/MissionType";
-import groupList from "../../data/groupList";
+import groupListData from "../../data/groupListData";
 
-/** 23-08-20 CurrentMission.tsx - 메인 컴프 */
-const CurrentMission = (): JSX.Element => {
-  const missionTab: CurrentMissionTab[] = [
+/** 23-08-20 GroupList.tsx - 메인 컴프 */
+const GroupList = (): JSX.Element => {
+  const missionTab: GroupListTab[] = [
     {
       id: 0,
       title: "전체",
@@ -30,19 +30,20 @@ const CurrentMission = (): JSX.Element => {
     <article>
       <h2>작심 그룹 리스트</h2>
       <MissonTab missionTab={missionTab} />
-      <CurrentMissionListS>
-        {groupList.map((groupInfo) => {
-          return <CurrentMissionItem groupInfo={groupInfo} key={groupInfo.id} />;
+      <GroupListListS>
+        {groupListData.map((groupInfo) => {
+          return <GroupListItem groupInfo={groupInfo} key={groupInfo.id} />;
         })}
-      </CurrentMissionListS>
+      </GroupListListS>
     </article>
   );
 };
 
-export default CurrentMission;
+export default GroupList;
 
-/** 2023-08-20 CurrentMission.tsx - 작심 그룹 항목 */
-const CurrentMissionItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element => {
+/** 2023-08-20 GroupList.tsx - 작심 그룹 항목 */
+const GroupListItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element => {
+  const isFirst = groupInfo.memberList.length === 0;
   const groupID = groupInfo.id;
   const post = groupInfo.posts.find((group) => group.id === groupInfo.defaultImageid);
   if (post === undefined) return <></>;
@@ -51,26 +52,26 @@ const CurrentMissionItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.El
   if (image === undefined) return <></>;
 
   return (
-    <CurrentMissionItemS key={groupInfo.id} img={image.url}>
+    <GroupListItemS key={groupInfo.id} img={image.url}>
       <div>
         <h2>{groupInfo.title}</h2>
-        <p>{groupInfo.memberList.length}명 참여중</p>
+        {isFirst ? <p>작심의 첫 주인공이 되어보세요!</p> : <p>{groupInfo.memberList.length}명 참여중</p>}
       </div>
       <Link to={`/groupIntro/${groupID}`}>
         <button>참여하기</button>
       </Link>
-    </CurrentMissionItemS>
+    </GroupListItemS>
   );
 };
 
-const CurrentMissionListS = styled.ul`
+const GroupListListS = styled.ul`
   display: flex;
   flex-direction: column;
   margin-top: 0.5rem;
   gap: var(--height-gap);
 `;
 
-const CurrentMissionItemS = styled.li<{ img: string }>`
+const GroupListItemS = styled.li<{ img: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
