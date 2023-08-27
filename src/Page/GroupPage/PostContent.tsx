@@ -1,12 +1,11 @@
 import { styled } from "styled-components";
 import postInfo from "../../data/postInfo";
-import { likeIcon, commentIcon } from "../../Component/Like_CommentBarrel";
+import { likeIcon, likeFill, commentIcon } from "../../Component/Like_CommentBarrel";
 import { useState } from "react";
 
 /** 2023-08-22 GroupActive.tsx - 작심 인증 글 내용 */
-const PostContent = (): JSX.Element => {
+const PostContent = ({ setCommented }: { setCommented: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element => {
   const [isLiked, setIsLiked] = useState(false);
-  const [Commented, setCommented] = useState(false);
   /*
   const BtnIconArr = [
     {
@@ -42,22 +41,16 @@ const PostContent = (): JSX.Element => {
         <PostLikesViewS>
           {isLiked ? (
             <button onClick={() => handlerLiked("cancel")}>
-              <img src={likeIcon} alt="like" />
+              <img src={likeFill} alt="like" />
             </button>
           ) : (
             <button onClick={() => handlerLiked("add")}>
               <img src={likeIcon} alt="like" />
             </button>
           )}
-          {Commented ? (
-            <button onClick={handlerCommented}>
-              <img src={commentIcon} alt="comment" />
-            </button>
-          ) : (
-            <button onClick={handlerCommented}>
-              <img src={commentIcon} alt="comment" />
-            </button>
-          )}
+          <button onClick={handlerCommented}>
+            <img src={commentIcon} alt="comment" />
+          </button>
         </PostLikesViewS>
       </PostLikeS>
     </PostContentS>
@@ -68,7 +61,8 @@ export default PostContent;
 
 /** 2023-08-22 GroupActive.tsx - 그룹페이지 아티클 내용 */
 const PostContentS = styled.div`
-  margin: 1rem;
+  margin: 0 1rem;
+  margin-top: 1rem;
 
   display: flex;
   flex-direction: column;
@@ -94,7 +88,7 @@ const PostLikeS = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--height-gap);
 `;
 
 /** 2023-08-22 GroupActive.tsx - 그룹페이지 좋아요 / 댓글 수 */

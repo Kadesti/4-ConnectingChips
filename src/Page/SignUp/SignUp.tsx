@@ -135,7 +135,7 @@ const LoginInputContainerS = styled.div`
   height: 7.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--height-gap);
 
   p {
     color: var(--font-color2);

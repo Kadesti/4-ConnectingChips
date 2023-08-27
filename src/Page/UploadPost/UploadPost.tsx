@@ -56,7 +56,7 @@ const CreateFormS = styled.form`
 const CreateFormUploadS = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--height-gap);
   margin: 0 1rem;
 
   textarea {

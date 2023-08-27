@@ -133,6 +133,5 @@ const PostProfileImageS = styled.div`
 
   img {
     width: 3.5rem;
-    transform: translateX(-0.25rem) translateY(-0.2rem);
   }
 `;

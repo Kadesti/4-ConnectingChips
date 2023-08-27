@@ -58,6 +58,8 @@ const GroupBGHeaderS = styled(GroupHeaderS)`
   background-color: rgba(255, 255, 255, 0.5);
   cursor: default;
 
+  z-index: 10;
+
   img {
     cursor: pointer;
   }

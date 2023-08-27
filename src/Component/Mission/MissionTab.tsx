@@ -79,7 +79,7 @@ const MissionSingleS = styled.li`
   padding: 0.4rem 0.8rem;
 
   &:not(:first-child) {
-    margin-left: 0.5rem;
+    margin-left: var(--height-gap);
   }
 
   &.focused {

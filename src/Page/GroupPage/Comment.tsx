@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 import 기본프로필 from "../../image/예시사진모음/default_profile.svg";
+import sendIcon from "../../../src/image/Icon/send_Icon.svg";
 
 /** 2023-08-25 Comment.tsx - 그룹페이지 댓글 */
-const Comment = () => {
+const Comment = ({ Commented }: { Commented: boolean }) => {
   const commentname = "칩스1234";
   const replyname = "커넥팅칩스";
   const date = "1일 전";
@@ -14,13 +15,17 @@ const Comment = () => {
       <CommentListS>
         <CommentContainer sort="comment" commentname={commentname} date={date} text={text[0]} />
         <CommentContainer sort="reply" commentname={commentname} date={date} replyname={replyname} text={text[1]} />
+        <CommentContainer sort="reply" commentname={commentname} date={date} replyname={replyname} text={text[1]} />
+        <CommentContainer sort="comment" commentname={commentname} date={date} text={text[0]} />
       </CommentListS>
-      <CommentFormS>
-        <label htmlFor="comment">
-          <input id="comment" />
-          <button>전</button>
-        </label>
-      </CommentFormS>
+      {Commented && (
+        <CommentFormS>
+          <input placeholder="응원의 댓글을 적어주세요!" />
+          <button>
+            <img src={sendIcon} alt="sendIcon" />
+          </button>
+        </CommentFormS>
+      )}
     </CommentS>
   );
 };
@@ -51,6 +56,7 @@ const CommentContainer = ({ sort, commentname, replyname, date, text }: CommentP
         <p className="text">
           {sort === "reply" && <p className="call">@{commentname}</p>} {text}
         </p>
+
         <div className="reply">
           <h2>답글</h2>
           <p>삭제</p>
@@ -69,7 +75,7 @@ const CommentS = styled.article`
 const CommentListS = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--height-gap);
   margin-top: 0.69rem;
 `;
 
@@ -102,7 +108,7 @@ const CommentContentS = styled.div<{ sort: CommentType }>`
   .profile {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--height-gap);
     margin-bottom: 0.37rem;
 
     h2 {
@@ -120,7 +126,7 @@ const CommentContentS = styled.div<{ sort: CommentType }>`
       font-weight: 500;
       display: inline;
     }
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--height-gap);
   }
 
   .reply {
@@ -140,13 +146,25 @@ const CommentContentS = styled.div<{ sort: CommentType }>`
 
 /** 2023-08-25 Comment.tsx - 그룹페이지 댓글 입력 창 */
 const CommentFormS = styled.form`
-  label {
-    height: 4.5rem;
-    margin: 0 1rem;
-    border: 1px #e3e3e3;
-  }
+  border: 1px solid #e3e3e3;
+  border-radius: 0.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: var(--height-gap);
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
 
   input {
-    display: none;
+    width: 16.375rem;
+    height: 1.25rem;
+    border: none;
+    font-size: 0.875rem;
+    font-family: Noto Sans KR;
+
+    &:focus {
+      outline: none;
+    }
   }
 `;

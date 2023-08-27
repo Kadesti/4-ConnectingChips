@@ -46,7 +46,7 @@ const PostS = styled.article<{ passsort: PageSort }>`
 
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--height-gap);
 `;
 
 const CreateHeaderS = styled.div`

@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
 
     /* 세로 폭 */
     --height-banner: 3.5rem;
+    --height-gap: 0.5rem;
 
     
     &::-webkit-scrollbar {

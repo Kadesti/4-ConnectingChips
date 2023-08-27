@@ -67,7 +67,7 @@ const CurrentMissionListS = styled.ul`
   display: flex;
   flex-direction: column;
   margin-top: 0.5rem;
-  gap: 0.5rem;
+  gap: var(--height-gap);
 `;
 
 const CurrentMissionItemS = styled.li<{ img: string }>`
@@ -86,7 +86,7 @@ const CurrentMissionItemS = styled.li<{ img: string }>`
 
   h2 {
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--height-gap);
   }
 
   button {

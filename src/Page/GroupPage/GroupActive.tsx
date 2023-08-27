@@ -5,7 +5,7 @@ import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 
 /** 2023-08-22 GroupActive.tsx - 작심 인증 글 */
-const GroupActive = ({ passsort }: { passsort: PageSort }): JSX.Element => {
+const GroupActive = ({ passsort, setCommented }: { passsort: PageSort; setCommented: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element => {
   const nowTime: string = new Date().toLocaleString();
 
   return (
@@ -16,7 +16,7 @@ const GroupActive = ({ passsort }: { passsort: PageSort }): JSX.Element => {
         <PostImageS>
           <img src={자전거운동} alt="업로드 사진" />
         </PostImageS>
-        <PostContent />
+        <PostContent setCommented={setCommented} />
       </PostS>
     </GroupActiveS>
   );
@@ -29,7 +29,7 @@ const GroupActiveS = styled.div<{ passsort: PageSort }>`
   margin: ${(props) => (props.passsort === "Intro" ? "0 1rem 1rem 1rem" : "0 1rem")};
   margin-top: 1.25rem;
   h2 {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--height-gap);
   }
 `;
 

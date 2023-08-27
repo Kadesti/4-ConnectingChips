@@ -77,7 +77,11 @@ const BannerS = styled.a`
   .bannerText {
     width: 7.9375rem;
 
+    h2 {
+      cursor: pointer;
+    }
     p {
+      cursor: pointer;
       font-size: 0.8125rem;
       margin-top: 0.25rem;
     }

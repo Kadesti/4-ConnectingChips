@@ -19,11 +19,6 @@ const GroupContent = ({ intro, rule, selected, passsort }: GroupContentProps) =>
       <GroupArticle groupText={intro} groupRule={rule} selected={selected} passsort={passsort} />
       {passsort === "Intro" ? (
         <IntroExample passsort={passsort} />
-      ) : passsort === "Page" ? (
-        <>
-          <DivideBaS />
-          <GroupActive passsort={passsort} />
-        </>
       ) : passsort === "Create" ? (
         <>
           <CreateExample passsort={passsort} />
@@ -40,16 +35,10 @@ export default GroupContent;
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 아티클 + 인증 글 */
 const GroupContentS = styled.div<{ passsort: PageSort }>`
-  margin-bottom: 1rem;
+  margin-bottom: var(--height-gap);
 
   &::before {
     height: ${(props) => (props.passsort === "Intro" ? "30rem" : "0")};
-    content: "";
-    display: block;
-  }
-
-  &::after {
-    height: ${(props) => (props.passsort === "Page" ? "1.25rem" : "0")};
     content: "";
     display: block;
   }
