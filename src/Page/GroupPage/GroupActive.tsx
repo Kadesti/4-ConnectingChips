@@ -3,9 +3,15 @@ import 자전거운동 from "../../image/예시사진모음/자전거운동.jpg"
 import { PageSort } from "../../Type/MissionType";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
+import LikeBind from "../../Type/LikeBind";
 
+interface GroupActiveProps {
+  passsort: PageSort;
+  setCommented: React.Dispatch<React.SetStateAction<boolean>>;
+  likeBind: LikeBind;
+}
 /** 2023-08-22 GroupActive.tsx - 작심 인증 글 */
-const GroupActive = ({ passsort, setCommented }: { passsort: PageSort; setCommented: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element => {
+const GroupActive = ({ passsort, setCommented, likeBind }: GroupActiveProps): JSX.Element => {
   const nowTime: string = new Date().toLocaleString();
 
   return (
@@ -16,7 +22,7 @@ const GroupActive = ({ passsort, setCommented }: { passsort: PageSort; setCommen
         <PostImageS>
           <img src={자전거운동} alt="업로드 사진" />
         </PostImageS>
-        <PostContent setCommented={setCommented} />
+        <PostContent setCommented={setCommented} likeBind={likeBind} />
       </PostS>
     </GroupActiveS>
   );

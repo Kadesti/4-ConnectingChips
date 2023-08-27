@@ -1,11 +1,15 @@
 import { styled } from "styled-components";
 import postInfo from "../../data/postInfo";
 import { likeIcon, likeFill, commentIcon } from "../../Component/Like_CommentBarrel";
-import { useState } from "react";
+import LikeBind from "../../Type/LikeBind";
 
+interface PostContentProps {
+  setCommented: React.Dispatch<React.SetStateAction<boolean>>;
+  likeBind: LikeBind;
+}
 /** 2023-08-22 GroupActive.tsx - 작심 인증 글 내용 */
-const PostContent = ({ setCommented }: { setCommented: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element => {
-  const [isLiked, setIsLiked] = useState(false);
+const PostContent = ({ setCommented, likeBind }: PostContentProps): JSX.Element => {
+  const { isLiked, setIsLiked } = likeBind;
   /*
   const BtnIconArr = [
     {

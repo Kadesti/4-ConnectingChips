@@ -7,12 +7,14 @@ import scrollTop from "../../Hooks/scrollTop";
 import DivideBaS from "../../Component/Mission/DivideBa";
 import GroupActive from "./GroupActive";
 import GroupArticle from "../../Component/Mission/GroupArticle";
+import LikeBind from "../../Type/LikeBind";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
 
   useEffect(() => {
+    //TODO: 작업 끝나면 주석 해제
     // scrollTop();
   }, []);
 
@@ -50,9 +52,12 @@ const GroupSummary = ({ intro, rule, selected }: GroupPostProps) => {
 /** 2023-08-26 GroupPage.tsx - 그룹페이지 글 항목 */
 const GroupPost = () => {
   const [Commented, setCommented] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const likeBind: LikeBind = { isLiked, setIsLiked };
+
   return (
     <GroupPostS>
-      <GroupActive passsort="Page" setCommented={setCommented} />
+      <GroupActive passsort="Page" setCommented={setCommented} likeBind={likeBind} />
       <Comment Commented={Commented} />
     </GroupPostS>
   );
@@ -61,8 +66,6 @@ const GroupPost = () => {
 const GroupPageS = styled.div`
   width: var(--width-mobile);
   position: relative;
-
-  /* border: 1px solid; */
 `;
 
 /** 2023-08-22 GroupPage.tsx - 그룹페이지 대표 이미지 */
