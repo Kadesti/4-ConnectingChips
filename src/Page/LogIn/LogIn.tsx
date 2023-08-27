@@ -1,10 +1,11 @@
-import { styled } from "styled-components";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { styled } from "styled-components";
 import Banner from "../../Component/SignUp/Banner";
 import { LogInS, LoginInputS } from "../../StyleComp/LoginInputS";
 import { SignClearBtnS } from "../../StyleComp/SignBtnS";
-import { Link } from "react-router-dom";
-import { Arrow_Left_W } from "../../Component/ArrowBarrel";
+import { Arrow_Right } from "../../Component/ArrowBarrel";
+import Loginheader from "../../Component/SignUp/Loginheader";
 import scrollTop from "../../Hooks/scrollTop";
 
 /** 2023-08-24 LogIn.tsx - 로그인 페이지 */
@@ -46,9 +47,7 @@ const LogIn = (): JSX.Element => {
 
   return (
     <LogInS>
-      <header>
-        <h2>로그인</h2>
-      </header>
+      <Loginheader type="로그인" />
       <Banner />
       <LoginContainerS>
         <LoginFormS onSubmit={LoginSubmit}>
@@ -61,7 +60,9 @@ const LogIn = (): JSX.Element => {
           <p className="hoxy">회원이 아니신가요?</p>
           <Link to="/signUp">회원가입</Link>
           {/* <p>회원가입</p> */}
-          <img src={Arrow_Left_W} alt="arrowIcon" />
+          <div className="img">
+            <img src={Arrow_Right} alt="arrowIcon" />
+          </div>
         </NudgeSignS>
       </LoginContainerS>
     </LogInS>
@@ -120,8 +121,14 @@ const NudgeSignS = styled.div`
 
     &.hoxy {
       color: var(--font-color3);
-      margin-right: 0.13rem;
+      margin-right: 0.4rem;
     }
+  }
+  .img {
+    width: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   img {
     margin-top: 0.3rem;

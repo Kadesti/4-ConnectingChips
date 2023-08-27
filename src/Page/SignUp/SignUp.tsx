@@ -6,6 +6,7 @@ import { LogInS, LoginInputS } from "../../StyleComp/LoginInputS";
 import { SignClearBtnS, SignNotClearBtnS } from "../../StyleComp/SignBtnS";
 import { type handlerBind, useSignup } from "../../Hooks/useSignup";
 import scrollTop from "../../Hooks/scrollTop";
+import Loginheader from "../../Component/SignUp/Loginheader";
 
 enum Error {
   ID = "ID",
@@ -63,9 +64,7 @@ const SignUp = (): JSX.Element => {
 
   return (
     <LogInS>
-      <header>
-        <h2>회원가입</h2>
-      </header>
+      <Loginheader type="회원가입"/>
       <Banner />
       <LoginFormS onSubmit={SignupSubmit}>
         <LoginInputContainerS>
