@@ -1,9 +1,8 @@
-import { useEffect, useState, Link, styled, axios } from "./LoginBarrel";
+import { useState, Link, styled, axios, useNavigate } from "./LoginBarrel";
 import { LogInS, LoginInputS, SignClearBtnS, Arrow_Right } from "./LoginBarrel";
 import Banner from "../../Component/SignUp/Banner";
 import Loginheader from "../../Component/SignUp/Loginheader";
-import scrollTop from "../../Hooks/scrollTop";
-import { useNavigate } from "react-router-dom";
+import useLoginCheck from "../../Hooks/useLoginCheck";
 
 type bindVlaue = {
   value: string;
@@ -19,10 +18,7 @@ const LogIn = (): JSX.Element => {
   const pwBind: bindVlaue = { value: password, setValue: setPassword };
   const navigate = useNavigate();
 
-  useEffect(() => {
-    scrollTop();
-  }, []);
-
+  useLoginCheck(navigate, "Done");
   const referrer = document.referrer;
 
   console.log("이전 페이지 URL: " + referrer);

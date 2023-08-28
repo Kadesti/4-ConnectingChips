@@ -1,12 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { axios, styled, useEffect, useState } from "./SignUpBarrel";
+import { axios, styled, useEffect, useState, useNavigate, useLoginCheck } from "./SignUpBarrel";
 import { Banner, LogInS, LoginInputS, SignClearBtnS, SignNotClearBtnS, Loginheader, infoIcon } from "./SignUpBarrel";
-import { type handlerBind, useSignup, scrollTop } from "./SignUpBarrel";
-
-enum Error {
-  ID = "ID",
-  PW = "PW",
-}
+import { type handlerBind, useSignup } from "./SignUpBarrel";
 
 /** 2023-08-24 SignUp - 회원가입 페이지 */
 const SignUp = (): JSX.Element => {
@@ -16,9 +10,7 @@ const SignUp = (): JSX.Element => {
   const { nickname, nicknameBind, password, passBind, confirmPassword, confirmBind } = useSignup();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    scrollTop();
-  }, []);
+  useLoginCheck(navigate,'Done');
 
   useEffect(() => {
     const isValidArr = [false, false, false];

@@ -3,16 +3,14 @@ import { GroupHeader } from "../../Component/Mission/GroupHeader";
 import groupList from "../../data/groupListData";
 import GroupContent from "../../Component/Mission/GroupContent";
 import { SubmitButtonCTA } from "../../Component/CTA/CTAContainer";
-import { useEffect } from "react";
-import scrollTop from "../../Hooks/scrollTop";
+import { useLoginCheck, useNavigate } from "../GroupPage/GroupPageBarrel";
 
 /** 2023-08-24 CreatePost.tsx - 인증글쓰기 페이지 */
 const UploadPost = () => {
   const { intro, rule } = groupList[0];
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    scrollTop();
-  }, []);
+  useLoginCheck(navigate, "None");
 
   return (
     <CreatePostS>

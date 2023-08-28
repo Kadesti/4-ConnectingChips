@@ -1,27 +1,13 @@
-import { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import { useFindGroup } from "../../Hooks/useFindGroup";
-import { GroupHeader } from "../../Component/Mission/GroupHeader";
-import Comment from "./Comment";
-import scrollTop from "../../Hooks/scrollTop";
-import DivideBaS from "../../Component/Mission/DivideBa";
-import GroupActive from "./GroupActive";
-import GroupArticle from "../../Component/Mission/GroupArticle";
-import LikeBind from "../../Type/LikeBind";
-import { useNavigate } from "react-router-dom";
+import { useState, styled } from "./GroupPageBarrel";
+import { useNavigate, useFindGroup, useLoginCheck } from "./GroupPageBarrel";
+import { GroupHeader, type LikeBind, Comment, DivideBaS, GroupActive, GroupArticle } from "./GroupPageBarrel";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    scrollTop();
-    
-    const access_token = localStorage.getItem("access_token");
-    //TODO: 404에러 페이지
-    // if (access_token === null) navigate("/");
-  }, []);
+  useLoginCheck(navigate, "None");
 
   return (
     <GroupPageS>
