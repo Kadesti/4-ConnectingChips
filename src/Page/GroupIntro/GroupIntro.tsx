@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 import { GNB } from "../../AppBarral";
-import { JoinButtonCTA } from "../../Component/Mission/GroupButton";
+import { CTAContainer } from "../../Component/CTA/CTAContainer";
 import { GroupIntroHeader } from "../../Component/Mission/GroupHeader";
 import { useFindGroup } from "../../Hooks/useFindGroup";
 import GroupContent from "../../Component/Mission/GroupContent";
 import { useEffect } from "react";
-import scrollTop from '../../Hooks/scrollTop'
+import scrollTop from "../../Hooks/scrollTop";
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {
@@ -29,16 +29,6 @@ const GroupIntro = (): JSX.Element => {
 };
 
 export default GroupIntro;
-
-/** 2023-08-22 GroupIntro.tsx - CTA 참여하기 + GNB */
-const CTAContainer = (): JSX.Element => {
-  return (
-    <CTAContainerS>
-      {/* <GNB /> */}
-      <JoinButtonCTA />
-    </CTAContainerS>
-  );
-};
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntroS = styled.div<{ img: string }>`
@@ -77,15 +67,4 @@ const GroupContainerS = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-/** 2023-08-22 GroupIntro.tsx - CTA 참여하기 + GNB */
-const CTAContainerS = styled.div`
-  position: sticky;
-  bottom: 0;
-  width: var(--width-mobile);
-
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 1rem;
 `;

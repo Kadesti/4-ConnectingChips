@@ -8,14 +8,19 @@ import DivideBaS from "../../Component/Mission/DivideBa";
 import GroupActive from "./GroupActive";
 import GroupArticle from "../../Component/Mission/GroupArticle";
 import LikeBind from "../../Type/LikeBind";
+import { useNavigate } from "react-router-dom";
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    //TODO: 작업 끝나면 주석 해제
-    // scrollTop();
+    scrollTop();
+    
+    const access_token = localStorage.getItem("access_token");
+    //TODO: 404에러 페이지
+    // if (access_token === null) navigate("/");
   }, []);
 
   return (

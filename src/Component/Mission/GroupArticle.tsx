@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import HeadLine from "../../Component/Mission/HeadLine";
 import MissionRule from "../../Component/Mission/MissionRule";
 import MissionIntro from "./MissionIntro";
-import { PostButton } from "./GroupButton";
+import { PostButton } from "../CTA/CTAContainer";
 import { PageSort } from "../../Type/MissionType";
 
 /** 2023-08-22 GroupArticle.tsx - 그룹 아티클 Props */

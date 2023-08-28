@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { GroupHeader } from "../../Component/Mission/GroupHeader";
 import groupList from "../../data/groupListData";
 import GroupContent from "../../Component/Mission/GroupContent";
-import { SubmitButtonCTA } from "../../Component/Mission/GroupButton";
+import { SubmitButtonCTA } from "../../Component/CTA/CTAContainer";
 import { useEffect } from "react";
 import scrollTop from "../../Hooks/scrollTop";
 

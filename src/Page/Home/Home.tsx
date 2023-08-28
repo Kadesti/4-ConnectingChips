@@ -64,6 +64,18 @@ export default Home;
 
 // const baseurl = process.env.REACT_APP_BASE_URL;
 
+/** 2023-08-20 Home.tsx - 메인 컴프 스타일 */
+const HomeS = styled.section`
+  height: 100%;
+
+  .CTA {
+    position: sticky;
+    max-width: var(--width-mobile);
+    width: var(--width-mobile);
+    bottom: 0;
+  }
+`;
+
 /** 2023-08-22 Home.tsx - 설문조사 배너 */
 const Banner = (): JSX.Element => {
   return (
@@ -103,19 +115,6 @@ const BannerS = styled.a`
     width: 10.5625rem;
     position: absolute;
     transform: translateX(9.5rem) translateY(-5.7rem);
-  }
-`;
-
-/** 2023-08-20 Home.tsx - 메인 컴프 스타일 */
-const HomeS = styled.section`
-  height: 100%;
-
-  .CTA {
-    position: sticky;
-    /* position: fixed; */
-    max-width: var(--width-mobile);
-    width: var(--width-mobile);
-    bottom: 0;
   }
 `;
 

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { myGroupList } from "../../data/myInfo";
 
-/** 2023-08-22 GroupButton.tsx - 참여하기 버튼 */
+/** 2023-08-22 CTAContainer.tsx - 참여하기 버튼 */
 const JoinButtonCTA = (): JSX.Element => {
   const { uuid } = useParams();
   const [isLogin, setIsLogin] = useState(false);
@@ -36,19 +36,53 @@ const JoinButtonCTA = (): JSX.Element => {
   return <CTAButtonS valid={validJoin}>{validJoin ? <button onClick={joinGroup}>참여하기</button> : <button>최대 3개의 그룹까지 참여 가능합니다</button>}</CTAButtonS>;
 };
 
-/** 2023-08-22 GroupButton.tsx - 작심 인증하기 버튼 */
+/** 2023-08-22 CTAContainer.tsx - 작심 인증하기 버튼 */
 const PostButton = (): JSX.Element => {
   return <MissionButtonS href={`/uploadPost/1`}>작심 인증하기</MissionButtonS>;
 };
 
-/** 2023-08-22 GroupButton.tsx - 인증하기 버튼 */
+/** 2023-08-22 CTAContainer.tsx - 인증하기 버튼 */
 const SubmitButtonCTA = (): JSX.Element => {
   return <CTAButtonS valid={true}>인증하기</CTAButtonS>;
 };
 
-export { JoinButtonCTA, PostButton, SubmitButtonCTA };
+/** 2023-08-22 CTAContainer.tsx - CTA 참여하기 + GNB */
+const CTAContainer = (): JSX.Element => {
+  return (
+    <CTAContainerS>
+      {/* <GNB /> */}
+      <JoinButtonCTA />
+    </CTAContainerS>
+  );
+};
 
-/** 2023-08-22 GroupButton.tsx - 버튼 공통 스타일 */
+/** 2023-08-22 CTAContainer.tsx - CTA 참여하기 + GNB */
+const ErrorCTA = (): JSX.Element => {
+  const navigate = useNavigate();
+
+  return (
+    <CTAContainerS>
+      <CTAButtonS valid={true}>
+        <button onClick={() => navigate('/')}>메인으로</button>
+      </CTAButtonS>
+    </CTAContainerS>
+  );
+};
+
+export { JoinButtonCTA, PostButton, SubmitButtonCTA, CTAContainer, ErrorCTA };
+
+/** 2023-08-22 CTAContainer.tsx - CTA 참여하기 + GNB */
+const CTAContainerS = styled.div`
+  position: sticky;
+  bottom: 0;
+  width: var(--width-mobile);
+
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+`;
+
+/** 2023-08-22 CTAContainer.tsx - 버튼 공통 스타일 */
 const LinkS = styled.a`
   height: 3.5rem;
 
@@ -61,7 +95,7 @@ const LinkS = styled.a`
   align-items: center;
 `;
 
-/** 2023-08-22 GroupArticle.tsx - CTA 버튼(참여하기, 인증하기) */
+/** 2023-08-22 CTAContainer.tsx - CTA 버튼(참여하기, 인증하기) */
 const CTAButtonS = styled(LinkS)<{ valid: boolean }>`
   background-color: ${(props) => (props.valid ? "var(--color-main)" : "var(--color-disabled2)")};
   margin: 0 1rem;
@@ -75,7 +109,7 @@ const CTAButtonS = styled(LinkS)<{ valid: boolean }>`
   }
 `;
 
-/** 2023-08-22 GroupArticle.tsx - 작심 인증하기 버튼 */
+/** 2023-08-22 CTAContainer.tsx - 작심 인증하기 버튼 */
 const MissionButtonS = styled(LinkS)`
   border: 0.1rem solid;
   border-color: var(--color-main);

@@ -1,12 +1,11 @@
 import { styled } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, GroupIntro, Feed, GroupPage, LogIn, UploadPost, ServerTest, SignUp } from "./AppBarral";
-import Test from "./Page/Test";
+import { Home, GroupIntro, Feed, GroupPage, LogIn, UploadPost, SignUp, NotFound } from "./AppBarral";
 
 function App() {
   return (
-    <MobileS>
-      <BrowserRouter>
+    <BrowserRouter>
+      <MobileS>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/groupIntro/:uuid" element={<GroupIntro />} />
@@ -15,11 +14,10 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/LogIn" element={<LogIn />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path="/serverTest" element={<ServerTest />} />
-          <Route path="/test" element={<Test />} />
+          <Route path="/notFound" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </MobileS>
+      </MobileS>
+    </BrowserRouter>
   );
 }
 
