@@ -41,6 +41,12 @@ const PostButton = (): JSX.Element => {
   return <MissionButtonS href={`/uploadPost/1`}>작심 인증하기</MissionButtonS>;
 };
 
+/** 2023-08-28 CTAContainer.tsx - 작심 인증하기 버튼 */
+const BackButton = (): JSX.Element => {
+  const navigate = useNavigate();
+  return <BackButtonS onClick={() => navigate(-1)}>이전 페이지로</BackButtonS>;
+};
+
 /** 2023-08-22 CTAContainer.tsx - 인증하기 버튼 */
 const SubmitButtonCTA = (): JSX.Element => {
   return <CTAButtonS valid={true}>인증하기</CTAButtonS>;
@@ -63,13 +69,13 @@ const ErrorCTA = (): JSX.Element => {
   return (
     <CTAContainerS>
       <CTAButtonS valid={true}>
-        <button onClick={() => navigate('/')}>메인으로</button>
+        <button onClick={() => navigate("/")}>메인으로</button>
       </CTAButtonS>
     </CTAContainerS>
   );
 };
 
-export { JoinButtonCTA, PostButton, SubmitButtonCTA, CTAContainer, ErrorCTA };
+export { JoinButtonCTA, PostButton, SubmitButtonCTA, CTAContainer, BackButton, ErrorCTA };
 
 /** 2023-08-22 CTAContainer.tsx - CTA 참여하기 + GNB */
 const CTAContainerS = styled.div`
@@ -115,4 +121,12 @@ const MissionButtonS = styled(LinkS)`
   border-color: var(--color-main);
 
   width: 100%;
+`;
+
+/** 2023-08-28 CTAContainer.tsx - 이전 페이지로 버튼 */
+const BackButtonS = styled(MissionButtonS)`
+  height: 2.5rem;
+  width: 11.25rem;
+  
+  font-size: 0.75rem;
 `;

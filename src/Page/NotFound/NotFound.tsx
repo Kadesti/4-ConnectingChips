@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import errorChips from "../../image/chips_404.svg";
-import { ErrorCTA } from "../../Component/CTA/CTAContainer";
+import { BackButton, ErrorCTA } from "../../Component/CTA/CTAContainer";
 
 /** 2023-08-28 NotFound.tsx - 404 에러 페이지 */
 const NotFound = () => {
@@ -8,8 +8,11 @@ const NotFound = () => {
     <NotFoundS>
       <NotFoundContentS>
         <img src={errorChips} alt="errorChips" />
-        <div>잘못된 접근입니다</div>
-        <button>이전 페이지로</button>
+        <div className="textbox">
+          <h1>잘못된 접근입니다</h1>
+          <p>찾으시는 페이지가 존재하지 않습니다</p>
+        </div>
+        <BackButton />
       </NotFoundContentS>
 
       <div className="CTA">
@@ -25,15 +28,12 @@ export default NotFound;
 const NotFoundS = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-
   justify-content: center;
   align-items: center;
 
-  border: 1px solid;
-
   width: var(--width-mobile);
   max-width: var(--width-mobile);
+  height: 100vh;
 
   position: relative;
 
@@ -48,4 +48,23 @@ const NotFoundContentS = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+
+  height: 14.875rem;
+
+  .textbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--font-color3);
+    font-size: 0.875rem;
+  }
 `;
