@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, GroupIntro, Feed, GroupPage, LogIn, UploadPost, ServerTest, SignUp } from "./AppBarral";
+import Test from "./Page/Test";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/LogIn" element={<LogIn />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/serverTest" element={<ServerTest />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </BrowserRouter>
     </MobileS>

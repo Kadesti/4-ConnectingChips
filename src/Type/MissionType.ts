@@ -3,6 +3,7 @@ export interface MemberInfo {
   id: string;
   day: number;
   count: number;
+  done: boolean;
 }
 
 interface Image {

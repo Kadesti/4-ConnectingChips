@@ -18,11 +18,13 @@ const groupListData: GroupInfoType[] = [
         id: "aadd1234",
         day: 6,
         count: 3,
+        done: true,
       },
       {
         id: "aadd12345",
         day: 2,
         count: 2,
+        done: false,
       },
     ],
     posts: [
@@ -84,11 +86,13 @@ const groupListData: GroupInfoType[] = [
         id: "aadd1234",
         day: 2,
         count: 2,
+        done: false,
       },
       {
         id: "aadd12345",
         day: 2,
         count: 2,
+        done: true,
       },
     ],
     posts: [
@@ -150,11 +154,13 @@ const groupListData: GroupInfoType[] = [
         id: "aadd1234",
         day: 2,
         count: 2,
+        done: true,
       },
       {
         id: "aadd12345",
         day: 2,
         count: 2,
+        done: true,
       },
     ],
     posts: [
@@ -271,6 +277,7 @@ const groupListData: GroupInfoType[] = [
         id: "aadd12345",
         day: 2,
         count: 2,
+        done: false,
       },
     ],
     posts: [

@@ -7,23 +7,23 @@ import { Link } from "react-router-dom";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 /** 2023-08-20 MyMission.tsx - 작심 중인 리스트 */
-const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: string }): JSX.Element => {  
-  if (myGroupList.length === 0) return <></>;
+const MyMisson = ({ mygrouplist, myid }: { mygrouplist: GroupInfoType[]; myid: string }): JSX.Element => {
+  if (mygrouplist.length === 0) return <></>;
 
   return (
     <MyMissonS>
-      <h2>나의 작심 현황({myGroupList.length}/3)</h2>
+      <h2>나의 작심 현황({mygrouplist.length}/3)</h2>
       <MyMissionULS>
-        {myGroupList.map((myGroup) => {          
-          const missionInfo = myGroup.memberList.find((member) => member.id === myID);
+        {mygrouplist.map((mygroup) => {
+          const missionInfo = mygroup.memberList.find((member) => member.id === myid);
           if (missionInfo === undefined) return "";
 
           const myDate = missionInfo.day;
           const myCount = missionInfo.count;
-          const completedToday = false;
+          const completedToday = missionInfo.done;
 
-          const imageUrl = findUrl(myGroup);
-          const { id, tag, title } = myGroup;
+          const imageUrl = findUrl(mygroup);
+          const { id, tag, title } = mygroup;
 
           return (
             <li key={id}>
@@ -37,17 +37,15 @@ const MyMisson = ({ myGroupList, myID }: { myGroupList: GroupInfoType[]; myID: s
                 </div>
                 <ChipList count={myCount} />
               </MyMissionInfoS>
-              {myCount !== 3 ? (
-                completedToday ? (
-                  <TodayClearBtnS>오늘 작심 성공!</TodayClearBtnS>
-                ) : (
-                  <Link to="/uploadPost/1">
-                    <NoneClearBtnS>작심 인증하기</NoneClearBtnS>
-                  </Link>
-                )
-              ) : (
+              {myCount === 3 ? (
                 <Link to={`/groupPage/${id}`}>
                   <ClearBtnS>재작심하기</ClearBtnS>
+                </Link>
+              ) : completedToday ? (
+                <TodayClearBtnS>오늘 작심 성공!</TodayClearBtnS>
+              ) : (
+                <Link to="/uploadPost/1">
+                  <NoneClearBtnS>작심 인증하기</NoneClearBtnS>
                 </Link>
               )}
             </li>
@@ -186,4 +184,7 @@ const TodayClearBtnS = styled.button`
   border-radius: 2rem;
   background-color: var(--color-main);
   color: black;
+  &:hover {
+    cursor: default;
+  }
 `;

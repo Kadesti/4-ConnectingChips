@@ -4,11 +4,8 @@ import { useEffect, useState } from "react";
 import { Banner as BannerImage, Logo_002 } from "./HomeImageBarrel";
 import groupListData from "../../data/groupListData";
 import { MyMisson, GroupList } from "./HomeBarrel";
-import { GroupInfoType } from "../../Type/MissionType";
 import { GNB } from "../../AppBarral";
 import scrollTop from "../../Hooks/scrollTop";
-import { group } from "console";
-import testData from "../../data/testData";
 
 type MyInfoType = {
   id: string;
@@ -18,7 +15,12 @@ type MyInfoType = {
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [access_token, setAccess_token] = useState("");
+
+  useEffect(() => {
+    const access_token = localStorage.getItem("access_token");
+    if (access_token) setAccess_token(access_token);
+  }, [access_token]);
 
   const myInfo: MyInfoType = {
     id: "aadd1234",
@@ -26,24 +28,24 @@ const Home = (): JSX.Element => {
     profileimg: "",
   };
 
-  console.log("groupListData: ", groupListData);
-  const myGroupList: GroupInfoType[] = groupListData.filter((group) => group.memberList.filter((member) => member.id === myInfo.id));
-  // const myGroupList = groupListData.map((group) => group.memberList.filter((member) => console.log(member.id === myInfo.id)));
-  console.log("myGroupList: ", myGroupList);
-
-  // const testResult = testData.flatMap((item) => item.memberList.filter((member) => member.id === myInfo.id));
-  // console.log("testResult: ", testResult);
+  const myGroupList = groupListData.filter((group) => group.memberList.some((member) => member.id === myInfo.id));
+  const myGroupId = myGroupList.map((group) => group.id);
 
   useEffect(() => {
     scrollTop();
   }, []);
 
+  const clearStorage = () => {
+    localStorage.clear();
+    setAccess_token('')
+  };
+
   return (
     <HomeS>
       <HomeHeaderS>
         <img src={Logo_002} alt="logo" />
-        {isLogin ? (
-          <button>로그아웃</button>
+        {access_token ? (
+          <button onClick={clearStorage}>로그아웃</button>
         ) : (
           <Link to="/login">
             <button>로그인</button>
@@ -52,7 +54,7 @@ const Home = (): JSX.Element => {
       </HomeHeaderS>
       <HomeContentS>
         <WelcomeTextS>
-          {isLogin ? (
+          {access_token ? (
             <h1>반가워요 {myInfo.id} 님! 오늘도 함께 작심을 성공해볼까요?</h1>
           ) : (
             <h1>
@@ -61,9 +63,9 @@ const Home = (): JSX.Element => {
             </h1>
           )}
         </WelcomeTextS>
-        {/* {myGroupList && <MyMisson myGroupList={myGroupList} myID={myInfo.id} />} */}
+        {myGroupList && <MyMisson mygrouplist={myGroupList} myid={myInfo.id} />}
         <Banner />
-        <GroupList />
+        <GroupList mygroupid={myGroupId} />
       </HomeContentS>
 
       {/* <div className="CTA">
@@ -134,6 +136,7 @@ const HomeS = styled.section`
 
 /** 2023-08-20 Home.tsx - 홈화면 헤더 */
 const HomeHeaderS = styled.header`
+  z-index: 10;
   display: flex;
   height: 2.7rem;
   justify-content: space-between;

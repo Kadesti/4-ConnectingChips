@@ -1,20 +1,31 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { styled } from "styled-components";
+import { useEffect, useState, Link, styled, axios } from "./LoginBarrel";
+import { LogInS, LoginInputS, SignClearBtnS, Arrow_Right } from "./LoginBarrel";
 import Banner from "../../Component/SignUp/Banner";
-import { LogInS, LoginInputS } from "../../StyleComp/LoginInputS";
-import { SignClearBtnS } from "../../StyleComp/SignBtnS";
-import { Arrow_Right } from "../../Component/ArrowBarrel";
 import Loginheader from "../../Component/SignUp/Loginheader";
 import scrollTop from "../../Hooks/scrollTop";
+import { useNavigate } from "react-router-dom";
+
+type bindVlaue = {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
 
 /** 2023-08-24 LogIn.tsx - 로그인 페이지 */
 const LogIn = (): JSX.Element => {
   const [inputState, setInputState] = useState("default");
+  const [nickname, setNickname] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const idBind: bindVlaue = { value: nickname, setValue: setNickname };
+  const pwBind: bindVlaue = { value: userPassword, setValue: setUserPassword };
+  const navigate = useNavigate();
 
   useEffect(() => {
     scrollTop();
   }, []);
+
+  const referrer = document.referrer;
+
+  console.log("이전 페이지 URL: " + referrer);
 
   // const [password, setPassword] = useState("");
   // const [showPassword, setShowPassword] = useState(false);
@@ -33,16 +44,30 @@ const LogIn = (): JSX.Element => {
   const LoginInputContainer = (): JSX.Element => {
     return (
       <LoginInputContainerS>
-        <LoginInput sort="ID" isDefault={isDefault} />
-        <LoginInput sort="PW" isDefault={isDefault} />
+        <LoginInput sort="ID" isdefault={isDefault} inputbind={idBind} />
+        <LoginInput sort="PW" isdefault={isDefault} inputbind={pwBind} />
         {!isDefault && <p>아이디 혹은 비밀번호가 일치하지 않습니다</p>}
       </LoginInputContainerS>
     );
   };
 
   /** 2023-08-24 LogIn.tsx - 로그인 요청 핸들러 */
-  const LoginSubmit = (e: React.MouseEvent<HTMLFormElement, MouseEvent>): void => {
+  const LoginSubmit = async (e: React.MouseEvent<HTMLFormElement, MouseEvent>): Promise<void> => {
     e.preventDefault();
+
+    try {
+      const loginPost = await axios.post("/users/sign-in", {
+        nickname: nickname,
+        password: userPassword,
+      });
+
+      const access_token = loginPost.data.access_token;
+      localStorage.setItem("access_token", access_token);
+
+      navigate(-1);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (
@@ -51,7 +76,13 @@ const LogIn = (): JSX.Element => {
       <Banner />
       <LoginContainerS>
         <LoginFormS onSubmit={LoginSubmit}>
-          <LoginInputContainer />
+          {/* <LoginInputContainer /> */}
+          <LoginInputContainerS>
+            <LoginInput sort="ID" isdefault={isDefault} inputbind={idBind} />
+            <LoginInput sort="PW" isdefault={isDefault} inputbind={pwBind} />
+            {!isDefault && <p>아이디 혹은 비밀번호가 일치하지 않습니다</p>}
+          </LoginInputContainerS>
+
           <SignClearBtnS type="submit">
             <p>로그인</p>
           </SignClearBtnS>
@@ -59,7 +90,6 @@ const LogIn = (): JSX.Element => {
         <NudgeSignS>
           <p className="hoxy">회원이 아니신가요?</p>
           <Link to="/signUp">회원가입</Link>
-          {/* <p>회원가입</p> */}
           <div className="img">
             <img src={Arrow_Right} alt="arrowIcon" />
           </div>
@@ -77,10 +107,12 @@ export default LogIn;
  * @param isDefault 기본값인지 한번 틀린상태인지 구분
  * @returns id입력창 또는 pw입력창
  */
-const LoginInput = ({ sort, isDefault }: { sort: "ID" | "PW"; isDefault: boolean }): JSX.Element => {
-  if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" className={isDefault ? "" : "failed"} />;
+const LoginInput = ({ sort, isdefault, inputbind }: { sort: "ID" | "PW"; isdefault: boolean; inputbind: bindVlaue }): JSX.Element => {
+  const { value, setValue } = inputbind;
 
-  return <LoginInputS placeholder="비밀번호를 입력해 주세요" className={isDefault ? "" : "failed"} type={isDefault ? "password" : "text"} />;
+  if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" className={isdefault ? "" : "failed"} value={value} onChange={(e) => setValue(e.target.value)} />;
+
+  return <LoginInputS placeholder="비밀번호를 입력해 주세요" className={isdefault ? "" : "failed"} type={isdefault ? "password" : "text"} value={value} onChange={(e) => setValue(e.target.value)} />;
 };
 
 /** 2023-08-24 LogIn.tsx - 로그인 / 회원가입 배너 */

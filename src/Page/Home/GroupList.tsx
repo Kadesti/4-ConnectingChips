@@ -6,7 +6,7 @@ import { GroupInfoType } from "../../Type/MissionType";
 import groupListData from "../../data/groupListData";
 
 /** 23-08-20 GroupList.tsx - 메인 컴프 */
-const GroupList = (): JSX.Element => {
+const GroupList = ({ mygroupid }: { mygroupid: number[] }): JSX.Element => {
   const missionTab: GroupListTab[] = [
     {
       id: 0,
@@ -26,12 +26,13 @@ const GroupList = (): JSX.Element => {
     },
   ];
 
+  const newGroup = groupListData.filter((group) => mygroupid.find((myGroupID) => myGroupID === group.id) === undefined);
   return (
     <article>
       <h2>작심 그룹 리스트</h2>
       <MissonTab missionTab={missionTab} />
       <GroupListListS>
-        {groupListData.map((groupInfo) => {
+        {newGroup.map((groupInfo) => {
           return <GroupListItem groupInfo={groupInfo} key={groupInfo.id} />;
         })}
       </GroupListListS>
