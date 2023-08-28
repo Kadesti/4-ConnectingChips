@@ -1,12 +1,7 @@
-import axios from "axios";
-import { styled } from "styled-components";
-import { useEffect, useState } from "react";
-import Banner from "../../Component/SignUp/Banner";
-import { LogInS, LoginInputS } from "../../StyleComp/LoginInputS";
-import { SignClearBtnS, SignNotClearBtnS } from "../../StyleComp/SignBtnS";
-import { type handlerBind, useSignup } from "../../Hooks/useSignup";
-import scrollTop from "../../Hooks/scrollTop";
-import Loginheader from "../../Component/SignUp/Loginheader";
+import { useNavigate } from "react-router-dom";
+import { axios, styled, useEffect, useState } from "./SignUpBarrel";
+import { Banner, LogInS, LoginInputS, SignClearBtnS, SignNotClearBtnS, Loginheader, infoIcon } from "./SignUpBarrel";
+import { type handlerBind, useSignup, scrollTop } from "./SignUpBarrel";
 
 enum Error {
   ID = "ID",
@@ -18,12 +13,13 @@ const SignUp = (): JSX.Element => {
   const [isValid, setIsValid] = useState(true);
   const [inputState, setInputState] = useState("default");
   const isFailed = inputState === "failed";
-  const { id, idBind, password, passBind, passConfirm, confirmBind } = useSignup();
+  const { nickname, nicknameBind, password, passBind, confirmPassword, confirmBind } = useSignup();
+  const navigate = useNavigate();
 
   useEffect(() => {
     scrollTop();
   }, []);
-  
+
   useEffect(() => {
     const isValidArr = [false, false, false];
 
@@ -37,7 +33,7 @@ const SignUp = (): JSX.Element => {
     };
 
     // id는 영문, 영문+숫자 중 1가지 2~10자 조합, 공백 불가
-    if (idReg.test(id) && id.length <= 10) isValidArr[0] = true;
+    if (idReg.test(nickname) && nickname.length <= 10) isValidArr[0] = true;
     else return setFalse(0);
 
     // pw는 영문+숫자 10~20자 조합, 공백 불가
@@ -45,38 +41,52 @@ const SignUp = (): JSX.Element => {
     else return setFalse(1);
 
     // pw는 pwconfirm과 동일해야함
-    if (password === passConfirm) isValidArr[2] = true;
+    if (password === confirmPassword) isValidArr[2] = true;
     else return setFalse(2);
 
     const findFalse = isValidArr.find((isvalid) => isvalid === false);
     if (findFalse === undefined) setIsValid(true);
-  }, [id, password, passConfirm]);
+  }, [nickname, password, confirmPassword]);
 
   /** 2023-08-24 SignUp.tsx - 로그인 요청 핸들러 */
-  const SignupSubmit = (e: React.MouseEvent<HTMLFormElement, MouseEvent>): void => {
+  const SignupSubmit = async (e: React.MouseEvent<HTMLFormElement, MouseEvent>): Promise<void> => {
     e.preventDefault();
-
-    // axios.post("/", {
-    //   id,
-    //   password,
-    // }).catch(error => error);
+    try {
+      await axios.post("/users/sign-up", {
+        nickname,
+        password,
+        confirmPassword,
+      });
+      navigate("/LogIn");
+    } catch (error) {
+      console.error("회원가입 오류: ", error);
+      setInputState("failed");
+    }
   };
 
   return (
     <LogInS>
-      <Loginheader type="회원가입"/>
+      <Loginheader type="회원가입" />
       <Banner />
       <LoginFormS onSubmit={SignupSubmit}>
         <LoginInputContainerS>
           <h2>아이디</h2>
-          <SignUpInput sort="ID" handlerBind={idBind} isFailed={isFailed} />
-          {!isFailed && <p>영문, 영문+숫자 중 1가지 2~10자 조합, 공백 불가</p>}
+          <SignUpInput sort="ID" handlerBind={nicknameBind} isFailed={isFailed} />
+          {!isFailed && (
+            <p>
+              <img src={infoIcon} alt="infoIcon" />
+              영문, 영문+숫자 중 1가지 2~10자 조합, 공백 불가
+            </p>
+          )}
           {isFailed && <p className="error">이미 존재하는 아이디입니다</p>}
         </LoginInputContainerS>
         <LoginInputContainerS>
           <h2>비밀번호</h2>
           <SignUpInput sort="PW" handlerBind={passBind} />
-          <p>영문+숫자 10~20자 조합, 공백 불가</p>
+          <p>
+            <img src={infoIcon} alt="infoIcon" />
+            영문+숫자 10~20자 조합, 공백 및 특수문자 불가
+          </p>
         </LoginInputContainerS>
         <LoginInputContainerS>
           <h2>비밀번호 확인</h2>
@@ -115,9 +125,9 @@ const SignUpInput = ({ sort, handlerBind, isFailed }: SignUpInputProps): JSX.Ele
   const { value, setValue } = handlerBind;
   const handlerOnChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
-  if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" className={isFailed ? "failed" : ""} value={value} onChange={handlerOnChange} />;
+  if (sort === "ID") return <LoginInputS placeholder="닉네임과 동일하게 적용됩니다" className={isFailed ? "failed" : ""} value={value} onChange={handlerOnChange} />;
 
-  return <LoginInputS placeholder="비밀번호를 입력해 주세요" type="password" className={isFailed ? "failed" : ""} value={value} onChange={handlerOnChange} />;
+  return <LoginInputS placeholder="비밀번호를 확인해 주세요" type="password" className={isFailed ? "failed" : ""} value={value} onChange={handlerOnChange} />;
 };
 
 /** 2023-08-24 LogIn.tsx - 로그인 입력폼 */
@@ -138,6 +148,10 @@ const LoginInputContainerS = styled.div`
 
   p {
     color: var(--font-color2);
+
+    img {
+      margin-right: 0.25rem;
+    }
 
     &.error {
       color: var(--system-red);

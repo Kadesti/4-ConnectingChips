@@ -4,9 +4,12 @@ import { MissonTab } from "../../Component/Mission/MissionTab";
 import { GroupListTab } from "../../Type/MissionType";
 import { GroupInfoType } from "../../Type/MissionType";
 import groupListData from "../../data/groupListData";
+import { myGroupList } from "../../data/myInfo";
 
 /** 23-08-20 GroupList.tsx - 메인 컴프 */
-const GroupList = ({ mygroupid }: { mygroupid: number[] }): JSX.Element => {
+const GroupList = (): JSX.Element => {
+  const myGroupIds = myGroupList.map((group) => group.id);
+
   const missionTab: GroupListTab[] = [
     {
       id: 0,
@@ -26,7 +29,7 @@ const GroupList = ({ mygroupid }: { mygroupid: number[] }): JSX.Element => {
     },
   ];
 
-  const newGroup = groupListData.filter((group) => mygroupid.find((myGroupID) => myGroupID === group.id) === undefined);
+  const newGroup = groupListData.filter((group) => myGroupIds.find((myGroupID) => myGroupID === group.id) === undefined);
   return (
     <article>
       <h2>작심 그룹 리스트</h2>

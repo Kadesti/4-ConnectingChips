@@ -14,9 +14,9 @@ type bindVlaue = {
 const LogIn = (): JSX.Element => {
   const [inputState, setInputState] = useState("default");
   const [nickname, setNickname] = useState("");
-  const [userPassword, setUserPassword] = useState("");
+  const [password, setPassword] = useState("");
   const idBind: bindVlaue = { value: nickname, setValue: setNickname };
-  const pwBind: bindVlaue = { value: userPassword, setValue: setUserPassword };
+  const pwBind: bindVlaue = { value: password, setValue: setPassword };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,8 +57,8 @@ const LogIn = (): JSX.Element => {
 
     try {
       const loginPost = await axios.post("/users/sign-in", {
-        nickname: nickname,
-        password: userPassword,
+        nickname,
+        password,
       });
 
       const access_token = loginPost.data.access_token;

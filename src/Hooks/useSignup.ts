@@ -7,26 +7,26 @@ type handlerBind = {
 
 /** 2023-08-24 SignUp - useSignup 리턴타입 */
 interface useSignupType {
-  id: string,
+  nickname: string,
   password: string,
-  passConfirm: string,
+  confirmPassword: string,
   
-  idBind: handlerBind;
+  nicknameBind: handlerBind;
   passBind: handlerBind;
   confirmBind: handlerBind;
 }
 
 /** 2023-08-24 SignUp - 회원가입 입력값 Hooks */
 const useSignup = (): useSignupType => {
-  const [id, setId] = useState("");
+  const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
-  const [passConfirm, setPassConfirm] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const idBind = { value: id, setValue: setId };
+  const nicknameBind = { value: nickname, setValue: setNickname };
   const passBind = { value: password, setValue: setPassword };
-  const confirmBind = { value: passConfirm, setValue: setPassConfirm };
+  const confirmBind = { value: confirmPassword, setValue: setConfirmPassword };
 
-  return { id, idBind, password, passBind, passConfirm, confirmBind };
+  return { nickname, nicknameBind, password, passBind, confirmPassword, confirmBind };
 };
 
 export { type handlerBind, useSignup };

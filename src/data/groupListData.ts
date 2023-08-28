@@ -15,13 +15,13 @@ const groupListData: GroupInfoType[] = [
     defaultImageid: 0,
     memberList: [
       {
-        id: "aadd1234",
+        id: "aa11",
         day: 6,
         count: 3,
         done: true,
       },
       {
-        id: "aadd12345",
+        id: "aa222",
         day: 2,
         count: 2,
         done: false,
@@ -83,13 +83,13 @@ const groupListData: GroupInfoType[] = [
     defaultImageid: 0,
     memberList: [
       {
-        id: "aadd1234",
+        id: "aa11",
         day: 2,
         count: 2,
         done: false,
       },
       {
-        id: "aadd12345",
+        id: "aa222",
         day: 2,
         count: 2,
         done: true,
@@ -151,13 +151,13 @@ const groupListData: GroupInfoType[] = [
     defaultImageid: 0,
     memberList: [
       {
-        id: "aadd1234",
+        id: "aa11",
         day: 2,
         count: 2,
         done: true,
       },
       {
-        id: "aadd12345",
+        id: "aa222",
         day: 2,
         count: 2,
         done: true,
@@ -274,7 +274,7 @@ const groupListData: GroupInfoType[] = [
     defaultImageid: 0,
     memberList: [
       {
-        id: "aadd12345",
+        id: "aa222",
         day: 2,
         count: 2,
         done: false,

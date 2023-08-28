@@ -2,16 +2,10 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Banner as BannerImage, Logo_002 } from "./HomeImageBarrel";
-import groupListData from "../../data/groupListData";
 import { MyMisson, GroupList } from "./HomeBarrel";
 import { GNB } from "../../AppBarral";
 import scrollTop from "../../Hooks/scrollTop";
-
-type MyInfoType = {
-  id: string;
-  password: string;
-  profileimg: string;
-};
+import { myInfo, myGroupList } from "../../data/myInfo";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
@@ -22,22 +16,13 @@ const Home = (): JSX.Element => {
     if (access_token) setAccess_token(access_token);
   }, [access_token]);
 
-  const myInfo: MyInfoType = {
-    id: "aadd1234",
-    password: "abcd1234ef56",
-    profileimg: "",
-  };
-
-  const myGroupList = groupListData.filter((group) => group.memberList.some((member) => member.id === myInfo.id));
-  const myGroupId = myGroupList.map((group) => group.id);
-
   useEffect(() => {
     scrollTop();
   }, []);
 
   const clearStorage = () => {
     localStorage.clear();
-    setAccess_token('')
+    setAccess_token("");
   };
 
   return (
@@ -65,7 +50,7 @@ const Home = (): JSX.Element => {
         </WelcomeTextS>
         {myGroupList && <MyMisson mygrouplist={myGroupList} myid={myInfo.id} />}
         <Banner />
-        <GroupList mygroupid={myGroupId} />
+        <GroupList />
       </HomeContentS>
 
       {/* <div className="CTA">
