@@ -15,7 +15,7 @@ interface Image {
 export interface Post {
   id: number;
   title: string;
-  images: Image[];
+  image: Image;
 }
 
 /** 2023-08-20 MissionType.tsx - 미션 그룹 정보 */

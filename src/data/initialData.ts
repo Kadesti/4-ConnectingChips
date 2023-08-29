@@ -5,7 +5,7 @@ export const initGroup = {
   intro: "",
   rule: "",
   memberList: [{ id: "", day: 0, count: 0, done: false }],
-  posts: [{ id: 0, title: "", images: [{ id: 0, url: "", path: "" }] }],
+  posts: [{ id: 0, title: "", image: { id: 0, url: "", path: "" } }],
   defaultImageid: 0,
 };
 

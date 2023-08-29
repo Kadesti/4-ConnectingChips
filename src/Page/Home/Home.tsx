@@ -48,7 +48,7 @@ const Home = (): JSX.Element => {
             </h1>
           )}
         </WelcomeTextS>
-        {myGroupList && <MyMisson mygrouplist={myGroupList} myid={myInfo.id} />}
+        {myGroupList && <MyMisson mygrouplist={myGroupList} />}
         <Banner />
         <GroupList />
       </HomeContentS>

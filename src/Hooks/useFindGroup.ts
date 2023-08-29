@@ -57,12 +57,13 @@ const FindGroup = (uuid: string | undefined, initGroup: GroupInfoType): { group:
 const findUrl = (myGroup: GroupInfoType): string => {
   const thumbnailId = myGroup.defaultImageid;
 
-  const post = myGroup.posts.find((post) => post.images.find((image) => image.id === thumbnailId));
+  const post = myGroup.posts.find((post) => post.image.id === thumbnailId);
   if (post === undefined) return "";
-  const image = post.images.find((image) => image.id === thumbnailId);
+  const image = post.image.id === thumbnailId;
   if (image === undefined) return "";
 
-  return image.url;
+  
+  return post.image.url;
 };
 
 export { useFindGroup, findUrl };

@@ -52,11 +52,12 @@ const GroupListItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element
   const post = groupInfo.posts.find((group) => group.id === groupInfo.defaultImageid);
   if (post === undefined) return <></>;
 
-  const image = post.images.find((image) => image.url);
+  const image = post.image.url;
+  // const image = post.images.find((image) => image.url);
   if (image === undefined) return <></>;
 
   return (
-    <GroupListItemS key={groupInfo.id} img={image.url}>
+    <GroupListItemS key={groupInfo.id} img={image}>
       <div>
         <h2>{groupInfo.title}</h2>
         {isFirst ? <p>작심의 첫 주인공이 되어보세요!</p> : <p>{groupInfo.memberList.length}명 참여중</p>}
