@@ -1,7 +1,35 @@
-import { Link, MissionSingleWide, findUrl, myInfo, myGroupList, ChipList, styled } from "./CarreselBarrel";
+import { MissionSingleWide, findUrl, myInfo, myGroupList, ChipList, styled, Link } from "./CarreselBarrel";
+import { ArrowLeft, Arrow_Right } from "./CarreselBarrel";
+
+interface CarreselListProps {
+  countBind: {
+    count: number;
+    setCount: React.Dispatch<React.SetStateAction<number>>;
+  };
+  setSort: React.Dispatch<React.SetStateAction<string>>;
+  length: number;
+}
 
 /** 2023-08-29 Carresel.tsx - 캐러셀 컨텐츠 리스트 */
-const CarreselList = () => {
+const CarreselList = ({ countBind, setSort, length }: CarreselListProps) => {
+  const { count, setCount } = countBind;
+
+  /** 2023-08-29 Carresel.tsx - 다음 이동 핸들러 */
+  const nextSlide = () => {
+    setSort("next");
+
+    if (count >= length) setCount(0);
+    else setCount((prev) => prev + 1);
+  };
+
+  /** 2023-08-29 Carresel.tsx - 이전 이동 핸들러 */
+  const prevSlide = () => {
+    setSort("prev");
+
+    if (count === 0) setCount(length);
+    else setCount((prev) => prev - 1);
+  };
+
   const Mylist = myGroupList.map((mygroup) => {
     const missionInfo = mygroup.memberList.find((member) => member.id === myInfo.id);
     if (missionInfo === undefined) return <></>;
@@ -26,26 +54,50 @@ const CarreselList = () => {
           </MissionContentS>
           <ChipList count={myCount} />
         </MyMissionInfoS>
-
-        {myCount === 3 ? (
-          <Link to={`/groupPage/${id}`}>
-            <ClearBtnS>재작심하기</ClearBtnS>
-          </Link>
-        ) : completedToday ? (
-          <TodayClearBtnS>오늘 작심 성공!</TodayClearBtnS>
-        ) : (
-          <Link to="/uploadPost/1">
-            <NoneClearBtnS>작심 인증하기</NoneClearBtnS>
-          </Link>
-        )}
       </li>
     );
   });
 
-  return <>{Mylist}</>;
+  return (
+    <div>
+      <div>
+        {Mylist}
+        {/* 좌우 이동 버튼 */}
+        <ButtonContainerS>
+          <ButtonInnerS>
+            <ButtonS onClick={prevSlide} isvalid={`${count !== 0}`}>
+              <img src={ArrowLeft} alt="ArrowLeft" />
+            </ButtonS>
+            <ButtonS onClick={nextSlide} isvalid={`${count !== length}`}>
+              <img src={Arrow_Right} alt="ArrowRight" />
+            </ButtonS>
+          </ButtonInnerS>
+        </ButtonContainerS>
+      </div>
+      {/* <CarreselBtnList /> */}
+    </div>
+  );
 };
 
 export default CarreselList;
+
+// const CarreselBtnList = ({myCount}: {myCount: number}) => {
+//   return (
+//     <>
+//       {myCount === 3 ? (
+//         <Link to={`/groupPage/${id}`}>
+//           <ClearBtnS>재작심하기</ClearBtnS>
+//         </Link>
+//       ) : completedToday ? (
+//         <TodayClearBtnS>오늘 작심 성공!</TodayClearBtnS>
+//       ) : (
+//         <Link to="/uploadPost/1">
+//           <NoneClearBtnS>작심 인증하기</NoneClearBtnS>
+//         </Link>
+//       )}
+//     </>
+//   );
+// };
 
 /** 2023-08-21 MyMisson.tsx - 나의 작심 현황 항목 정보 */
 const MyMissionInfoS = styled.a`
@@ -84,6 +136,41 @@ const MyMissionInfoS = styled.a`
 const MissionContentS = styled.div`
   position: absolute;
   padding: 1rem;
+`;
+
+/** 2023-08-29 Carresel.tsx - 캐러셀 버튼 영역 */
+const ButtonContainerS = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+`;
+
+/** 2023-08-29 Carresel.tsx - 캐러셀 버튼 내부 위치잡기 */
+const ButtonInnerS = styled.div`
+  margin: 0 1rem;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    background-color: rgba(79, 79, 79, 0.4);
+    border-radius: 10rem;
+    padding: 0.5rem;
+    width: 2rem;
+    aspect-ratio: 1/1;
+  }
+`;
+
+/** 2023-08-29 Carresel.tsx - 캐러셀 버튼 */
+const ButtonS = styled.button<{ isvalid: string }>`
+  visibility: ${(props) => (props.isvalid === "true" ? "" : "hidden")};
 `;
 
 /** 2023-08-21 MyMisson.tsx - 다른 작심 둘러보기 버튼 */

@@ -8,7 +8,7 @@ const useLoginCheck = (navigate: ReturnType<typeof useNavigate>, state: string) 
     const access_token = localStorage.getItem("access_token");
     const setReg = state === "Done" ? access_token : access_token === null;
 
-    if (setReg) navigate(-1);
+    if (setReg !== null) navigate(-1);
 
     scrollTop();
   }, [navigate, state]);
