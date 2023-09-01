@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
@@ -23,10 +22,6 @@ const JoinButtonCTA = (): JSX.Element => {
     if (!isLogin) return navigate("/logIn");
 
     try {
-      await axios.post("/어딘가", {
-        headers: { Authorization: localStorage.getIteme("access_token") },
-      });
-
       navigate(`/groupPage/${uuid}`);
     } catch (error) {
       console.error("참여하기 실패: ", error);
@@ -127,6 +122,6 @@ const MissionButtonS = styled(LinkS)`
 const BackButtonS = styled(MissionButtonS)`
   height: 2.5rem;
   width: 11.25rem;
-  
+
   font-size: 0.75rem;
 `;

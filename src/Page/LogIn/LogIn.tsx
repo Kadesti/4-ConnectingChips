@@ -1,4 +1,4 @@
-import { useState, Link, styled, axios, useNavigate } from "./LoginBarrel";
+import { useState, Link, styled, useNavigate } from "./LoginBarrel";
 import { LogInS, LoginInputS, SignClearBtnS, Arrow_Right } from "./LoginBarrel";
 import Banner from "../../Component/SignUp/Banner";
 import Loginheader from "../../Component/SignUp/Loginheader";
@@ -52,13 +52,13 @@ const LogIn = (): JSX.Element => {
     e.preventDefault();
 
     try {
-      const loginPost = await axios.post("/users/sign-in", {
-        nickname,
-        password,
-      });
+      // const loginPost = await axios.post("/users/sign-in", {
+      //   nickname,
+      //   password,
+      // });
 
-      const access_token = loginPost.data.access_token;
-      localStorage.setItem("access_token", access_token);
+      // const access_token = loginPost.data.access_token;
+      // localStorage.setItem("access_token", access_token);
 
       navigate(-1);
     } catch (error) {

@@ -1,4 +1,4 @@
-import { axios, styled, useEffect, useState, useNavigate, useLoginCheck } from "./SignUpBarrel";
+import { styled, useEffect, useState, useNavigate, useLoginCheck } from "./SignUpBarrel";
 import { Banner, LogInS, LoginInputS, SignClearBtnS, SignNotClearBtnS, Loginheader, infoIcon } from "./SignUpBarrel";
 import { type handlerBind, useSignup } from "./SignUpBarrel";
 
@@ -44,11 +44,11 @@ const SignUp = (): JSX.Element => {
   const SignupSubmit = async (e: React.MouseEvent<HTMLFormElement, MouseEvent>): Promise<void> => {
     e.preventDefault();
     try {
-      await axios.post("/users/sign-up", {
-        nickname,
-        password,
-        confirmPassword,
-      });
+      // await axios.post("/users/sign-up", {
+      //   nickname,
+      //   password,
+      //   confirmPassword,
+      // });
       navigate("/LogIn");
     } catch (error) {
       console.error("회원가입 오류: ", error);
