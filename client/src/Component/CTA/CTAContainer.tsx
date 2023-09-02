@@ -5,16 +5,16 @@ import { myGroupList } from "../../data/myInfo";
 
 /** 2023-08-22 CTAContainer.tsx - 참여하기 버튼 */
 const JoinButtonCTA = (): JSX.Element => {
+  const navigate = useNavigate();
   const { uuid } = useParams();
   // const [isLogin, setIsLogin] = useState(false);
-  const [validJoin, setValidJoin] = useState(true);
-  const navigate = useNavigate();
+  const [validJoin, setValidJoin] = useState("true");
 
   // useEffect(() => {
   //   if (localStorage.getItem("access_token")) {
   //     setIsLogin(true);
 
-  //     if (myGroupList.length === 3) setValidJoin(false);
+  //     if (myGroupList.length === 3) setValidJoin('false');
   //   }
   // }, []);
 
@@ -28,12 +28,19 @@ const JoinButtonCTA = (): JSX.Element => {
     }
   };
 
-  return <CTAButtonS valid={validJoin}>{validJoin ? <button onClick={joinGroup}>참여하기</button> : <button>최대 3개의 그룹까지 참여 가능합니다</button>}</CTAButtonS>;
+  return validJoin === "true" ? (
+    <CTAButtonS valid={validJoin} onClick={joinGroup}>
+      참여하기
+    </CTAButtonS>
+  ) : (
+    <CTAButtonS valid={validJoin}>최대 3개의 그룹까지 참여 가능합니다</CTAButtonS>
+  );
 };
 
 /** 2023-08-22 CTAContainer.tsx - 작심 인증하기 버튼 */
 const PostButton = (): JSX.Element => {
-  return <MissionButtonS href={`/uploadPost/1`}>작심 인증하기</MissionButtonS>;
+  const navigate = useNavigate();
+  return <MissionButtonS onClick={() => navigate(`/uploadPost/1`)}>작심 인증하기</MissionButtonS>;
 };
 
 /** 2023-08-28 CTAContainer.tsx - 작심 인증하기 버튼 */
@@ -44,7 +51,7 @@ const BackButton = (): JSX.Element => {
 
 /** 2023-08-22 CTAContainer.tsx - 인증하기 버튼 */
 const SubmitButtonCTA = (): JSX.Element => {
-  return <CTAButtonS valid={true}>인증하기</CTAButtonS>;
+  return <CTAButtonS valid={"true"}>인증하기</CTAButtonS>;
 };
 
 /** 2023-08-22 CTAContainer.tsx - CTA 참여하기 + GNB */
@@ -63,8 +70,8 @@ const ErrorCTA = (): JSX.Element => {
 
   return (
     <CTAContainerS>
-      <CTAButtonS valid={true}>
-        <button onClick={() => navigate("/")}>메인으로</button>
+      <CTAButtonS valid={"true"} onClick={() => navigate("/")}>
+        메인으로
       </CTAButtonS>
     </CTAContainerS>
   );
@@ -84,7 +91,7 @@ const CTAContainerS = styled.div`
 `;
 
 /** 2023-08-22 CTAContainer.tsx - 버튼 공통 스타일 */
-const LinkS = styled.a`
+const LinkButtonS = styled.button`
   height: 3.5rem;
 
   border-radius: 1.88rem;
@@ -97,21 +104,21 @@ const LinkS = styled.a`
 `;
 
 /** 2023-08-22 CTAContainer.tsx - CTA 버튼(참여하기, 인증하기) */
-const CTAButtonS = styled(LinkS)<{ valid: boolean }>`
-  background-color: ${(props) => (props.valid ? "var(--color-main)" : "var(--color-disabled2)")};
+const CTAButtonS = styled(LinkButtonS)<{ valid: string }>`
+  background-color: ${(props) => (props.valid === "true" ? "var(--color-main)" : "var(--color-disabled2)")};
   margin: 0 1rem;
   margin-bottom: 1rem;
   position: sticky;
   bottom: 0rem;
 
   button {
-    color: ${(props) => (props.valid ? "var(--font-color1)" : "var(--color-disabled1)")};
+    color: ${(props) => (props.valid === "true" ? "var(--font-color1)" : "var(--color-disabled1)")};
     font-size: 1rem;
   }
 `;
 
 /** 2023-08-22 CTAContainer.tsx - 작심 인증하기 버튼 */
-const MissionButtonS = styled(LinkS)`
+const MissionButtonS = styled(LinkButtonS)`
   border: 0.1rem solid;
   border-color: var(--color-main);
 
