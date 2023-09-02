@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import 기본프로필 from "../../image/예시사진모음/default_profile.svg";
 import sendIcon from "../../../src/image/Icon/send_Icon.svg";
+import postInfoData from "../../data/postInfoData";
 
 /** 2023-08-25 Comment.tsx - 그룹페이지 댓글 */
 const Comment = ({ Commented }: { Commented: boolean }) => {
@@ -146,20 +147,25 @@ const CommentContentS = styled.div<{ sort: CommentType }>`
 
 /** 2023-08-25 Comment.tsx - 그룹페이지 댓글 입력 창 */
 const CommentFormS = styled.form`
+  position: fixed;
+  bottom: 1.7rem;
+  background-color: #fff;
+
   border: 1px solid #e3e3e3;
   border-radius: 0.5rem;
-  margin-top: 1.25rem;
-  margin-bottom: var(--height-gap);
   height: 3.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 1rem;
+  z-index: 10;
 
   input {
     width: 16.375rem;
     height: 1.25rem;
     border: none;
+    background-color: transparent;
+
+    color: var(--font-color3);
     font-size: 0.875rem;
     font-family: Noto Sans KR;
 
