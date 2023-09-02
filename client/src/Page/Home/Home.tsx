@@ -10,6 +10,7 @@ import { myInfo, myGroupList } from "../../data/myInfo";
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
   const [access_token, setAccess_token] = useState("");
+  const tokenBind = { access_token, setAccess_token };
 
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
@@ -20,31 +21,26 @@ const Home = (): JSX.Element => {
     scrollTop();
   }, []);
 
-  const clearStorage = () => {
-    localStorage.clear();
-    setAccess_token("");
-  };
-
   return (
     <HomeS>
       <HomeHeaderS>
         <img src={Logo_002} alt="logo" />
-        {access_token ? (
-          <button onClick={clearStorage}>로그아웃</button>
-        ) : (
-          <Link to="/login">
-            <button>로그인</button>
-          </Link>
-        )}
+        {/* <HomeLogin tokenbind={tokenBind} /> */}
       </HomeHeaderS>
       <HomeContentS>
         <WelcomeTextS>
           {access_token ? (
             <h1>반가워요 {myInfo.id} 님! 오늘도 함께 작심을 성공해볼까요?</h1>
           ) : (
+            // <h1>
+            //   반가워요 칩스!
+            //   <br /> 아래 리스트에서 작심을 시작해볼까요?
+            // </h1>
             <h1>
-              반가워요 칩스!
-              <br /> 아래 리스트에서 작심을 시작해볼까요?
+              딱 3일!
+              <br />
+              재미있게
+              <br /> 삼칩하자!
             </h1>
           )}
         </WelcomeTextS>
@@ -64,14 +60,37 @@ export default Home;
 
 // const baseurl = process.env.REACT_APP_BASE_URL;
 
+interface tokenbind {
+  access_token: string;
+  setAccess_token: React.Dispatch<React.SetStateAction<string>>;
+}
+
+/** 2023-09-02 Home.tsx - 헤더 로그인 버튼 - adesti */
+const HomeLogin = ({ tokenbind }: { tokenbind: tokenbind }) => {
+  const { access_token, setAccess_token } = tokenbind;
+
+  const clearStorage = () => {
+    localStorage.clear();
+    setAccess_token("");
+  };
+
+  return access_token ? (
+    <button onClick={clearStorage}>로그아웃</button>
+  ) : (
+    <Link to="/login">
+      <button>로그인</button>
+    </Link>
+  );
+};
+
 /** 2023-08-20 Home.tsx - 메인 컴프 스타일 */
 const HomeS = styled.section`
   height: 100%;
+  max-width: var(--width-mobile);
+  width: var(--width-mobile);
 
   .CTA {
     position: sticky;
-    max-width: var(--width-mobile);
-    width: var(--width-mobile);
     bottom: 0;
   }
 `;
@@ -153,7 +172,6 @@ const HomeContentS = styled.div`
 
 /** 2023-08-20 Home.tsx - 오늘도 득근한 하루 되세요 */
 const WelcomeTextS = styled.div`
-  width: 70%;
   padding: 2rem 0;
 
   h1 {
