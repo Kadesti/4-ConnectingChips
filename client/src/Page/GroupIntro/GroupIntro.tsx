@@ -10,7 +10,6 @@ import scrollTop from "../../Hooks/scrollTop";
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
-
   useEffect(() => {
     scrollTop();
   }, []);
@@ -43,9 +42,6 @@ const GroupIntroS = styled.div<{ img: string }>`
   height: 100vh;
 
   background-image: url(${(props) => props.img});
-  background-size: 70rem;
-  background-position-x: -8rem;
-  background-position-y: -2rem;
 `;
 
 /** 2023-08-21 GroupIntro.tsx - 백 어두운 레이어 추가 */

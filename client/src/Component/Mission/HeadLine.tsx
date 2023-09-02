@@ -1,18 +1,13 @@
 import { styled } from "styled-components";
 import { MissionSingleWide } from "./MissionTab";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
-/** 2023-08-22 HeadLine.tsx - 그룹 정보 */
-interface GroupInfoType {
-  id: number;
-  tab: string;
-  title: string;
-  member: number;
-}
+import { useLocation, useParams } from "react-router-dom";
+import groupListData from "../../data/groupListData";
 
 /** 2023-08-22 HeadLine.tsx - 타이틀 / 태그 / n일차 */
 const HeadLine = (): JSX.Element => {
+  const { uuid } = useParams();
+
   const [urlPath, setUrlPath] = useState("");
   const location = useLocation();
 
@@ -25,18 +20,14 @@ const HeadLine = (): JSX.Element => {
     setUrlPath(extractedValue);
   }, [location]);
 
-  const groupInfo: GroupInfoType = {
-    id: 0,
-    tab: "헬스",
-    title: "몸에서 닭다리 빼기",
-    member: 10,
-  };
+  const groupInfo = groupListData.find((groupData) => groupData.group_id === Number(uuid));
+  if (groupInfo === undefined) return <></>;
 
   return (
     <HeadLineS>
       <MissionSingleWide text={groupInfo.tab} />
       <h1>{groupInfo.title}</h1>
-      <p className={urlPath === "groupIntro" ? "" : "subTitle"}>{groupInfo.member - 1}명과 함께 맛보기 중</p>
+      <p className={urlPath === "groupIntro" ? "" : "subTitle"}>{groupInfo.memberList.length > 0 ? `${groupInfo.memberList.length - 1}명과 함께 맛보기 중` : "첫번째로 작심 맛보기!"}</p>
     </HeadLineS>
   );
 };

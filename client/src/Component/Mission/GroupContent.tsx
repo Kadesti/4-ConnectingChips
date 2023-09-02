@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import GroupArticle from "./GroupArticle";
-import GroupActive from "../../Page/GroupPage/GroupActive";
 import { IntroExample, CreateExample } from "../../Page/GroupIntro/ActiveExample";
 import { PageSort } from "../../Type/MissionType";
 import DivideBaS from "./DivideBa";

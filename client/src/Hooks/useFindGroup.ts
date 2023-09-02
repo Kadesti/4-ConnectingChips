@@ -14,12 +14,16 @@ interface FindGroupHook {
 /** 2023-08-23 useFindGroup.ts - uuid를 받아 intro rule url 뱉는 함수 */
 const useFindGroup = (): FindGroupHook => {
   const { uuid } = useParams();
+
   const [group, setGroup] = useState(initGroup);
   const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     if (uuid) {
-      const { foundGroup, imageUrl } = FindGroup(uuid, initGroup);
+      const foundGroup = FindGroup(uuid, initGroup);
+      const imageUrl = foundGroup.defaultImage.intro_url;
+      if(imageUrl === undefined) return;
+
       setGroup(foundGroup);
       setImageUrl(imageUrl);
     }
@@ -29,23 +33,21 @@ const useFindGroup = (): FindGroupHook => {
   return { intro, rule, url: imageUrl };
 };
 
-
 /**
- * 2023-08-23 useFindGroup.ts - 파라미터로 그룹과 썸네일 찾는 함수 
+ * 2023-08-23 useFindGroup.ts - 파라미터로 그룹과 썸네일 찾는 함수
  * @param uuid 접속한 그룹 페이지의 파라미터
  * @param initGroup 예외처리를 위한 초기 값
  * @returns 내가 속한 그룹, 썸네일Url
  */
-const FindGroup = (uuid: string | undefined, initGroup: GroupInfoType): { foundGroup: GroupInfoType; imageUrl: string } => {
-  const initValue = { foundGroup: initGroup, imageUrl: "" };
+const FindGroup = (uuid: string | undefined, initGroup: GroupInfoType): GroupInfoType => {
+  const initValue = initGroup;
   if (uuid === undefined) return initValue;
 
-  groupListData.find(group => group.group_id)
+  // groupListData.find((group) => group.group_id);
   const foundGroup = groupListData.find((group) => group.group_id === Number(uuid));
   if (foundGroup === undefined) return initValue;
 
-  const imageUrl = findUrl(foundGroup);
-  return { foundGroup, imageUrl };
+  return foundGroup;
 };
 
 /**
@@ -61,7 +63,6 @@ const findUrl = (myGroup: GroupInfoType): string => {
   const image = post.image.image_id === thumbnailId;
   if (image === undefined) return "";
 
-  
   return post.image.url;
 };
 
