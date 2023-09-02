@@ -1,11 +1,8 @@
-import { styled } from "styled-components";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Banner as BannerImage, Logo_002 } from "./HomeImageBarrel";
+import { styled, Link, useEffect, useState } from "./HomeBarrel";
 import { MyMisson, GroupList } from "./HomeBarrel";
+import { scrollTop, myInfo, myGroupList } from "./HomeBarrel";
+import { Banner as BannerImage, Logo_002, 헤드셋칩스 } from "./HomeImageBarrel";
 import { GNB } from "../../AppBarral";
-import scrollTop from "../../Hooks/scrollTop";
-import { myInfo, myGroupList } from "../../data/myInfo";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
@@ -21,6 +18,14 @@ const Home = (): JSX.Element => {
     scrollTop();
   }, []);
 
+  /** 2023-09-03 Home.tsx - 오늘 작심 했으면 true */
+  const todayDone = myGroupList.some(
+    (mygroup) =>
+      mygroup.memberList.filter((member) => {
+        if (member.id === myInfo.id) return member.done;
+      })[0].done
+  );
+
   return (
     <HomeS>
       <HomeHeaderS>
@@ -28,18 +33,23 @@ const Home = (): JSX.Element => {
         {/* <HomeLogin tokenbind={tokenBind} /> */}
       </HomeHeaderS>
       <HomeContentS>
-        <WelcomeTextS>
-          {access_token ? (
-            <h1>반가워요 {myInfo.id} 님! 오늘도 함께 작심을 성공해볼까요?</h1>
-          ) : (
-            <h1>
-              딱 3일!
-              <br />
-              재미있게
-              <br /> 삼칩하자!
-            </h1>
-          )}
-        </WelcomeTextS>
+        <WelcomeHeadS>
+          <WelcomeTextS>
+            {todayDone ? (
+              <h1>멋져요 {myInfo.id}칩스! 내일도 함께 해주실 거죠?</h1>
+            ) : access_token ? (
+              <h1>반가워요 {myInfo.id}칩스! 오늘도 함께 작심을 성공해볼까요?</h1>
+            ) : (
+              <h1>
+                <p className="bold">딱 3일!</p>
+                {/* <br /> */}
+                재미있게
+                <br /> 삼칩하자!
+              </h1>
+            )}
+          </WelcomeTextS>
+          <img src={헤드셋칩스} alt="헤드셋칩스" />
+        </WelcomeHeadS>
         {myGroupList && <MyMisson mygrouplist={myGroupList} />}
         <Banner />
         <GroupList />
@@ -91,6 +101,15 @@ const HomeS = styled.section`
   }
 `;
 
+/** 2023-09-02 Home.tsx - 인사말과 캐릭터 - Kadesti */
+const WelcomeHeadS = styled.div`
+  display: flex;
+  justify-content: space-between;
+  img {
+    margin-right: 1.25rem;
+  }
+`;
+
 /** 2023-08-22 Home.tsx - 설문조사 배너 */
 const Banner = (): JSX.Element => {
   return (
@@ -113,6 +132,8 @@ const BannerS = styled.a`
 
   padding: 1rem;
   margin-bottom: 1.25rem;
+
+  border-radius: 0.63rem;
 
   .bannerText {
     width: 7.9375rem;
@@ -169,9 +190,15 @@ const HomeContentS = styled.div`
 /** 2023-08-20 Home.tsx - 오늘도 득근한 하루 되세요 */
 const WelcomeTextS = styled.div`
   padding: 2rem 0;
+  /* border: 1px solid; */
 
   h1 {
     display: block;
     word-break: keep-all;
+
+    p.bold {
+      font-weight: 700;
+      font-size: 1.75rem;
+    }
   }
 `;
