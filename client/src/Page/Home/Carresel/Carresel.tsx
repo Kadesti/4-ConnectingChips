@@ -1,28 +1,13 @@
 import { CarreselProps } from "../../../Type/MissionType";
 import { MissionSingleWide, findUrl, myInfo, myGroupList, ChipList, styled } from "./CarreselBarrel";
-import { ArrowLeft, Arrow_Right } from "./CarreselBarrel";
 import useCarresel from "./useCarresel";
+import ImageBoxS from "../../../StyleComp/ImageBoxS";
+import CarreselSlideButton from "./CarreselSlideButton";
 
 /** 2023-08-29 Carresel.tsx - 캐러셀 컨텐츠 리스트 */
 const Carresel = ({ carreselProps }: { carreselProps: CarreselProps }) => {
   const { slideRef, count, setCount, sort, setSort, TOTAL_SLIDES, doneBind, countBind, uuidBind } = carreselProps;
   const { dateList, doneList, countList, uuidList } = useCarresel(doneBind, countBind, uuidBind);
-
-  /** 2023-08-29 Carresel.tsx - 다음 이동 핸들러 */
-  const nextSlide = () => {
-    setSort("next");
-
-    if (count >= TOTAL_SLIDES) setCount(0);
-    else setCount((prev) => prev + 1);
-  };
-
-  /** 2023-08-29 Carresel.tsx - 이전 이동 핸들러 */
-  const prevSlide = () => {
-    setSort("prev");
-
-    if (count === 0) setCount(TOTAL_SLIDES);
-    else setCount((prev) => prev - 1);
-  };
 
   /** 2023-09-22 Carresel.tsx - 내 작심 현황 - Kadesti */
   const Mylist = myGroupList.map((mygroup, index) => {
@@ -57,18 +42,7 @@ const Carresel = ({ carreselProps }: { carreselProps: CarreselProps }) => {
         <ImageBoxS ref={slideRef} count={count} sort={sort} length={TOTAL_SLIDES}>
           {Mylist}
         </ImageBoxS>
-
-        {/* 좌우 이동 버튼 */}
-        <ButtonContainerS>
-          <ButtonInnerS>
-            <ButtonS onClick={prevSlide} isvalid={`${count !== 0}`}>
-              <img src={ArrowLeft} alt="ArrowLeft" />
-            </ButtonS>
-            <ButtonS onClick={nextSlide} isvalid={`${count !== TOTAL_SLIDES}`}>
-              <img src={Arrow_Right} alt="ArrowRight" />
-            </ButtonS>
-          </ButtonInnerS>
-        </ButtonContainerS>
+        <CarreselSlideButton count={count} setSort={setSort} setCount={setCount} TOTAL_SLIDES={TOTAL_SLIDES} />
       </MissionListS>
     </div>
   );
@@ -80,15 +54,6 @@ export default Carresel;
 const MissionListS = styled.div`
   display: flex;
   position: relative;
-`;
-
-/** 2023-08-29 Carresel.tsx - 캐러셀 이미지 컴포넌트 */
-const ImageBoxS = styled.ul<{ count: number; sort: string; length: number }>`
-  display: flex;
-
-  transition: ${(props) => (props.sort === "next" ? (!props.count ? "" : "all 0.5s ease-in-out") : props.sort === "prev" ? (props.count === props.length ? "" : "all 0.5s ease-in-out") : "")};
-  transform: ${(props) => "translateX(-" + props.count * 190 + "px)"};
-  gap: 0.75rem;
 `;
 
 /** 2023-08-21 MyMisson.tsx - 나의 작심 현황 항목 정보 */
@@ -128,39 +93,4 @@ const MyMissionInfoS = styled.a`
 const MissionContentS = styled.div`
   position: absolute;
   padding: 1rem;
-`;
-
-/** 2023-08-29 Carresel.tsx - 캐러셀 버튼 영역 */
-const ButtonContainerS = styled.div`
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-
-  cursor: pointer;
-`;
-
-/** 2023-08-29 Carresel.tsx - 캐러셀 버튼 내부 위치잡기 */
-const ButtonInnerS = styled.div`
-  margin: 0 1rem;
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  button {
-    background-color: rgba(79, 79, 79, 0.4);
-    border-radius: 10rem;
-    padding: 0.5rem;
-    width: 2rem;
-    aspect-ratio: 1/1;
-  }
-`;
-
-/** 2023-08-29 Carresel.tsx - 캐러셀 좌우 버튼 */
-const ButtonS = styled.button<{ isvalid: string }>`
-  visibility: ${(props) => (props.isvalid === "true" ? "" : "hidden")};
 `;

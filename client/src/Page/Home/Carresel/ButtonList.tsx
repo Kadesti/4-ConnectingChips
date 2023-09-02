@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { ButtonListProps } from "../../../Type/MissionType";
+import ImageBoxS from "../../../StyleComp/ImageBoxS";
 
 /** 2023-09-02 ButtonList.tsx - 캐러셀 버튼 영역 - Kadesti */
 const ButtonList = ({ buttonListProps }: { buttonListProps: ButtonListProps }): JSX.Element => {
@@ -8,7 +9,6 @@ const ButtonList = ({ buttonListProps }: { buttonListProps: ButtonListProps }): 
   return (
     <ImageBoxS ref={slideRef} count={count} sort={sort} length={TOTAL_SLIDES}>
       {IMG.map((_, index) => {
-        // return <CarreselBtnList myCount={countList[index]} completedToday={doneList[index]} uuid={uuidList[index]} key={uuidList[index]} />;
         return <CarreselBtnList myCount={countList[index]} completedToday={doneList[index]} uuid={uuidList[index]} key={index} />;
       })}
     </ImageBoxS>
@@ -35,16 +35,6 @@ const CarreselBtnList = ({ myCount, completedToday, uuid }: { myCount: number; c
     </>
   );
 };
-
-/** 2023-08-29 ButtonList.tsx - 캐러셀 이미지 컴포넌트 */
-const ImageBoxS = styled.ul<{ count: number; sort: string; length: number }>`
-  display: flex;
-
-  transition: ${(props) => (props.sort === "next" ? (!props.count ? "" : "all 0.5s ease-in-out") : props.sort === "prev" ? (props.count === props.length ? "" : "all 0.5s ease-in-out") : "")};
-  transform: ${(props) => "translateX(-" + props.count * 190 + "px)"};
-  gap: 0.75rem;
-  width: 100vw;
-`;
 
 /** 2023-08-21 ButtonList.tsx - 다른 작심 둘러보기 버튼 */
 const ClearBtnS = styled.button`
