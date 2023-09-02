@@ -10,7 +10,7 @@ const UploadPost = () => {
   const { intro, rule } = groupList[0];
   const navigate = useNavigate();
 
-  useLoginCheck(navigate, "None");
+  // useLoginCheck(navigate, "None");
 
   return (
     <CreatePostS>
