@@ -15,9 +15,9 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/LogIn" element={<LogIn />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path="/notFound" element={<NotFound />} />
           <Route path="/test" element={<Test />} />
           <Route path="/test2" element={<Test2 />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </MobileS>
     </BrowserRouter>
