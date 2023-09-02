@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import postInfo from "../../data/postInfo";
+import postInfoData from "../../data/postInfoData";
 import { likeIcon, likeFill, commentIcon } from "../../Component/Like_CommentBarrel";
 import LikeBind from "../../Type/LikeBind";
 
@@ -36,11 +36,11 @@ const PostContent = ({ setCommented, likeBind }: PostContentProps): JSX.Element 
   };
   return (
     <PostContentS>
-      <p className="post">{postInfo.postText}</p>
+      <p className="post">{postInfoData.postText}</p>
       <PostLikeS>
         <PostLikeCountS>
-          <p className="like">{postInfo.likeAmount}명이 응원하고 있어요!</p>
-          <p className="like"> 댓글 {postInfo.commentList.length}</p>
+          <p className="like">{postInfoData.likedBy.length}명이 응원하고 있어요!</p>
+          <p className="like"> 댓글 {postInfoData.commentList.length}</p>
         </PostLikeCountS>
         <PostLikesViewS>
           {isLiked ? (

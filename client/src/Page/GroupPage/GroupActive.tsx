@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
-import 자전거운동 from "../../image/예시사진모음/자전거운동.jpg";
 import { PageSort } from "../../Type/MissionType";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 import LikeBind from "../../Type/LikeBind";
+import postInfoData from "../../data/postInfoData";
 
 interface GroupActiveProps {
   passsort: PageSort;
@@ -20,7 +20,7 @@ const GroupActive = ({ passsort, setCommented, likeBind }: GroupActiveProps): JS
       <PostS>
         <PostHeader nowTime={nowTime} />
         <PostImageS>
-          <img src={자전거운동} alt="업로드 사진" />
+          <img src={postInfoData.image[0].url} alt="업로드 사진" />
         </PostImageS>
         <PostContent setCommented={setCommented} likeBind={likeBind} />
       </PostS>

@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import postInfo from "../../data/postInfo";
+import postInfoData from "../../data/postInfoData";
 import 기본프로필 from "../../image/예시사진모음/default_profile.svg";
 import point3 from "../../image/Icon/3point_icon.svg";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const PostHeader = ({ nowTime }: { nowTime: string }): JSX.Element => {
           {/* <Link to={ 마이페이지 }/>  */}
         </PostProfileImageS>
         <div>
-          <h2>{postInfo.nickName}</h2>
+          <h2>{postInfoData.nickName}</h2>
           {/* <Link to={ 마이페이지 }/>  */}
           <p>{`${year}년 ${month}월 ${day}일 `}</p>
         </div>
