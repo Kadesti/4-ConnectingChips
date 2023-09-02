@@ -6,20 +6,20 @@ import { myGroupList } from "../../data/myInfo";
 /** 2023-08-22 CTAContainer.tsx - 참여하기 버튼 */
 const JoinButtonCTA = (): JSX.Element => {
   const { uuid } = useParams();
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
   const [validJoin, setValidJoin] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (localStorage.getItem("access_token")) {
-      setIsLogin(true);
+  // useEffect(() => {
+  //   if (localStorage.getItem("access_token")) {
+  //     setIsLogin(true);
 
-      if (myGroupList.length === 3) setValidJoin(false);
-    }
-  }, []);
+  //     if (myGroupList.length === 3) setValidJoin(false);
+  //   }
+  // }, []);
 
   const joinGroup = async () => {
-    if (!isLogin) return navigate("/logIn");
+    // if (!isLogin) return navigate("/logIn");
 
     try {
       navigate(`/groupPage/${uuid}`);

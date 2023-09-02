@@ -5,9 +5,9 @@ import { GroupHeader, type LikeBind, Comment, DivideBaS, GroupActive, GroupArtic
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
   const { intro, rule, url } = useFindGroup();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useLoginCheck(navigate, "None");
+  // useLoginCheck(navigate, "None");
 
   return (
     <GroupPageS>
@@ -30,7 +30,7 @@ type GroupPostProps = {
   selected: number[] | null;
 };
 
-/** 2023-08-26 GroupPage.tsx - 그룹페이지 소개글 */
+/** 2023-08-26 GroupPage.tsx - 그룹페이지 소개글 - 0 : 헤드라인 1 : 소개 2 : 규칙 3 : 버튼 */
 const GroupSummary = ({ intro, rule, selected }: GroupPostProps) => {
   return (
     <>
