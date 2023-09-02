@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
     /* 가로 폭 */
     --width-mobile: 375px;
+    --width-my-mission: 11.25rem;
 
     /* 세로 폭 */
     --height-banner: 3.5rem;

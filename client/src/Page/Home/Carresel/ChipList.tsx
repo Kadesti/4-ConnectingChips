@@ -31,6 +31,7 @@ const ChipListS = styled.ul`
   position: absolute;
   bottom: 1rem;
   left: 13.5px;
+  gap: 0.85rem;
 `;
 
 /** 2023-08-23 ChipList.tsx - 시식 칩 항목*/

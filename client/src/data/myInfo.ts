@@ -1,3 +1,4 @@
+import { GroupInfoType } from "../Type/MissionType";
 import groupListData from "./groupListData";
 
 type MyInfoType = {
@@ -12,7 +13,7 @@ const myInfo: MyInfoType = {
   profileimg: "",
 };
 
-const myGroupList = groupListData.filter((group) => group.memberList.some((member) => member.id === myInfo.id));
+const myGroupList: GroupInfoType[] = groupListData.filter((group) => group.memberList.some((member) => member.id === myInfo.id));
 const myGroupIds = myGroupList.map((group) => group.id);
 
 export { myInfo, myGroupList, myGroupIds };

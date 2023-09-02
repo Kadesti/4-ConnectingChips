@@ -32,10 +32,6 @@ const Home = (): JSX.Element => {
           {access_token ? (
             <h1>반가워요 {myInfo.id} 님! 오늘도 함께 작심을 성공해볼까요?</h1>
           ) : (
-            // <h1>
-            //   반가워요 칩스!
-            //   <br /> 아래 리스트에서 작심을 시작해볼까요?
-            // </h1>
             <h1>
               딱 3일!
               <br />
@@ -44,7 +40,7 @@ const Home = (): JSX.Element => {
             </h1>
           )}
         </WelcomeTextS>
-        {/* {myGroupList && <MyMisson mygrouplist={myGroupList} />} */}
+        {myGroupList && <MyMisson mygrouplist={myGroupList} />}
         <Banner />
         <GroupList />
       </HomeContentS>
