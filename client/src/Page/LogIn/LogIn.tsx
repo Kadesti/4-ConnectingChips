@@ -3,6 +3,7 @@ import { LogInS, LoginInputS, SignClearBtnS, Arrow_Right } from "./LoginBarrel";
 import Banner from "../../Component/SignUp/Banner";
 import Loginheader from "../../Component/SignUp/Loginheader";
 import useLoginCheck from "../../Hooks/useLoginCheck";
+import { myInfo } from "../Home/HomeBarrel";
 
 type bindVlaue = {
   value: string;
@@ -37,21 +38,27 @@ const LogIn = (): JSX.Element => {
   const isDefault = inputState === "default";
 
   /** 2023-08-24 LogIn.tsx - 로그인 ID PW 입력창 컨테이너 */
-  const LoginInputContainer = (): JSX.Element => {
-    return (
-      <LoginInputContainerS>
-        <LoginInput sort="ID" isdefault={isDefault} inputbind={idBind} />
-        <LoginInput sort="PW" isdefault={isDefault} inputbind={pwBind} />
-        {!isDefault && <p>아이디 혹은 비밀번호가 일치하지 않습니다</p>}
-      </LoginInputContainerS>
-    );
-  };
+  // const LoginInputContainer = (): JSX.Element => {
+  //   return (
+  //     <LoginInputContainerS>
+  //       <LoginInput sort="ID" isdefault={isDefault} inputbind={idBind} />
+  //       <LoginInput sort="PW" isdefault={isDefault} inputbind={pwBind} />
+  //       {!isDefault && <p>아이디 혹은 비밀번호가 일치하지 않습니다</p>}
+  //     </LoginInputContainerS>
+  //   );
+  // };
 
   /** 2023-08-24 LogIn.tsx - 로그인 요청 핸들러 */
   const LoginSubmit = async (e: React.MouseEvent<HTMLFormElement, MouseEvent>): Promise<void> => {
     e.preventDefault();
 
     try {
+      if (nickname !== myInfo.my_id || password !== myInfo.password) {
+        setInputState("false");
+        throw Error("아이디 혹은 비밀번호가 일치하지 않습니다");
+      }
+      localStorage.setItem("access_token", "1234564862169");
+
       // const loginPost = await axios.post("/users/sign-in", {
       //   nickname,
       //   password,
@@ -60,6 +67,7 @@ const LogIn = (): JSX.Element => {
       // const access_token = loginPost.data.access_token;
       // localStorage.setItem("access_token", access_token);
 
+      // navigate(referrer);
       navigate(-1);
     } catch (error) {
       console.error("Login failed:", error);
@@ -70,14 +78,16 @@ const LogIn = (): JSX.Element => {
     <LogInS>
       <Loginheader type="로그인" />
       <Banner />
-      <LoginContainerS>
+      <LoginOuterContainerS>
         <LoginFormS onSubmit={LoginSubmit}>
           {/* <LoginInputContainer /> */}
-          <LoginInputContainerS>
-            <LoginInput sort="ID" isdefault={isDefault} inputbind={idBind} />
-            <LoginInput sort="PW" isdefault={isDefault} inputbind={pwBind} />
-            {!isDefault && <p>아이디 혹은 비밀번호가 일치하지 않습니다</p>}
-          </LoginInputContainerS>
+          <LoginContainerS>
+            <LoginInnerContainerS>
+              <LoginInput sort="ID" isdefault={isDefault} inputbind={idBind} />
+              <LoginInput sort="PW" isdefault={isDefault} inputbind={pwBind} />
+            </LoginInnerContainerS>
+            {!isDefault && <p className="error">아이디 혹은 비밀번호가 일치하지 않습니다</p>}
+          </LoginContainerS>
 
           <SignClearBtnS type="submit">
             <p>로그인</p>
@@ -90,7 +100,7 @@ const LogIn = (): JSX.Element => {
             <img src={Arrow_Right} alt="arrowIcon" />
           </div>
         </NudgeSignS>
-      </LoginContainerS>
+      </LoginOuterContainerS>
     </LogInS>
   );
 };
@@ -104,15 +114,15 @@ export default LogIn;
  * @returns id입력창 또는 pw입력창
  */
 const LoginInput = ({ sort, isdefault, inputbind }: { sort: "ID" | "PW"; isdefault: boolean; inputbind: bindVlaue }): JSX.Element => {
-  const { value, setValue } = inputbind;
+  const { value, setValue } = inputbind; 
 
   if (sort === "ID") return <LoginInputS placeholder="아이디를 입력해 주세요" className={isdefault ? "" : "failed"} value={value} onChange={(e) => setValue(e.target.value)} />;
 
-  return <LoginInputS placeholder="비밀번호를 입력해 주세요" className={isdefault ? "" : "failed"} type={isdefault ? "password" : "text"} value={value} onChange={(e) => setValue(e.target.value)} />;
+  return <LoginInputS placeholder="비밀번호를 입력해 주세요" className={isdefault ? "" : "failed"} type={true ? "password" : "text"} value={value} onChange={(e) => setValue(e.target.value)} />;
 };
 
 /** 2023-08-24 LogIn.tsx - 로그인 / 회원가입 배너 */
-const LoginContainerS = styled.div`
+const LoginOuterContainerS = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,18 +135,23 @@ const LoginFormS = styled.form`
   flex-direction: column;
   height: 13.75rem;
   width: 100%;
+
+  p.error {
+    color: var(--system-red);
+  }
 `;
 
+const LoginContainerS = styled.div`
+  height: 9.28438rem;
+  margin-bottom: 0.97rem;
+`
+
 /** 2023-08-24 LogIn.tsx - 로그인 입력 컨테이너 */
-const LoginInputContainerS = styled.div`
-  height: 9.56rem;
+const LoginInnerContainerS = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-
-  p {
-    color: var(--system-red);
-  }
+  margin-bottom: 0.47rem;
 `;
 
 /** 2023-08-24 LogIn.tsx - 회원가입 유도 */

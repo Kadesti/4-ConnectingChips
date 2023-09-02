@@ -9,7 +9,8 @@ import scrollTop from "../../Hooks/scrollTop";
 
 /** 2023-08-21 GroupIntro.tsx - 메인 컴프 */
 const GroupIntro = (): JSX.Element => {
-  const { intro, rule, url } = useFindGroup('intro');
+  const { intro, rule, url } = useFindGroup("intro");
+
   useEffect(() => {
     scrollTop();
   }, []);

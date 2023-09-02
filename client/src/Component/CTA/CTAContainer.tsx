@@ -7,19 +7,19 @@ import { myGroupList } from "../../data/myInfo";
 const JoinButtonCTA = (): JSX.Element => {
   const navigate = useNavigate();
   const { uuid } = useParams();
-  // const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const [validJoin, setValidJoin] = useState("true");
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("access_token")) {
-  //     setIsLogin(true);
+  useEffect(() => {
+    if (localStorage.getItem("access_token")) {
+      setIsLogin(true);
 
-  //     if (myGroupList.length === 3) setValidJoin('false');
-  //   }
-  // }, []);
+      if (myGroupList.length === 3) setValidJoin("false");
+    }
+  }, []);
 
   const joinGroup = async () => {
-    // if (!isLogin) return navigate("/logIn");
+    if (!isLogin) return navigate("/logIn");
 
     try {
       navigate(`/groupPage/${uuid}`);
@@ -111,10 +111,8 @@ const CTAButtonS = styled(LinkButtonS)<{ valid: string }>`
   position: sticky;
   bottom: 0rem;
 
-  button {
-    color: ${(props) => (props.valid === "true" ? "var(--font-color1)" : "var(--color-disabled1)")};
-    font-size: 1rem;
-  }
+  color: ${(props) => (props.valid === "true" ? "var(--font-color1)" : "var(--color-disabled1)")};
+  font-size: 1rem;
 `;
 
 /** 2023-08-22 CTAContainer.tsx - 작심 인증하기 버튼 */

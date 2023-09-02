@@ -3,12 +3,13 @@ import { MyMisson, GroupList } from "./HomeBarrel";
 import { scrollTop, myInfo, myGroupList } from "./HomeBarrel";
 import { Banner as BannerImage, Logo_002, 헤드셋칩스 } from "./HomeImageBarrel";
 import { GNB } from "../../AppBarral";
-import { myGroupImages } from "../../data/myInfo";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
   const [access_token, setAccess_token] = useState("");
   const tokenBind = { access_token, setAccess_token };
+  
+  if (access_token) console.log("이게 되네");
 
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
@@ -31,15 +32,21 @@ const Home = (): JSX.Element => {
     <HomeS>
       <HomeHeaderS>
         <img src={Logo_002} alt="logo" />
-        {/* <HomeLogin tokenbind={tokenBind} /> */}
+        <HomeLogin tokenbind={tokenBind} />
       </HomeHeaderS>
       <HomeContentS>
         <WelcomeHeadS>
           <WelcomeTextS>
-            {todayDone ? (
-              <h1>멋져요 {myInfo.my_id}칩스! <br/>내일도 함께 해주실 거죠?</h1>
+            { access_token && todayDone ? (
+              <h1>
+                멋져요 {myInfo.my_id}칩스! <br />
+                내일도 함께 해주실 거죠?
+              </h1>
             ) : access_token ? (
-              <h1>반가워요 {myInfo.my_id}칩스! <br/>오늘도 함께 작심을 성공해볼까요?</h1>
+              <h1>
+                반가워요 {myInfo.my_id}칩스! <br />
+                오늘도 함께 작심을 성공해볼까요?
+              </h1>
             ) : (
               <h1>
                 <p className="bold">딱 3일!</p>
@@ -51,7 +58,7 @@ const Home = (): JSX.Element => {
           </WelcomeTextS>
           {/* <img src={헤드셋칩스} alt="헤드셋칩스" /> */}
         </WelcomeHeadS>
-        {myGroupList && <MyMisson mygrouplist={myGroupList} />}
+        {myGroupList && access_token && <MyMisson mygrouplist={myGroupList} />}
         <Banner />
         <GroupList />
       </HomeContentS>

@@ -10,6 +10,7 @@ import { initGroup } from "../../data/initialData";
 
 /** 23-08-20 GroupList.tsx - 메인 컴프 */
 const GroupList = (): JSX.Element => {
+  const access_token = localStorage.getItem("access_token");
   const [newGroup, setNewGroup] = useState([initGroup]);
 
   const myGroupIds = myGroupList.map((group) => group.group_id);
@@ -20,16 +21,20 @@ const GroupList = (): JSX.Element => {
   useEffect(() => {
     const setGroup =
       curFocused === "전체"
-        ? groupListData.filter((group) => myGroupIds.find((myGroupID) => myGroupID === group.group_id) === undefined)
-        : groupListData.filter((group) => {
+        ? access_token !== null
+          ? groupListData.filter((group) => myGroupIds.find((myGroupID) => myGroupID === group.group_id) === undefined)
+          : groupListData
+        : access_token !== null
+        ? groupListData.filter((group) => {
             const focusValid = group.tab === curFocused;
             const mygroupIndex = myGroupIds.findIndex((groupId) => groupId === group.group_id);
 
             return focusValid && mygroupIndex;
-          });
+          })
+        : groupListData.filter((group) => group.tab === curFocused);
 
     setNewGroup(setGroup);
-  }, [curFocused]);
+  }, [curFocused, access_token]);
 
   return (
     <article>
@@ -52,8 +57,6 @@ const GroupListItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element
   const groupID = groupInfo.group_id;
   const imageUrl = groupInfo.defaultImage.list_url;
   if (imageUrl === undefined) return <></>;
-
-  console.log("groupID: ", groupID);
 
   return (
     <GroupListItemS key={groupID} img={imageUrl}>

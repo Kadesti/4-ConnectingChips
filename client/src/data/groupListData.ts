@@ -2,8 +2,9 @@ import 역도 from "../image/예시사진모음/역도.jpg";
 import 달리기 from "../image/예시사진모음/달리기.jpg";
 import { GroupInfoType } from "../Type/MissionType";
 
+import { co_fit_ootd_main, co_fit_ootd_group, co_fit_ootd_list, co_fit_ootd_intro } from "./CoverBarrel";
+import { co_walk_stroll_main, co_walk_stroll_list, co_walk_stroll_intro, co_walk_stroll_group } from "./CoverBarrel";
 import { co_bike_work_main, co_bike_work_list, co_bike_work_intro, co_bike_work_group } from "./CoverBarrel";
-import { co_fit_ootd_main, co_fit_ootd_group, co_walk_stroll_main, co_walk_stroll_group } from "./CoverBarrel";
 import { co_fit_enter_main, co_fit_enter_list, co_fit_enter_intro, co_fit_enter_group } from "./CoverBarrel";
 import { co_walk_bus_list, co_walk_bus_intro, co_walk_bus_group } from "./CoverBarrel";
 
@@ -18,6 +19,8 @@ const groupListData: GroupInfoType[] = [
     defaultImage: {
       defaultImage_id: 0,
       main_url: co_walk_stroll_main,
+      list_url: co_walk_stroll_list,
+      intro_url: co_walk_stroll_intro,
       group_url: co_walk_stroll_group,
     },
     memberList: [
@@ -66,6 +69,8 @@ const groupListData: GroupInfoType[] = [
     defaultImage: {
       defaultImage_id: 0,
       main_url: co_fit_ootd_main,
+      list_url: co_fit_ootd_list,
+      intro_url: co_fit_ootd_intro,
       group_url: co_fit_ootd_group,
     },
     memberList: [
@@ -114,6 +119,8 @@ const groupListData: GroupInfoType[] = [
     defaultImage: {
       defaultImage_id: 0,
       main_url: co_bike_work_main,
+      list_url: co_bike_work_list,
+      intro_url: co_bike_work_intro,
       group_url: co_bike_work_group,
     },
     memberList: [
