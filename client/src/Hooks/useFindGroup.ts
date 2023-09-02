@@ -12,7 +12,7 @@ interface FindGroupHook {
 }
 
 /** 2023-08-23 useFindGroup.ts - uuid를 받아 intro rule url 뱉는 함수 */
-const useFindGroup = (): FindGroupHook => {
+const useFindGroup = (sort: "page" | "intro"): FindGroupHook => {
   const { uuid } = useParams();
 
   const [group, setGroup] = useState(initGroup);
@@ -21,8 +21,8 @@ const useFindGroup = (): FindGroupHook => {
   useEffect(() => {
     if (uuid) {
       const foundGroup = FindGroup(uuid, initGroup);
-      const imageUrl = foundGroup.defaultImage.intro_url;
-      if(imageUrl === undefined) return;
+      const imageUrl = sort === "intro" ? foundGroup.defaultImage.intro_url : foundGroup.defaultImage.group_url;
+      if (imageUrl === undefined) return;
 
       setGroup(foundGroup);
       setImageUrl(imageUrl);

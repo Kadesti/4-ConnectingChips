@@ -4,10 +4,7 @@ import { GroupHeader, type LikeBind, Comment, DivideBaS, GroupActive, GroupArtic
 
 /** 2023-08-22 GroupPage.tsx - 메인 컴프 */
 const GroupPage = (): JSX.Element => {
-  const { intro, rule, url } = useFindGroup();
-  // const navigate = useNavigate();
-
-  // useLoginCheck(navigate, "None");
+  const { intro, rule, url } = useFindGroup('page');
 
   return (
     <GroupPageS>
