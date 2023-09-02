@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import co_bike from '../image/커버 이미지/co_bike_work/co_bike_work_main.jpg'
-import co_fit from '../image/커버 이미지/co_fit_enter/co_fit_enter_main.jpg'
-import co_walk from '../image/커버 이미지/co_walk_stroll/co_walk_stroll_main.jpg'
+import { myGroupImages } from "../data/myInfo";
 
 /** 2023-09-02 useMission.ts 나의 작심현황의 데이터/캐러셀 상태 관리 Hook - Kadesti */
 const useMission = () => {
@@ -13,15 +11,13 @@ const useMission = () => {
   /** Mylist - 내 작심 삼일 상태 관리 */
   const [doneList, setDoneList] = useState([false]);
   const [countList, setCountList] = useState([0]);
-  const [uuidList, setUuidList] = useState([""]);
+  const [uuidList, setUuidList] = useState([0]);
 
   // TODO: 네트워크 데이터로 교체될 부분
-  const IMG = useMemo(() => {
-    return [co_bike, co_fit, co_walk];
-  }, []);
+  const IMG = myGroupImages;
 
-  const IMGLen = IMG.slice(1);
-  const TOTAL_SLIDES = IMGLen.length;
+  // const IMGLen = IMG.slice(1);
+  const TOTAL_SLIDES = IMG.length;
 
   const doneBind = useMemo(() => {
     return { doneList, setDoneList };

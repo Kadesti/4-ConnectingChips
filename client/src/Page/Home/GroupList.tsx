@@ -1,43 +1,44 @@
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { MissonTab } from "../../Component/Mission/MissionTab";
-import { GroupListTab } from "../../Type/MissionType";
 import { GroupInfoType } from "../../Type/MissionType";
 import groupListData from "../../data/groupListData";
 import { myGroupList } from "../../data/myInfo";
+import { useEffect, useState } from "react";
+import missionTab from "../../data/missionTab";
+import { initGroup } from "../../data/initialData";
 
 /** 23-08-20 GroupList.tsx - 메인 컴프 */
 const GroupList = (): JSX.Element => {
-  const myGroupIds = myGroupList.map((group) => group.id);
+  const [newGroup, setNewGroup] = useState([initGroup]);
 
-  const missionTab: GroupListTab[] = [
-    {
-      id: 0,
-      title: "전체",
-    },
-    {
-      id: 1,
-      title: "조깅",
-    },
-    {
-      id: 2,
-      title: "헬스",
-    },
-    {
-      id: 3,
-      title: "자전거",
-    },
-  ];
+  const myGroupIds = myGroupList.map((group) => group.group_id);
 
-  const newGroup = groupListData.filter((group) => myGroupIds.find((myGroupID) => myGroupID === group.id) === undefined);
+  const [curFocused, setCurFocused] = useState(missionTab[0].title);
+  const curFocusBind = { curFocused, setCurFocused };
+
+  useEffect(() => {
+    const setGroup =
+      curFocused === "전체"
+        ? groupListData.filter((group) => myGroupIds.find((myGroupID) => myGroupID === group.group_id) === undefined)
+        : groupListData.filter((group) => {
+            const focusValid = group.tab === curFocused;
+            const mygroupIndex = myGroupIds.findIndex((groupId) => groupId === group.group_id);
+
+            return focusValid && mygroupIndex;
+          });
+
+    setNewGroup(setGroup);
+  }, [curFocused]);
+
   return (
     <article>
       <h2>작심 그룹 리스트</h2>
-      <MissonTab missionTab={missionTab} />
+      <MissonTab missionTab={missionTab} focusbind={curFocusBind} />
       <GroupListListS>
-        {newGroup.map((groupInfo) => {
-          return <GroupListItem groupInfo={groupInfo} key={groupInfo.id} />;
-        })}
+        {newGroup.map((groupInfo) => (
+          <GroupListItem groupInfo={groupInfo} key={groupInfo.group_id} />
+        ))}
       </GroupListListS>
     </article>
   );
@@ -48,16 +49,14 @@ export default GroupList;
 /** 2023-08-20 GroupList.tsx - 작심 그룹 항목 */
 const GroupListItem = ({ groupInfo }: { groupInfo: GroupInfoType }): JSX.Element => {
   const isFirst = groupInfo.memberList.length === 0;
-  const groupID = groupInfo.id;
-  const post = groupInfo.posts.find((group) => group.id === groupInfo.defaultImageid);
-  if (post === undefined) return <></>;
+  const groupID = groupInfo.group_id;
+  const imageUrl = groupInfo.defaultImage.list_url;
+  if (imageUrl === undefined) return <></>;
 
-  const image = post.image.url;
-  // const image = post.images.find((image) => image.url);
-  if (image === undefined) return <></>;
+  console.log("groupID: ", groupID);
 
   return (
-    <GroupListItemS key={groupInfo.id} img={image}>
+    <GroupListItemS key={groupID} img={imageUrl}>
       <div>
         <h2>{groupInfo.title}</h2>
         {isFirst ? <p>작심의 첫 주인공이 되어보세요!</p> : <p>{groupInfo.memberList.length}명 참여중</p>}

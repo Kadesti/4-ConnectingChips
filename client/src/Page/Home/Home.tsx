@@ -3,6 +3,7 @@ import { MyMisson, GroupList } from "./HomeBarrel";
 import { scrollTop, myInfo, myGroupList } from "./HomeBarrel";
 import { Banner as BannerImage, Logo_002, 헤드셋칩스 } from "./HomeImageBarrel";
 import { GNB } from "../../AppBarral";
+import { myGroupImages } from "../../data/myInfo";
 
 /** 2023-08-20 Home.tsx - 메인 컴프 */
 const Home = (): JSX.Element => {
@@ -22,7 +23,7 @@ const Home = (): JSX.Element => {
   const todayDone = myGroupList.some(
     (mygroup) =>
       mygroup.memberList.filter((member) => {
-        if (member.id === myInfo.id) return member.done;
+        if (member.member_id === myInfo.my_id) return member.done;
       })[0].done
   );
 
@@ -36,9 +37,9 @@ const Home = (): JSX.Element => {
         <WelcomeHeadS>
           <WelcomeTextS>
             {todayDone ? (
-              <h1>멋져요 {myInfo.id}칩스! 내일도 함께 해주실 거죠?</h1>
+              <h1>멋져요 {myInfo.my_id}칩스! <br/>내일도 함께 해주실 거죠?</h1>
             ) : access_token ? (
-              <h1>반가워요 {myInfo.id}칩스! 오늘도 함께 작심을 성공해볼까요?</h1>
+              <h1>반가워요 {myInfo.my_id}칩스! <br/>오늘도 함께 작심을 성공해볼까요?</h1>
             ) : (
               <h1>
                 <p className="bold">딱 3일!</p>
@@ -48,7 +49,7 @@ const Home = (): JSX.Element => {
               </h1>
             )}
           </WelcomeTextS>
-          <img src={헤드셋칩스} alt="헤드셋칩스" />
+          {/* <img src={헤드셋칩스} alt="헤드셋칩스" /> */}
         </WelcomeHeadS>
         {myGroupList && <MyMisson mygrouplist={myGroupList} />}
         <Banner />
@@ -107,6 +108,7 @@ const WelcomeHeadS = styled.div`
   justify-content: space-between;
   img {
     margin-right: 1.25rem;
+    /* aspect-ratio: 1/1; */
   }
 `;
 

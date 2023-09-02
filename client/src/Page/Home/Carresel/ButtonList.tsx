@@ -18,7 +18,7 @@ const ButtonList = ({ buttonListProps }: { buttonListProps: ButtonListProps }): 
 export default ButtonList;
 
 /** 2023-08-22 ButtonList.tsx - 캐러셀 버튼 영역 - Kadesti */
-const CarreselBtnList = ({ myCount, completedToday, uuid }: { myCount: number; completedToday: boolean; uuid: string }) => {
+const CarreselBtnList = ({ myCount, completedToday, uuid }: { myCount: number; completedToday: boolean; uuid: number }) => {
   return (
     <>
       {myCount === 3 ? (

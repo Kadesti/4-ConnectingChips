@@ -19,8 +19,8 @@ const useFindGroup = (): FindGroupHook => {
 
   useEffect(() => {
     if (uuid) {
-      const { group, imageUrl } = FindGroup(uuid, initGroup);
-      setGroup(group);
+      const { foundGroup, imageUrl } = FindGroup(uuid, initGroup);
+      setGroup(foundGroup);
       setImageUrl(imageUrl);
     }
   }, [uuid]);
@@ -36,18 +36,17 @@ const useFindGroup = (): FindGroupHook => {
  * @param initGroup 예외처리를 위한 초기 값
  * @returns 내가 속한 그룹, 썸네일Url
  */
-const FindGroup = (uuid: string | undefined, initGroup: GroupInfoType): { group: GroupInfoType; imageUrl: string } => {
-  const initValue = { group: initGroup, imageUrl: "" };
+const FindGroup = (uuid: string | undefined, initGroup: GroupInfoType): { foundGroup: GroupInfoType; imageUrl: string } => {
+  const initValue = { foundGroup: initGroup, imageUrl: "" };
   if (uuid === undefined) return initValue;
 
-  const group = groupListData.find((group) => group.id === Number(uuid));
-  if (group === undefined) return initValue;
+  groupListData.find(group => group.group_id)
+  const foundGroup = groupListData.find((group) => group.group_id === Number(uuid));
+  if (foundGroup === undefined) return initValue;
 
-  const imageUrl = findUrl(group);
-  return { group, imageUrl };
+  const imageUrl = findUrl(foundGroup);
+  return { foundGroup, imageUrl };
 };
-
-/** 2023-08-23 useFindGroup.ts - 그룹 썸네일 찾는 함수  */
 
 /**
  * 2023-08-23 useFindGroup.ts - 그룹 썸네일 찾는 함수
@@ -55,11 +54,11 @@ const FindGroup = (uuid: string | undefined, initGroup: GroupInfoType): { group:
  * @returns 썸네일Url
  */
 const findUrl = (myGroup: GroupInfoType): string => {
-  const thumbnailId = myGroup.defaultImageid;
+  const thumbnailId = myGroup.defaultImage.defaultImage_id;
 
-  const post = myGroup.posts.find((post) => post.image.id === thumbnailId);
+  const post = myGroup.posts.find((post) => post.image.image_id === thumbnailId);
   if (post === undefined) return "";
-  const image = post.image.id === thumbnailId;
+  const image = post.image.image_id === thumbnailId;
   if (image === undefined) return "";
 
   

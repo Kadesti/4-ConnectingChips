@@ -7,9 +7,6 @@ import useMission from "../../Hooks/useMission";
 /** 2023-08-20 MyMission.tsx - 작심 중인 리스트 */
 const MyMisson = ({ mygrouplist }: { mygrouplist: GroupInfoType[] }): JSX.Element => {
   const { carreselProps, buttonDataProps } = useMission();
-
-  if (mygrouplist.length === 0) return <></>;
-
   return (
     <MyMissonS>
       <h2>나의 작심 현황({mygrouplist.length}/3)</h2>

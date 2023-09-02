@@ -1,33 +1,33 @@
 import { styled } from "styled-components";
 import { GroupListTab } from "../../Type/MissionType";
-import { useState } from "react";
+import missionTab from "../../data/missionTab";
 
 /** 2023-08-21 MyMisson.tsx - 작심 중인 리스트 Props */
 type MissonTabProps = {
   missionTab: GroupListTab[];
+  focusbind: {
+    curFocused: string;
+    setCurFocused: React.Dispatch<React.SetStateAction<string>>;
+  };
 };
 
 /** 2023-08-21 MyMisson.tsx - 작심 중인 리스트 항목 타입 */
 type MissionSingleProps = {
   text: string;
   focusBind: {
-    isFocus: ("focused" | "")[];
-    setIsFocus: any;
+    curFocused: string;
+    setCurFocused: React.Dispatch<React.SetStateAction<string>>;
   };
   index: number;
 };
 
 /** 2023-08-20 MissonTab.tsx - 공통되는 탭 리스트 */
-const MissonTab = ({ missionTab }: MissonTabProps): JSX.Element => {
-  const initialValue: ("focused" | "")[] = [...missionTab].map((item) => (item.id === 0 ? "focused" : ""));
-  const [isFocus, setIsFocus] = useState(initialValue);
-
-  const focusBind = { isFocus, setIsFocus };
-
+// const MissonTab = ({ missionTab, focusbind }: MissonTabProps): JSX.Element => {
+const MissonTab = ({ missionTab, focusbind }: MissonTabProps): JSX.Element => {
   return (
     <MyMissonTabS>
       {missionTab.map((mission, index) => {
-        return <MissionSingle text={mission.title} focusBind={focusBind} index={index} key={mission.id} />;
+        return <MissionSingle text={mission.title} focusBind={focusbind} index={index} key={mission.tab_id} />;
       })}
     </MyMissonTabS>
   );
@@ -35,15 +35,15 @@ const MissonTab = ({ missionTab }: MissonTabProps): JSX.Element => {
 
 /** 2023-08-20 MissonTab.tsx - 공통되는 탭 단일 */
 const MissionSingle = ({ text, focusBind, index }: MissionSingleProps) => {
-  const { isFocus, setIsFocus } = focusBind;
+  // const { isFocus, setIsFocus } = focusBind;
+  const { curFocused, setCurFocused } = focusBind;
   const setFocus = () => {
-    const newFocus = [...isFocus].map(() => false);
-    newFocus[index] = true;
-    setIsFocus(newFocus);
+    const newFocus = missionTab[index].title;
+    setCurFocused(newFocus);
   };
 
   return (
-    <MissionSingleS className={`button ${isFocus[index] ? "focused" : ""}`} onClick={setFocus}>
+    <MissionSingleS className={`button ${text === curFocused ? "focused" : ""}`} onClick={setFocus}>
       {text}
     </MissionSingleS>
   );

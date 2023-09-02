@@ -4,7 +4,7 @@ const enum Gender {
 }
 
 export interface User {
-  id: number;
+  my_id: number;
   password: string;
   nickname: number;
   birthDate: string;
@@ -21,3 +21,10 @@ interface Admin {
   email: string;
   password: string;
 }
+
+export type MyInfoType = {
+  my_id: string;
+  password: string;
+  profileimg: string;
+};
+

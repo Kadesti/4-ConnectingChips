@@ -1,19 +1,15 @@
+import { MyInfoType } from "../Type/User";
 import { GroupInfoType } from "../Type/MissionType";
-import groupListData from "./groupListData";
-
-type MyInfoType = {
-  id: string;
-  password: string;
-  profileimg: string;
-};
+import groupListData from "../data/groupListData"; 
 
 const myInfo: MyInfoType = {
-  id: "aa11",
-  password: "aaaaaaa777",
-  profileimg: "",
-};
-
-const myGroupList: GroupInfoType[] = groupListData.filter((group) => group.memberList.some((member) => member.id === myInfo.id));
-const myGroupIds = myGroupList.map((group) => group.id);
-
-export { myInfo, myGroupList, myGroupIds };
+    my_id: "aa11",
+    password: "aaaaaaa777",
+    profileimg: "",
+  };
+  
+  const myGroupList: GroupInfoType[] = groupListData.filter((group) => group.memberList.some((member) => member.member_id === myInfo.my_id));
+  const myGroupIds = myGroupList.map((group) => group.group_id);
+  const myGroupImages = myGroupList.map((group) => group.defaultImage.main_url);
+  
+  export { myInfo, myGroupList, myGroupIds, myGroupImages };

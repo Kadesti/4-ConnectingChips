@@ -8,8 +8,8 @@ import co_walk from '../../../image/커버 이미지/co_walk_stroll/co_walk_stro
 import ArrowLeft from "../../../image/Icon/Arrow/Arrow_icon_W.svg";
 import Arrow_Right from "../../../image/Icon/Arrow/Arrow_icon_Right_W.png";
 
-import { MissionSingleWide } from "../../../Component/Mission/MissionTab"; 
-import { findUrl } from "../../../Hooks/useFindGroup"; 
+import { MissionSingleWide } from "../../../Component/Mission/MissionTab";
+import { myGroupImages } from "../../../data/myInfo";
 import { myInfo, myGroupList } from '../../../data/myInfo'
 import chip_Active from "../../../image/Home/chip_Active.png";
 import chip_NoneActive from "../../../image/Home/chip_NoneActive.png";
@@ -18,5 +18,5 @@ import ChipList from "./ChipList";
 export { styled, Link, useEffect, useRef, useState };
 export { co_bike, co_fit, co_walk };
 export { ArrowLeft, Arrow_Right };
-export { MissionSingleWide, findUrl, myInfo, myGroupList, ChipList };
+export { MissionSingleWide, myGroupImages, myInfo, myGroupList, ChipList };
 export { chip_Active, chip_NoneActive };

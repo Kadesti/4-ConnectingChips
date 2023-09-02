@@ -1,5 +1,5 @@
 import { CarreselProps } from "../../../Type/MissionType";
-import { MissionSingleWide, findUrl, myInfo, myGroupList, ChipList, styled } from "./CarreselBarrel";
+import { MissionSingleWide, myGroupImages, myInfo, myGroupList, ChipList, styled } from "./CarreselBarrel";
 import useCarresel from "./useCarresel";
 import ImageBoxS from "../../../StyleComp/ImageBoxS";
 import CarreselSlideButton from "./CarreselSlideButton";
@@ -11,19 +11,18 @@ const Carresel = ({ carreselProps }: { carreselProps: CarreselProps }) => {
 
   /** 2023-09-22 Carresel.tsx - 내 작심 현황 - Kadesti */
   const Mylist = myGroupList.map((mygroup, index) => {
-    const missionInfo = mygroup.memberList.find((member) => member.id === myInfo.id);
+    const missionInfo = mygroup.memberList.find((member) => member.member_id === myInfo.my_id);
     if (missionInfo === undefined) return <></>;
 
-    const imageUrl = findUrl(mygroup);
-    const { tag, title } = mygroup;
+    const { tab, title } = mygroup;
 
     return (
       // <li key={uuidList[index]}>
       <li key={index}>
         <MyMissionInfoS href={`/groupPage/${uuidList[index]}`}>
-          <img src={imageUrl} alt="co_bike" />
+          <img src={myGroupImages[index]} alt="main_image" />
           <MissionContentS>
-            <MissionSingleWide text={tag} />
+            <MissionSingleWide text={tab} />
             <h2>{title}</h2>
             <p>
               🔥 <span className="date">{dateList[index]}</span>일자 맛보기 중
