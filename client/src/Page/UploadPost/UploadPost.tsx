@@ -4,6 +4,7 @@ import groupList from "../../data/groupListData";
 import GroupContent from "../../Component/Mission/GroupContent";
 import { SubmitButtonCTA } from "../../Component/CTA/CTAContainer";
 import { useLoginCheck, useNavigate } from "../GroupPage/GroupPageBarrel";
+import 업로드아이콘 from "../../image/Icon/image_upload_icon.png";
 
 /** 2023-08-24 CreatePost.tsx - 인증글쓰기 페이지 */
 const UploadPost = () => {
@@ -21,7 +22,10 @@ const UploadPost = () => {
         <CreateFormUploadS>
           <h2>인증샷 올리기</h2>
           {/* <SettingUserThumbnail /> */}
-          <SampleImageS />
+          <label htmlFor="image-upload">
+            <img src={업로드아이콘} alt="업로드아이콘" />
+          </label>
+          <input type="file" id="image-upload" />
         </CreateFormUploadS>
         <CreateFormUploadS>
           <h2>오늘의 작심은 어땠나요?</h2>
@@ -64,24 +68,10 @@ const CreateFormUploadS = styled.div`
   }
 
   label {
-    display: inline-block;
-    height: 5.70525rem;
-    width: 5.70525rem;
-
-    border-radius: 1rem;
-    background-color: var(--color-main);
     cursor: pointer;
   }
+
   input[type="file"] {
     display: none;
   }
-`;
-
-/** 2023-08-25 CreatePost.tsx - 임시 확보한 이미지 공간 */
-const SampleImageS = styled.div`
-  height: 5.70525rem;
-  width: 5.70525rem;
-
-  border-radius: 1rem;
-  background-color: var(--color-main);
 `;
