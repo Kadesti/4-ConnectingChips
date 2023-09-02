@@ -1,6 +1,7 @@
-type ReplyInfo = {
+export type ReplyInfo = {
   reply_id: number;
   username: string;
+  profileUrl: string;
   text: string;
   // createdAt : number;
   // updatedAt : number;

@@ -1,23 +1,24 @@
 import { styled } from "styled-components";
-import 기본프로필 from "../../image/예시사진모음/default_profile.svg";
 import sendIcon from "../../../src/image/Icon/send_Icon.svg";
 import postInfoData from "../../data/postInfoData";
+import { CommentInfo } from "../../Type/PostInfo";
 
 /** 2023-08-25 Comment.tsx - 그룹페이지 댓글 */
 const Comment = ({ Commented }: { Commented: boolean }) => {
-  const commentname = "칩스1234";
-  const replyname = "커넥팅칩스";
-  const date = "1일 전";
-  const text = ["대박대박 대단합니다!!! 저도 칩스님처럼 작심삼칩 열심히 해야겠어요ㅜㅜ", "ㅎㅎㅎㅎ 감사합니다~! 칩스님도 득근한 하루 보내세요! :-)"];
+  const commentList = postInfoData.commentList;
+
+  // const commentname = "칩스1234";
+  // const replyname = "커넥팅칩스";
+  // const date = "1일 전";
+  // const text = ["대박대박 대단합니다!!! 저도 칩스님처럼 작심삼칩 열심히 해야겠어요ㅜㅜ", "ㅎㅎㅎㅎ 감사합니다~! 칩스님도 득근한 하루 보내세요! :-)"];
 
   return (
     <CommentS>
       <h2>댓글</h2>
       <CommentListS>
-        <CommentContainer sort="comment" commentname={commentname} date={date} text={text[0]} />
-        <CommentContainer sort="reply" commentname={commentname} date={date} replyname={replyname} text={text[1]} />
-        <CommentContainer sort="reply" commentname={commentname} date={date} replyname={replyname} text={text[1]} />
-        <CommentContainer sort="comment" commentname={commentname} date={date} text={text[0]} />
+        {commentList.map((comment) => {
+          return <CommentBox comment={comment} key={comment.commnet_id} />;
+        })}
       </CommentListS>
       {Commented && (
         <CommentFormS>
@@ -35,33 +36,78 @@ export default Comment;
 
 type CommentType = "comment" | "reply";
 
-/** 2023-08-26 Comment.tsx - 댓글 타입 - 종류 / 댓글 작성자 / 답글 작성자 / 기간 / 내용 */
-interface CommentProps {
+/** 2023-09-02 Comment.tsx - 그룹페이지 댓글+답글 박스 - Kadesti */
+const CommentBox = ({ comment }: { comment: CommentInfo }) => {
+  const reply = comment.reply;
+
+  class userName {
+    comment_user: string;
+    reply_user?: string;
+
+    constructor(comment_user: string, reply_user?: string) {
+      this.comment_user = comment_user;
+      this.reply_user = reply_user;
+    }
+  }
+  const comment_user = new userName(comment.username);
+
+  const imgUrl = comment.profileUrl;
+
+  //  TODO:  data 더미 추가 후 일자 연산
+  const today = new Date().toLocaleDateString();
+  const content = comment.text;
+
+  return (
+    <CommentBoxS>
+      <SelectContainer sort="comment" username={comment_user} imgUrl={imgUrl} date={today} content={content} />
+      {reply.map((reply) => {
+        const reply_user = new userName(comment.username, reply.username);
+        const imgUrl = reply.profileUrl;
+        const content = reply.text;
+
+        return <SelectContainer sort="reply" username={reply_user} imgUrl={imgUrl} date={today} content={content} />;
+      })}
+    </CommentBoxS>
+  );
+};
+
+interface selectContainerProps {
   sort: CommentType;
-  commentname: string;
-  replyname?: string;
+  username: {
+    comment_user: string;
+    reply_user?: string;
+  };
+  imgUrl: string;
   date: string;
-  text: string;
+  content: string;
 }
 
-/** 2023-08-25 Comment.tsx - 그룹페이지 댓글 항목 */
-const CommentContainer = ({ sort, commentname, replyname, date, text }: CommentProps) => {
+/** 2023-09-02 Comment.tsx - 그룹페이지 댓글/답글 항목 - Kadesti */
+const SelectContainer = ({ sort, username, imgUrl, date, content }: selectContainerProps) => {
+  const isReply = username.reply_user !== undefined;
   return (
     <CommentContainerS sort={sort}>
-      <img src={기본프로필} alt="기본프로필" />
+      <img src={imgUrl} alt="답글프로필" />
       <CommentContentS sort={sort}>
-        <div className="profile">
-          <h2>{sort === "comment" ? commentname : replyname}</h2>
-          <p>{date}</p>
+        <div>
+          <div className="profile">
+            <h2>{!isReply ? username.comment_user : username.reply_user}</h2>
+            <p>{date}</p>
+          </div>
+          <p className="text">
+            {!isReply ? (
+              content
+            ) : (
+              <>
+                <p className="call">@{username.comment_user}</p> {content}
+              </>
+            )}
+          </p>
         </div>
-        <p className="text">
-          {sort === "reply" && <p className="call">@{commentname}</p>} {text}
-        </p>
-
-        <div className="reply">
+        <CommentOptionS>
           <h2>답글</h2>
           <p>삭제</p>
-        </div>
+        </CommentOptionS>
       </CommentContentS>
     </CommentContainerS>
   );
@@ -76,8 +122,15 @@ const CommentS = styled.article`
 const CommentListS = styled.div`
   display: flex;
   flex-direction: column;
-  gap: var(--height-gap);
+  gap: 1rem;
   margin-top: 0.69rem;
+`;
+
+/** 2023-09-02 Comment.tsx - 댓글+ 답글 / 답글 간격 - Kadesti */
+const CommentBoxS = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 /** 2023-08-25 Comment.tsx - 그룹페이지 댓글 전체 내용 */
@@ -100,7 +153,7 @@ const CommentContentS = styled.div<{ sort: CommentType }>`
 
   margin-top: 0.31rem;
   width: ${(props) => (props.sort === "comment" ? "19.0625rem" : "18.0625rem")};
-  /* height: 100%; */
+  height: 6rem;
 
   display: flex;
   flex-direction: column;
@@ -129,19 +182,20 @@ const CommentContentS = styled.div<{ sort: CommentType }>`
     }
     margin-bottom: var(--height-gap);
   }
+`;
 
-  .reply {
-    display: flex;
-    gap: 1.5rem;
+/** 2023-09-02 Comment.tsx - 답글, 삭제 */
+const CommentOptionS = styled.div`
+  display: flex;
+  gap: 1.5rem;
 
-    h2 {
-      font-size: 0.875rem;
-    }
-    p {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--font-color3);
-    }
+  h2 {
+    font-size: 0.875rem;
+  }
+  p {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--font-color3);
   }
 `;
 
