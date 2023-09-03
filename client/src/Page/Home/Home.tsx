@@ -8,8 +8,6 @@ import { GNB } from "../../AppBarral";
 const Home = (): JSX.Element => {
   const [access_token, setAccess_token] = useState("");
   const tokenBind = { access_token, setAccess_token };
-  
-  if (access_token) console.log("이게 되네");
 
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
@@ -37,15 +35,17 @@ const Home = (): JSX.Element => {
       <HomeContentS>
         <WelcomeHeadS>
           <WelcomeTextS>
-            { access_token && todayDone ? (
+            {access_token && todayDone ? (
               <h1>
                 멋져요 {myInfo.my_id}칩스! <br />
-                내일도 함께 해주실 거죠?
+                내일도 함께 해<br />
+                주실 거죠?
               </h1>
             ) : access_token ? (
               <h1>
                 반가워요 {myInfo.my_id}칩스! <br />
-                오늘도 함께 작심을 성공해볼까요?
+                오늘도 함께 작심을
+                <br /> 성공해볼까요?
               </h1>
             ) : (
               <h1>
@@ -56,7 +56,7 @@ const Home = (): JSX.Element => {
               </h1>
             )}
           </WelcomeTextS>
-          {/* <img src={헤드셋칩스} alt="헤드셋칩스" /> */}
+          {!access_token && <img src={헤드셋칩스} alt="헤드셋칩스" />}
         </WelcomeHeadS>
         {myGroupList && access_token && <MyMisson mygrouplist={myGroupList} />}
         <Banner />
@@ -113,9 +113,11 @@ const HomeS = styled.section`
 const WelcomeHeadS = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 1.25rem 0;
+  height: 7.8125rem;
+
   img {
     margin-right: 1.25rem;
-    /* aspect-ratio: 1/1; */
   }
 `;
 
@@ -198,7 +200,7 @@ const HomeContentS = styled.div`
 
 /** 2023-08-20 Home.tsx - 오늘도 득근한 하루 되세요 */
 const WelcomeTextS = styled.div`
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
   /* border: 1px solid; */
 
   h1 {

@@ -8,6 +8,5 @@ import LogIn from "./Page/LogIn/LogIn";
 import UploadPost from "./Page/UploadPost/UploadPost";
 import SignUp from "./Page/SignUp/SignUp";
 import NotFound from "./Page/NotFound/NotFound";
-import Test from "./Page/Test/Test";
 
-export { GNB, Home, GroupIntro, Feed, MyPage, GroupPage, LogIn, UploadPost, SignUp, NotFound, Test };
+export { GNB, Home, GroupIntro, Feed, MyPage, GroupPage, LogIn, UploadPost, SignUp, NotFound };
