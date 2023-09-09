@@ -13,7 +13,7 @@ export const initGroup: GroupInfoType = {
   intro: "",
   rule: "",
   memberList: [{ member_id: "", day: 0, count: 0, done: false }],
-  posts: [{ post_id: 0, title: "", image: initImage }],
+  posts: [{ post_id: 0, title: "", image: initImage, authArticle: '오늘 작심 성공!' }],
   defaultImage: {
     defaultImage_id: 0,
     main_url: "",

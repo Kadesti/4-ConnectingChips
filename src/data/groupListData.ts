@@ -47,6 +47,7 @@ const groupListData: GroupInfoType[] = [
           url: co_bike_work_main,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
       {
         post_id: 1,
@@ -57,6 +58,7 @@ const groupListData: GroupInfoType[] = [
           url: 역도,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
     ],
   },
@@ -90,23 +92,25 @@ const groupListData: GroupInfoType[] = [
     posts: [
       {
         post_id: 0,
-        title: "인증 이름3",
+        title: "인증 이름1",
 
         image: {
           image_id: 0,
-          url: co_fit_ootd_main,
+          url: co_bike_work_main,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
       {
         post_id: 1,
-        title: "인증 이름4",
+        title: "인증 이름2",
 
         image: {
           image_id: 0,
-          url: 달리기,
+          url: 역도,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
     ],
   },
@@ -140,23 +144,25 @@ const groupListData: GroupInfoType[] = [
     posts: [
       {
         post_id: 0,
-        title: "인증 이름3",
+        title: "인증 이름1",
 
         image: {
           image_id: 0,
-          url: co_fit_enter_main,
+          url: co_bike_work_main,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
       {
         post_id: 1,
-        title: "인증 이름4",
+        title: "인증 이름2",
 
         image: {
           image_id: 0,
-          url: 달리기,
+          url: 역도,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
     ],
   },
@@ -202,9 +208,10 @@ const groupListData: GroupInfoType[] = [
 
         image: {
           image_id: 0,
-          url: 역도,
+          url: co_bike_work_main,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
       {
         post_id: 1,
@@ -215,6 +222,7 @@ const groupListData: GroupInfoType[] = [
           url: 역도,
           path: "/wwjkrn131",
         },
+        authArticle: "오늘 작심 성공!",
       },
     ],
   },

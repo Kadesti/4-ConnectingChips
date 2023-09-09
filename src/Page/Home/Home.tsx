@@ -50,7 +50,6 @@ const Home = (): JSX.Element => {
             ) : (
               <h1>
                 <p className="bold">딱 3일!</p>
-                {/* <br /> */}
                 재미있게
                 <br /> 삼칩하자!
               </h1>

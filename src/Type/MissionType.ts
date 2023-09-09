@@ -16,6 +16,7 @@ export interface Post {
   post_id: number;
   title: string;
   image: Image;
+  authArticle: string;
 }
 
 /** 2023-08-20 MissionType.tsx - 미션 그룹 정보 */

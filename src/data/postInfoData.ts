@@ -8,8 +8,8 @@ const postInfoData: PostInfo = {
   image: [{ image_id: 0, url: 자전거운동 }],
   likedBy: [
     { id: 0, username: "칩스1234" },
-    { id: 1, username: "칩스1234" },
-    { id: 2, username: "칩스1234" },
+    { id: 1, username: "칩스4567" },
+    { id: 2, username: "칩스5744" },
     { id: 3, username: "4567칩스" },
   ],
   commentList: [
